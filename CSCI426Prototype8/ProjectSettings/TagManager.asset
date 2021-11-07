@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Magnet_Up
+  - Magnet_Down
+  - PullForce
+  - Interactable
+  - Rest1
+  - Rest2
+  - Battery
+  - RoadBattery
+  - End
+  - Magnet
+  - Magnet_Left
+  - Magnet_Right
+  - Bomb
+  - Magnet_None
+  - MusicManager
+  - VariablesSaver
+  - KeyLock
+  - Rest3
+  - MagnetHint
+  - Magnet_DiagonalLeft
+  - Magnet_DiagonalRight
+  - ElectricStation
+  - Block
+  - MagnetPositions
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Magnet
+  - Water
+  - UI
+  - Interactable
+  - Bomb
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 3947540103
+    locked: 0
