@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private VariablesSaver vs;
     private Interactable[] interactables;
     private KeyLock[] keyLocks;
+    private Battery[] batteries;
     public bool dead;
     private Music music;
     void Awake()
@@ -37,6 +38,13 @@ public class Player : MonoBehaviour
         for(int i = 0; i < keyLockObjects.Length; i++)
         {
             keyLocks[i] = keyLockObjects[i].GetComponent<KeyLock>();
+        }
+
+        GameObject[] batteryObjects = GameObject.FindGameObjectsWithTag("Battery");
+        batteries = new Battery[batteryObjects.Length];
+        for(int i = 0; i < batteryObjects.Length; i++)
+        {
+            batteries[i] = batteryObjects[i].GetComponent<Battery>();
         }
 
         mm = GameObject.FindGameObjectWithTag("Magnet").GetComponent<MagnetMove>();
@@ -61,6 +69,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Minus)) vs.PreviousLevel();
         else if (Input.GetKeyDown(KeyCode.Equals)) vs.NextLevel();
+        //MUSIC TEST
+        else if(Input.GetKeyDown(KeyCode.M))
+        {
+            music.SwapBackgroundMusic();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,11 +94,12 @@ public class Player : MonoBehaviour
             }
             
         }
-        else if(collision.gameObject.CompareTag("RoadBattery") || collision.gameObject.CompareTag("Battery"))
+        else if(collision.gameObject.CompareTag("Battery"))
         {
             if(!collision.gameObject.GetComponent<Battery>().charged)
             {
                 Die();
+                music.PlayElectricDie();
             }
         }
     }
@@ -97,11 +111,12 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-        else if (collision.gameObject.CompareTag("RoadBattery") || collision.gameObject.CompareTag("Battery"))
+        else if (collision.gameObject.CompareTag("Battery"))
         {
             if (!collision.gameObject.GetComponent<Battery>().charged)
             {
                 Die();
+                //music.PlayElectricDie();
             }
         }
     }
@@ -125,6 +140,10 @@ public class Player : MonoBehaviour
         foreach(KeyLock k in keyLocks)
         {
             k.ResetLock();
+        }
+        foreach(Battery b in batteries)
+        {
+            b.UnCharge();
         }
         yield return new WaitForSeconds(1f);
         move.ResetToStart();
