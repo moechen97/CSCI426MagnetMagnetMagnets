@@ -43,7 +43,7 @@ public class Interactable : MonoBehaviour
     public void SetPull(Transform dest, MagnetMove.Quadrant pd)
     {
         snapped = false;
-        pullDest = dest;
+        pullDest = dest;   
         if(pd == MagnetMove.Quadrant.Up)
         {
             pull = PullDirection.Up;
