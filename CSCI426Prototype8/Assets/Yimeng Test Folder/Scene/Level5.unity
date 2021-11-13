@@ -153,6 +153,68 @@ Transform:
   m_Father: {fileID: 785380125}
   m_RootOrder: 92
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8612776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1824210281}
+    m_Modifications:
+    - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_Name
+      value: MagnetButtonUp_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+--- !u!4 &8612777 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+  m_PrefabInstance: {fileID: 8612776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &10256741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,7 +2229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937056, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_TagString
-      value: RoadBattery
+      value: Battery
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937063, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_RootOrder
@@ -2335,11 +2397,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonUp_3
+      value: MagnetButtonUp_4
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2383,7 +2445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144563, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: index
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
@@ -3204,7 +3266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3248,11 +3310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonRight_5
+      value: MagnetButtonRight_6
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164286, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: index
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
@@ -5343,7 +5405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937056, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_TagString
-      value: RoadBattery
+      value: Battery
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937063, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_RootOrder
@@ -8629,7 +8691,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8673,11 +8735,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonDown_6
+      value: MagnetButtonDown_7
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747342, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: index
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
@@ -8905,11 +8967,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonUp_2
+      value: MagnetButtonUp_3
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8953,7 +9015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144563, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: index
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
@@ -10849,7 +10911,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10893,11 +10955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonRight_4
+      value: MagnetButtonRight_5
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164286, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: index
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
@@ -10957,7 +11019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937056, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_TagString
-      value: RoadBattery
+      value: Battery
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937063, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_RootOrder
@@ -11571,7 +11633,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11615,7 +11677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonLeft_8
+      value: MagnetButtonLeft_9
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_TagString
@@ -11623,7 +11685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747342, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: index
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
@@ -14063,11 +14125,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonUp_1
+      value: MagnetButtonUp_2
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14108,6 +14170,10 @@ PrefabInstance:
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144563, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: index
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
@@ -15954,6 +16020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006447383}
+  - {fileID: 8612777}
   - {fileID: 1514203821}
   - {fileID: 875381924}
   - {fileID: 240727687}
@@ -18374,7 +18441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fb2403e59bc634b88e0fcc72e33c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 7
+  index: 8
 --- !u!1 &6968316301356481974
 GameObject:
   m_ObjectHideFlags: 0
@@ -18388,7 +18455,7 @@ GameObject:
   - component: {fileID: 6968316301356481973}
   - component: {fileID: 6968316301356481972}
   m_Layer: 0
-  m_Name: MagnetButtonLeft_7
+  m_Name: MagnetButtonLeft_8
   m_TagString: Magnet_Left
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18407,7 +18474,7 @@ Transform:
   m_Children:
   - {fileID: 3320617539737132549}
   m_Father: {fileID: 1824210281}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &6968316301356481978
 SpriteRenderer:

@@ -3997,7 +3997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937056, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_TagString
-      value: RoadBattery
+      value: Battery
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937063, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_RootOrder
@@ -4466,7 +4466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937056, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_TagString
-      value: RoadBattery
+      value: Battery
       objectReference: {fileID: 0}
     - target: {fileID: 4992877490695937063, guid: 95f077d3f46fc53469fff9aacbbd2334, type: 3}
       propertyPath: m_RootOrder

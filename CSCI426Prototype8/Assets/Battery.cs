@@ -13,9 +13,11 @@ public class Battery : MonoBehaviour
     private float animationSpeed;
     private float chargeTimer;
     private float chargeTimeExpire;
+    private Music music;
     public GameObject electricPrefab;
     void Awake()
     {
+        music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
         chargedColor = batteryAnimationP.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
         unchargedColor = Color.red;
         charged = false;
@@ -39,6 +41,7 @@ public class Battery : MonoBehaviour
     {
         charged = true;
         chargeTimer = 0F;
+        music.PlayBatteryCharge();
         //GameObject e = Instantiate(electricPrefab);
         //e.transform.position = transform.position + new Vector3(0.5F, 1.25F, 0F);
         //e.transform.rotation = transform.rotation;
@@ -57,9 +60,16 @@ public class Battery : MonoBehaviour
             chargeTimer += Time.deltaTime;
             if(chargeTimer >= chargeTimeExpire)
             {
-                charged = false;
+                UnCharge();
             }
         }
+    }
+
+    public void UnCharge()
+    {
+        charged = false;
+        chargeTimer = 0F;
+        music.PlayBatteryUncharge();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
