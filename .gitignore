@@ -36,3 +36,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 CSCI426Prototype8/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+*.log
+CSCI426Prototype8/ProjectSettings/ProjectSettings.asset
+CSCI426Prototype8/ProjectSettings/ProjectSettings.asset
+CSCI426Prototype8/ProjectSettings/TimelineSettings.asset
+CSCI426Prototype8/ProjectSettings/UnityConnectSettings.asset
