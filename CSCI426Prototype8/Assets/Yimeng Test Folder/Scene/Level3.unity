@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MagnetButtonUp_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
+      propertyPath: m_TagString
+      value: Magnet_Up
+      objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_RootOrder
       value: 1

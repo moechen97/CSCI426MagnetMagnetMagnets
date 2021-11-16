@@ -5,7 +5,7 @@ using System.Collections;
 public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                                    IPointerExitHandler
 {
-    public int index;
+    private int index;
     SpriteRenderer sr;
     Color regularColor;
     Color hoverColor;
@@ -32,6 +32,25 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         selectTimer = 0F;
         selected = false;
         selectTimeLimit = 3.675F;
+        string[] magnetInfo = gameObject.name.Split('_');
+        if(magnetInfo[0].Equals("MagnetButtonUp"))
+        {
+            gameObject.tag = "Magnet_Up";
+        }
+        else if (magnetInfo[0].Equals("MagnetButtonDown"))
+        {
+            gameObject.tag = "Magnet_Down";
+        }
+        else if (magnetInfo[0].Equals("MagnetButtonRight"))
+        {
+            gameObject.tag = "Magnet_Right";
+        }
+        else if (magnetInfo[0].Equals("MagnetButtonLeft"))
+        {
+            gameObject.tag = "Magnet_Left";
+        }
+
+        index = int.Parse(magnetInfo[1]);
     }
 
     private IEnumerator OnMouseHover()
