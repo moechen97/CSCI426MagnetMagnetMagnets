@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour
     private Rigidbody2D rb;
     [HideInInspector] public bool pulling;
     [HideInInspector] public Transform startPos;
-    public int id;
+    private int id;
     [HideInInspector] public PullDirection pull;
     [HideInInspector] public Transform pullDest;
     private List<PullDirection> pullHistory;
@@ -39,6 +39,9 @@ public class Interactable : MonoBehaviour
         else if (rb.velocity.y > 0) currLockType = LockType.Up;
         else if (rb.velocity.y < 0) currLockType = LockType.Down;
         rb.velocity = Vector2.zero;
+
+        string[] spikeInfo = gameObject.name.Split('_');
+        id = int.Parse(spikeInfo[1]);
     }
     public void SetPull(Transform dest, MagnetMove.Quadrant pd)
     {
