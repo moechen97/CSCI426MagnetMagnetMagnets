@@ -29,6 +29,7 @@ TagManager:
   - MagnetPositions
   - RoadBattery
   - MagnetManager
+  - KeyLockManager
   layers:
   - Default
   - TransparentFX

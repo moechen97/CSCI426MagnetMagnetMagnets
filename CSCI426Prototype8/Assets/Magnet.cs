@@ -135,11 +135,38 @@ public class Magnet : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Interactable"))
                 {
                     Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
-                    if (!i.unlocking && i.pull == Interactable.PullDirection.Locked)
+                    if (i.pull == Interactable.PullDirection.Locked) {
+                        if (!i.unlocking)
+                        {
+                            Debug.Log("HA");
+                            snapBlocked = true;
+                            i.pull = Interactable.PullDirection.Locked;
+                            continue;
+                        }
+                    }
+                    if (i.currLockType == Interactable.LockType.Right)
                     {
-                        snapBlocked = true;
-                        i.pull = Interactable.PullDirection.Locked;
-                        continue;
+                        if (mm.currQuad == MagnetMove.Quadrant.Right)
+                        {
+                            KeyLocks[i.currKeyLock.index].Contain(i);
+                            //i.SetLocked(i.currKeyLock, i.currKeyLock.index, i.currKeyLock.transform);
+                        }
+                    }
+                    else if (i.currLockType == Interactable.LockType.Left)
+                    {
+
+                    }
+                    else if (i.currLockType == Interactable.LockType.Down)
+                    {
+
+                    }
+                    else if (i.currLockType == Interactable.LockType.Up)
+                    {
+
+                    }
+                    else if (i.pull == Interactable.PullDirection.Locked)
+                    {
+
                     }
                     if (!pulls.Contains(hit.collider.gameObject))
                     {

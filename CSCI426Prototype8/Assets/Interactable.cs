@@ -6,9 +6,9 @@ public class Interactable : MonoBehaviour
 {
     public enum Direction { Up, Down, Left, Right } 
     public enum PullDirection { None, Left, Up, Right, Down, Locked }
-    private enum LockType { None, Left, Right, Up, Down }
+    public enum LockType { None, Left, Right, Up, Down }
     private int lockIndex = 0;
-    private LockType currLockType;
+    [HideInInspector] public LockType currLockType;
     private Rigidbody2D rb;
     [HideInInspector] public bool pulling;
     [HideInInspector] public bool resetting;
@@ -379,10 +379,11 @@ public class Interactable : MonoBehaviour
         snapped = false;
         pullDest = dest.position;
         pull = PullDirection.Locked;
-        if (rb.velocity.x > 0) currLockType = LockType.Right;
-        else if (rb.velocity.x < 0) currLockType = LockType.Left;
-        else if (rb.velocity.y > 0) currLockType = LockType.Up;
-        else if (rb.velocity.y < 0) currLockType = LockType.Down;
+        if (rb.velocity.x > 1F) currLockType = LockType.Right;
+        else if (rb.velocity.x < 1F) currLockType = LockType.Left;
+        else if (rb.velocity.y > 1F) currLockType = LockType.Up;
+        else if (rb.velocity.y < 1F) currLockType = LockType.Down;
+        Debug.Log("CURR LOCK TYPE: " + currLockType);
         rb.velocity = Vector2.zero;
     }
 }
