@@ -312,26 +312,26 @@ public class Interactable : MonoBehaviour
                 Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.transform.position.y, 0F));
                 if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
                 {
-                    v = new Vector3(1.75F, 0F);
+                    v = new Vector3(1.5F, 0F);
                 }
                 else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
                 {
-                    v = new Vector3(-1.75F, 0F);
+                    v = new Vector3(-1.5F, 0F);
                 }
                 else if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
                 {
-                    v = new Vector3(0F, -1.75F);
+                    v = new Vector3(0F, -1.5F);
                 }
                 else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
                 {
-                    v = new Vector3(0F, 1.75F);
+                    v = new Vector3(0F, 1.5F);
                 }
                 rb.velocity = v;
             }
             else
             {
                 Vector3 dest = startPos.position;
-                Vector3 v = 1.75F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
+                Vector3 v = 1.5F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
                 rb.velocity = v;
             }
         }
