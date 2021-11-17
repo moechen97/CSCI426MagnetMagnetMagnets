@@ -21,24 +21,40 @@ namespace SWS
     public class splineMove : MonoBehaviour
     {
         //CUSTOM IMPLEMENTATION
-        private float timeElapsed;
-        private float rateOfAcceleration;
-        private Player player; //Level, Rate of acceleration variables
+        private float timeElapsed = 0F;
         private float speedLimit = 4F;
         private float startSpeed = 2.0F;
         private int level;
         private void Awake()
         {
-            timeElapsed = 0F;
-            player = GetComponent<Player>();
-            Debug.Log("SPLINE MOVE: LEVEL " + player.GameLevel);
+            level = SceneManager.GetActiveScene().name[SceneManager.GetActiveScene().name.Length - 1] - '0';
+            Debug.Log("SPLINE MOVE: LEVEL " + level);
         }
         private void Update()
         {
+            //DEVELOPER SHORTCUTS: Skip to checkpoints
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                W1_L5_SetCheckpoint(1);
+                ResetToStart();
+                StartMove();
+            }
+            else if(Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                W1_L5_SetCheckpoint(2);
+                ResetToStart();
+                StartMove();
+            }
+
             if (level != 5 && level != 4) //No speed increases
             {
-                timeElapsed += rateOfAcceleration * Time.deltaTime;
-                ChangeSpeed(timeElapsed / 2.0F + startSpeed);
+                timeElapsed += Time.deltaTime / 2F;
+                ChangeSpeed(timeElapsed + 1F);
+                if (speed >= speedLimit)
+                {
+                    timeElapsed -= Time.deltaTime / 2F;
+                    ChangeSpeed(timeElapsed + 1F);
+                }
             }
         }
 
@@ -57,24 +73,6 @@ namespace SWS
             }
         }
         private int start = 0;
-
-        /// <summary>
-        /// Change running tween speed by manipulating its timeScale.
-        /// <summary>
-        public void ChangeSpeed(float value)
-        {
-            //calulate new timeScale value based on original speed
-            float newValue;
-            if (timeValue == TimeValue.speed)
-                newValue = value / originSpeed;
-            else
-                newValue = originSpeed / value;
-
-            //set speed, change timeScale percentually
-            speed = value;
-            if (tween != null)
-                tween.timeScale = newValue;
-        }
         //END OF CUSTOM IMPLEMENTATION
 
         /// <summary>
@@ -786,6 +784,24 @@ namespace SWS
             }
         }
 
+
+        /// <summary>
+        /// Change running tween speed by manipulating its timeScale.
+        /// <summary>
+        public void ChangeSpeed(float value)
+        {
+            //calulate new timeScale value based on original speed
+            float newValue;
+            if (timeValue == TimeValue.speed)
+                newValue = value / originSpeed;
+            else
+                newValue = originSpeed / value;
+
+            //set speed, change timeScale percentually
+            speed = value;
+            if (tween != null)
+                tween.timeScale = newValue;
+        }
 
 
         /// <summary>

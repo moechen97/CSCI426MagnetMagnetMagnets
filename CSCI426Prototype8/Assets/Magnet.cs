@@ -37,31 +37,20 @@ public class Magnet : MonoBehaviour
     public void AddPull(GameObject i)
     {
         if (mm.currQuad == MagnetMove.Quadrant.None) return;
-        ResetPulls();
-        i.GetComponent<Interactable>().SetPull(mm.magnetIndex, pullSource, mm.currQuad);
-        pulls.Add(i);
-    }
-
-
-    public void RemovePulls(GameObject i)
-    {
-        foreach(GameObject p in pulls)
+        if (i.CompareTag("Interactable"))
         {
-            if (p.CompareTag("Interactable"))
-            {
-                Debug.Log("NAME: " + p.gameObject.name);
-                p.GetComponent<Interactable>().ResetPull();
-            }
+            pulls.Add(i);
+            if (pulls.Count > 1) Debug.Log("ADDPULL(): More than one pull");
+            i.GetComponent<Interactable>().SetPull(pullSource, mm.currQuad);
         }
-        snapBlocked = false;
-        pulls.Clear();
     }
+
 
     public void ResetPulls()
     {
         foreach(GameObject p in pulls)
         {
-            p.GetComponent<Interactable>().ResetPull();
+            if (p.CompareTag("Interactable")) p.GetComponent<Interactable>().ResetPull();
         }
         snapBlocked = false;
         pulls.Clear();
@@ -127,7 +116,7 @@ public class Magnet : MonoBehaviour
         }
 
         //raycast for interactables
-        RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 20.5F, maskInteractable);
+        RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 15F, maskInteractable);
         foreach (RaycastHit2D hit in raycasts)
         {
             if (hit.collider != null)
@@ -136,10 +125,7 @@ public class Magnet : MonoBehaviour
                 {
                     Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
                     if (i.pull == Interactable.PullDirection.Locked) break;
-                    if (!pulls.Contains(hit.collider.gameObject))
-                    {
-                        Debug.Log("ADDING PULL");  AddPull(hit.collider.gameObject);
-                    }
+                    if (!pulls.Contains(hit.collider.gameObject)) AddPull(hit.collider.gameObject);
                     break;
                 }
             }
