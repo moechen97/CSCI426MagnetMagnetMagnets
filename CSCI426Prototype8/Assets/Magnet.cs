@@ -18,7 +18,7 @@ public class Magnet : MonoBehaviour
     private Music music;
     private bool playingClink;
     public KeyLock[] KeyLocks;
-    public 
+
     void Awake()
     {
         playingClink = false;
@@ -135,7 +135,12 @@ public class Magnet : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Interactable"))
                 {
                     Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
-                    if (i.pull == Interactable.PullDirection.Locked) break;
+                    if (!i.unlocking && i.pull == Interactable.PullDirection.Locked)
+                    {
+                        snapBlocked = true;
+                        i.pull = Interactable.PullDirection.Locked;
+                        continue;
+                    }
                     if (!pulls.Contains(hit.collider.gameObject))
                     {
                         Debug.Log("ADDING PULL");  AddPull(hit.collider.gameObject);

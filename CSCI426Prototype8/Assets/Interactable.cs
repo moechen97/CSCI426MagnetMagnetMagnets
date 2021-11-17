@@ -30,8 +30,11 @@ public class Interactable : MonoBehaviour
     private GameObject electricSpark;
     private GameObject spike;
     private List<Vector3> sourceHistory;
+    [HideInInspector] public bool unlocking;
+    [HideInInspector] public KeyLock currKeyLock;
     void Awake()
     {
+        currKeyLock = null;
         electricSpark = transform.GetChild(2).transform.gameObject;
         if (GameObject.FindGameObjectWithTag("ElectricStation")) electricStation = GameObject.FindGameObjectWithTag("ElectricStation").GetComponent<ElectricStation>();
         currLockType = LockType.None;
@@ -56,10 +59,12 @@ public class Interactable : MonoBehaviour
 
         string[] spikeInfo = transform.parent.gameObject.name.Split('_');
         id = int.Parse(spikeInfo[1]);
+        unlocking = false;
     }
   
     public void SetPull(int magnet, Transform dest, MagnetMove.Quadrant pd)
     {
+        pull = PullDirection.None;
         Debug.Log("SET PULL TO MAGNET " + magnet);
         float speed = 2F;
         snapped = false;
@@ -96,8 +101,23 @@ public class Interactable : MonoBehaviour
         resetting = true;
         if(pull == PullDirection.Locked)
         {
-
+            pull = PullDirection.None;
+            Debug.Log("PULL HISTORY SIZE: " + pullHistory.Count);
+            foreach(PullDirection p in pullHistory)
+            {
+                Debug.Log(p);
+            }
+            unlocking = true;
+            currKeyLock.Unlock();
+            StartCoroutine(Unlock());
         }
+    }
+
+    private IEnumerator Unlock()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.2F);
+        unlocking = false;
     }
     public void ResetStage()
     {
@@ -131,7 +151,8 @@ public class Interactable : MonoBehaviour
 
     public void Update()
     {
-        if(!Charged)
+        //if (pull == PullDirection.Locked || unlocking) return;
+        if (!Charged)
         {
             electricSpark.SetActive(false);
         }
@@ -175,7 +196,7 @@ public class Interactable : MonoBehaviour
         KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + id.ToString());
         if (Input.GetKeyDown(thisKeyCode))
         {
-            Debug.Log("PULL DEST: " + sourceHistory[sourceHistory.Count - 1].x + ", " + sourceHistory[sourceHistory.Count - 1].y);
+            //Debug.Log("PULL DEST: " + sourceHistory[sourceHistory.Count - 1].x + ", " + sourceHistory[sourceHistory.Count - 1].y);
             Debug.Log("RESETTING: " + resetting);
             Debug.Log("PULLING: " + pulling);
         }
@@ -184,6 +205,10 @@ public class Interactable : MonoBehaviour
         {
             if (pullHistory.Count > 0)
             {
+                if(id == 2)
+                {
+                    Debug.Log("HERE");
+                }
                 if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
                 {
                     if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
@@ -265,6 +290,7 @@ public class Interactable : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (pull == PullDirection.Locked || unlocking) return;
         SetVelocity();
     }
 
@@ -290,26 +316,26 @@ public class Interactable : MonoBehaviour
                 Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.transform.position.y, 0F));
                 if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
                 {
-                    v = new Vector3(1.25F, 0F);
+                    v = new Vector3(1.75F, 0F);
                 }
                 else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
                 {
-                    v = new Vector3(-1.25F, 0F);
+                    v = new Vector3(-1.75F, 0F);
                 }
                 else if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
                 {
-                    v = new Vector3(0F, -1.25F);
+                    v = new Vector3(0F, -1.75F);
                 }
                 else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
                 {
-                    v = new Vector3(0F, 1.25F);
+                    v = new Vector3(0F, 1.75F);
                 }
                 rb.velocity = v;
             }
             else
             {
                 Vector3 dest = startPos.position;
-                Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
+                Vector3 v = 1.75F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
                 rb.velocity = v;
             }
         }
@@ -344,14 +370,14 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void SetLocked(int index, Transform dest)
+    public void SetLocked(KeyLock keyLock, int index, Transform dest)
     {
+        currKeyLock = keyLock;
         lockIndex = index;
         spike.transform.position = dest.position;
         snapped = false;
         pullDest = dest.position;
         pull = PullDirection.Locked;
-        currLockType = LockType.None;
         if (rb.velocity.x > 0) currLockType = LockType.Right;
         else if (rb.velocity.x < 0) currLockType = LockType.Left;
         else if (rb.velocity.y > 0) currLockType = LockType.Up;

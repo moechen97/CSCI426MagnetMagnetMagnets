@@ -16,6 +16,7 @@ public class KeyLock : MonoBehaviour
     private float unlockTimer;
     private SpriteRenderer[] blocks;
     private Music music;
+    private Interactable spike;
     private void Awake()
     {
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
@@ -32,6 +33,7 @@ public class KeyLock : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerSr = player.gameObject.GetComponent<SpriteRenderer>();
         playerSrOriginalColor = playerSr.color;
+        spike = null;
     }
 
     public void ResetLock()
@@ -79,18 +81,22 @@ public class KeyLock : MonoBehaviour
 
     public void Contain(Interactable i)
     {
+        if (i.unlocking) return;
         isLocked = true;
         music.PlaySpikeKey();
         unlocking = false;
         isLocked = true;
         SetColor(Color.green, false);
-        i.SetLocked(index, transform);
+        i.SetLocked(this, index, transform);
+        spike = i;
     }
 
     public void Unlock()
     {
         unlocking = true;
         isLocked = false;
+        Debug.Log("UNLOCK");
+        spike = null;
         StartCoroutine(UnlockRoutine());
     }
 
