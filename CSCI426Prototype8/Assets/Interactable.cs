@@ -116,7 +116,7 @@ public class Interactable : MonoBehaviour
     private IEnumerator Unlock()
     {
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(0.2F);
+        yield return new WaitForSeconds(1.5F);
         unlocking = false;
     }
     public void ResetStage()
@@ -290,7 +290,7 @@ public class Interactable : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (pull == PullDirection.Locked || unlocking) return;
+        if (pull == PullDirection.Locked) return;
         SetVelocity();
     }
 
