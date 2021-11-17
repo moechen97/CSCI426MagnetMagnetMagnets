@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4782529403917389286}
+  - component: {fileID: 4782529402538999515}
   - component: {fileID: 4782529403917389285}
   - component: {fileID: 4782529402538999514}
   - component: {fileID: 4782529402538999513}
   - component: {fileID: 4782529402538999512}
-  - component: {fileID: 4782529402538999515}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,6 +35,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4782529402538999515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4782529403917389284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93f31f05e20f474a9b1584d25ef8004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DieParticle: {fileID: 0}
+  WinParticle: {fileID: 0}
+  GameLevel: 0
+  RateOfAcceleration: 0
+  battery: {fileID: 0}
+  dead: 0
 --- !u!212 &4782529403917389285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -181,15 +199,3 @@ MonoBehaviour:
   movementEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4782529402538999515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782529403917389284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93f31f05e20f474a9b1584d25ef8004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -5,6 +5,7 @@ using System.Collections;
 public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                                    IPointerExitHandler
 {
+    private MagnetManager magnetManager;
     private int index;
     SpriteRenderer sr;
     Color regularColor;
@@ -17,23 +18,8 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     void Start()
     {
-        //Attach Physics2DRaycaster to the Camera
-        Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
-        addEventSystem();
-    }
-
-    void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        regularColor = sr.color;
-        hoverColor = Color.gray;
-        mm = GameObject.FindGameObjectWithTag("Magnet").GetComponent<MagnetMove>();
-        flashTime = 0.85F;
-        selectTimer = 0F;
-        selected = false;
-        selectTimeLimit = 3.675F;
         string[] magnetInfo = gameObject.name.Split('_');
-        if(magnetInfo[0].Equals("MagnetButtonUp"))
+        if (magnetInfo[0].Equals("MagnetButtonUp"))
         {
             gameObject.tag = "Magnet_Up";
         }
@@ -51,6 +37,24 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         }
 
         index = int.Parse(magnetInfo[1]);
+        Debug.Log("INDEX: " + index);
+        magnetManager = GameObject.FindGameObjectWithTag("MagnetManager").GetComponent<MagnetManager>();
+        magnetManager.RecordMagnetPosition(index, transform);
+        //Attach Physics2DRaycaster to the Camera
+        Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
+        addEventSystem();
+    }
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        regularColor = sr.color;
+        hoverColor = Color.gray;
+        mm = GameObject.FindGameObjectWithTag("Magnet").GetComponent<MagnetMove>();
+        flashTime = 0.85F;
+        selectTimer = 0F;
+        selected = false;
+        selectTimeLimit = 3.675F;
     }
 
     private IEnumerator OnMouseHover()
