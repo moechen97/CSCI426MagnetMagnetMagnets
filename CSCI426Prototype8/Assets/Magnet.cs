@@ -135,7 +135,7 @@ public class Magnet : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Interactable"))
                 {
                     Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
-                    if (!i.unlocking || i.pull == Interactable.PullDirection.Locked)
+                    if (!i.unlocking && i.pull == Interactable.PullDirection.Locked)
                     {
                         snapBlocked = true;
                         i.pull = Interactable.PullDirection.Locked;
