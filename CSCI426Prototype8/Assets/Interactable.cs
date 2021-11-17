@@ -208,6 +208,7 @@ public class Interactable : MonoBehaviour
                 if(id == 2)
                 {
                     Debug.Log("HERE");
+                    if (pull == PullDirection.Locked) Debug.Log("LOCKED!!!");
                 }
                 if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
                 {
