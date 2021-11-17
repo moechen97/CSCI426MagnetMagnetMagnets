@@ -1876,6 +1876,10 @@ PrefabInstance:
       propertyPath: WinParticle
       value: 
       objectReference: {fileID: 5183164134338851969, guid: 69634d3f59660da4f93fc4b7e44368e0, type: 3}
+    - target: {fileID: 4782529402538999515, guid: 126f0f9031189d140adf98221e9e5edb, type: 3}
+      propertyPath: RateOfAcceleration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4782529403917389284, guid: 126f0f9031189d140adf98221e9e5edb, type: 3}
       propertyPath: m_Name
       value: Player

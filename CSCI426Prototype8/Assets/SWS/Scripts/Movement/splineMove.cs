@@ -313,7 +313,7 @@ namespace SWS
         {
             //CUSTOM IMPLEMENTATION
             speed = startSpeed;
-            
+            timeElapsed = 0F;
             //END OF CUSTOM IMPLEMENTATION
             if (!moveToPathBool) startAt = 0;
             wpPos = new Vector3[waypoints.Length - startAt];
