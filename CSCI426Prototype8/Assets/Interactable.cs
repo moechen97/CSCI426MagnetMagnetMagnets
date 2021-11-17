@@ -116,7 +116,7 @@ public class Interactable : MonoBehaviour
     private IEnumerator Unlock()
     {
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(1.5F);
+        yield return new WaitForSeconds(0.25F);
         unlocking = false;
     }
     public void ResetStage()
@@ -205,11 +205,6 @@ public class Interactable : MonoBehaviour
         {
             if (pullHistory.Count > 0)
             {
-                if(id == 2)
-                {
-                    Debug.Log("HERE");
-                    if (pull == PullDirection.Locked) Debug.Log("LOCKED!!!");
-                }
                 if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
                 {
                     if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
