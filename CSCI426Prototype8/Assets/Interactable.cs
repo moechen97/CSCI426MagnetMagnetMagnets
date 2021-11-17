@@ -5,16 +5,18 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public enum Direction { Up, Down, Left, Right } 
-    public enum PullDirection { None, Up, Down, Left, Right, DiagonalLeftUp, Locked }
+    public enum PullDirection { None, Left, Up, Right, Down, Locked }
     private enum LockType { None, Left, Right, Up, Down }
     private int lockIndex = 0;
     private LockType currLockType;
     private Rigidbody2D rb;
     [HideInInspector] public bool pulling;
+    [HideInInspector] public bool resetting;
     [HideInInspector] public Transform startPos;
     private int id;
     [HideInInspector] public PullDirection pull;
-    [HideInInspector] public Transform pullDest;
+    [HideInInspector] public List<Vector3> pullDestHistory;
+    [HideInInspector] public Vector3 pullDest;
     private List<PullDirection> pullHistory;
     private bool snapped;
     private ParticleSystem magnetTractorBeam;
@@ -23,64 +25,15 @@ public class Interactable : MonoBehaviour
     private SpriteRenderer sr;
     private Color srOriginalColor;
     private Color srLockColor;
-    public bool Charged;
+    [HideInInspector] public bool Charged;
     private ElectricStation electricStation;
     private GameObject electricSpark;
-    public void SetLocked(int index, Transform dest)
-    {
-        lockIndex = index;
-        transform.position = dest.position;
-        snapped = false;
-        pullDest = dest;
-        pull = PullDirection.Locked;
-        currLockType = LockType.None;
-        if (rb.velocity.x > 0) currLockType = LockType.Right;
-        else if (rb.velocity.x < 0) currLockType = LockType.Left;
-        else if (rb.velocity.y > 0) currLockType = LockType.Up;
-        else if (rb.velocity.y < 0) currLockType = LockType.Down;
-        rb.velocity = Vector2.zero;
-
-        string[] spikeInfo = gameObject.name.Split('_');
-        id = int.Parse(spikeInfo[1]);
-    }
-    public void SetPull(Transform dest, MagnetMove.Quadrant pd)
-    {
-        snapped = false;
-        pullDest = dest;   
-        if(pd == MagnetMove.Quadrant.Up)
-        {
-            pull = PullDirection.Up;
-            transform.position = new Vector3(pullDest.position.x, transform.position.y, transform.position.z);
-            pullHistory.Add(pull);
-        }
-        else if(pd == MagnetMove.Quadrant.Down)
-        {
-            pull = PullDirection.Down;
-            transform.position = new Vector3(pullDest.position.x, transform.position.y, transform.position.z);
-            pullHistory.Add(pull);
-        }
-        else if (pd == MagnetMove.Quadrant.Left)
-        {
-            pull = PullDirection.Left;
-            transform.position = new Vector3(transform.position.x, pullDest.position.y, transform.position.z);
-            pullHistory.Add(pull);
-        }
-        else if (pd == MagnetMove.Quadrant.Right)
-        {
-            pull = PullDirection.Right;
-            transform.position = new Vector3(transform.position.x, pullDest.position.y, transform.position.z);
-            pullHistory.Add(pull);
-        }
-        else if(pd == MagnetMove.Quadrant.DiagonalLeft)
-        {
-            pull = PullDirection.DiagonalLeftUp;
-            pullHistory.Add(pull);
-        }
-    }
+    private GameObject spike;
+    private List<Vector3> sourceHistory;
     void Awake()
     {
-        electricSpark = transform.GetChild(2).gameObject;
-        if(GameObject.FindGameObjectWithTag("ElectricStation")) electricStation = GameObject.FindGameObjectWithTag("ElectricStation").GetComponent<ElectricStation>();
+        electricSpark = transform.GetChild(2).transform.gameObject;
+        if (GameObject.FindGameObjectWithTag("ElectricStation")) electricStation = GameObject.FindGameObjectWithTag("ElectricStation").GetComponent<ElectricStation>();
         currLockType = LockType.None;
         Charged = false;
         sr = transform.GetChild(1).GetComponent<SpriteRenderer>();
@@ -92,30 +45,46 @@ public class Interactable : MonoBehaviour
         snapped = false;
         pull = PullDirection.None;
         pulling = false;
+        resetting = false;
         pullHistory = new List<PullDirection>();
         rb = GetComponent<Rigidbody2D>();
-        startPos = GameObject.FindGameObjectWithTag("Rest" + id).transform;
-    }
+        startPos = transform.parent.GetChild(0).transform;
+        spike = transform.gameObject;
+        pullDestHistory = new List<Vector3>();
+        pullDest = transform.position;
+        sourceHistory = new List<Vector3>();
 
-    public void ResetStage()
+        string[] spikeInfo = transform.parent.gameObject.name.Split('_');
+        id = int.Parse(spikeInfo[1]);
+    }
+  
+    public void SetPull(int magnet, Transform dest, MagnetMove.Quadrant pd)
     {
-        transform.position = startPos.position;
-        pullHistory.Clear();
-        pull = PullDirection.None;
+        Debug.Log("SET PULL TO MAGNET " + magnet);
+        float speed = 2F;
         snapped = false;
-        Charged = false;
-    }
-
-    private IEnumerator UnlockRoutine(LockType l)
-    {
-        pull = PullDirection.None;
-        yield return new WaitForSeconds(0.025F);
-        if (currLockType == LockType.Left) SetPull(startPos, MagnetMove.Quadrant.Right);
-        else if (currLockType == LockType.Right) SetPull(startPos, MagnetMove.Quadrant.Left);
-        else if (currLockType == LockType.Up) SetPull(startPos, MagnetMove.Quadrant.Down);
-        else if (currLockType == LockType.Down) SetPull(startPos, MagnetMove.Quadrant.Up);
-        magnet.Unlock(lockIndex);
-        currLockType = LockType.None;
+        pullDest = dest.position;
+        pullDestHistory.Add(dest.position);
+        sourceHistory.Add(transform.position);
+        if(pd == MagnetMove.Quadrant.Up)
+        {
+            pull = PullDirection.Up;
+        }
+        else if (pd == MagnetMove.Quadrant.Down)
+        {
+            pull = PullDirection.Down;
+        }
+        if (pd == MagnetMove.Quadrant.Left)
+        {
+            pull = PullDirection.Left;
+        }
+        else if(pd == MagnetMove.Quadrant.Right)
+        {
+            pull = PullDirection.Right;
+        }
+        pullHistory.Add(pull);
+        pulling = true;
+        resetting = false;
     }
     public void ResetPull()
     {
@@ -123,35 +92,35 @@ public class Interactable : MonoBehaviour
         float speed = 3.33F;
         snapped = false;
         mm.UnhideCurrentMagnetHint();
-        if (pull == PullDirection.Locked)
+        pulling = false;
+        resetting = true;
+        if(pull == PullDirection.Locked)
         {
-            StartCoroutine(UnlockRoutine(currLockType));
+
         }
-        else if (pull == PullDirection.Up)
-        {
-            rb.velocity = new Vector2(startPos.position.x - transform.position.x, -1.0F * speed);
-            SetPull(startPos, MagnetMove.Quadrant.Down);
-        }
-        else if(pull == PullDirection.Down)
-        {
-            rb.velocity = new Vector2(startPos.position.x - transform.position.x, speed);
-            SetPull(startPos, MagnetMove.Quadrant.Up);
-        }
-        else if(pull == PullDirection.Left)
-        {
-            rb.velocity = new Vector2(speed, startPos.position.y - transform.position.y);
-            SetPull(startPos, MagnetMove.Quadrant.Right);
-        }
-        else if(pull == PullDirection.Right)
-        {
-            rb.velocity = new Vector2(-1.0F * speed, startPos.position.y - transform.position.y);
-            SetPull(startPos, MagnetMove.Quadrant.Left);
-        }
-        else if(pull == PullDirection.DiagonalLeftUp)
-        {
-            rb.velocity = new Vector2(-1.0F * speed, speed);
-            SetPull(startPos, MagnetMove.Quadrant.DiagonalLeft);
-        }
+    }
+    public void ResetStage()
+    {
+        spike.transform.position = startPos.position;
+        pullHistory.Clear();
+        pull = PullDirection.None;
+        pullDest = startPos.position;
+        snapped = false;
+        Charged = false;
+        pullDestHistory.Clear();
+        sourceHistory.Clear();
+    }
+
+    private IEnumerator UnlockRoutine(LockType l)
+    {
+        //pull = PullDirection.None;
+        yield return new WaitForSeconds(0.025F);
+        //if (currLockType == LockType.Left) SetPull(startPos, MagnetMove.Quadrant.Right);
+        //else if (currLockType == LockType.Right) SetPull(startPos, MagnetMove.Quadrant.Left);
+        //else if (currLockType == LockType.Up) SetPull(startPos, MagnetMove.Quadrant.Down);
+        //else if (currLockType == LockType.Down) SetPull(startPos, MagnetMove.Quadrant.Up);
+        //magnet.Unlock(lockIndex);
+        //currLockType = LockType.None;
     }
 
     public void RemoveCharge()
@@ -169,26 +138,6 @@ public class Interactable : MonoBehaviour
         else
         {
             electricSpark.SetActive(true);
-            if (pull == PullDirection.Left)
-            {
-                electricSpark.transform.localPosition = new Vector3(-1F, 0F, 0F);
-                electricSpark.transform.eulerAngles = new Vector3(0F, 0F, -90F);
-            }
-            else if(pull == PullDirection.Right)
-            {
-                electricSpark.transform.localPosition = new Vector3(1F, 0F, 0F);
-                electricSpark.transform.eulerAngles = new Vector3(0F, 0F, 90F);
-            }
-            else if(pull == PullDirection.Down)
-            {
-                electricSpark.transform.localPosition = new Vector3(0F, -1F, 0F);
-                electricSpark.transform.eulerAngles = Vector3.zero;
-            }
-            else if(pull == PullDirection.Up)
-            {
-                electricSpark.transform.localPosition = new Vector3(0F, 1F, 0F);
-                electricSpark.transform.eulerAngles = new Vector3(0F, 0F, 180F);
-            }
         }
 
         if (pull != PullDirection.Locked)
@@ -199,102 +148,214 @@ public class Interactable : MonoBehaviour
         {
             sr.color = srLockColor;
         }
-    }
-    private void FixedUpdate()
-    {
-        if (!snapped)
+
+        if (snapped) return;
+
+        if (pull == PullDirection.Left)
         {
-            SetVelocity();
-            if (pull == PullDirection.None || (pull == PullDirection.Locked))
+            electricSpark.transform.localPosition = new Vector3(-1F, 0F, 0F);
+            electricSpark.transform.eulerAngles = new Vector3(0F, 0F, -90F);
+        }
+        else if (pull == PullDirection.Right)
+        {
+            electricSpark.transform.localPosition = new Vector3(1F, 0F, 0F);
+            electricSpark.transform.eulerAngles = new Vector3(0F, 0F, 90F);
+        }
+        else if (pull == PullDirection.Down)
+        {
+            electricSpark.transform.localPosition = new Vector3(0F, -1F, 0F);
+            electricSpark.transform.eulerAngles = Vector3.zero;
+        }
+        else if (pull == PullDirection.Up)
+        {
+            electricSpark.transform.localPosition = new Vector3(0F, 1F, 0F);
+            electricSpark.transform.eulerAngles = new Vector3(0F, 0F, 180F);
+        }
+
+        KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + id.ToString());
+        if (Input.GetKeyDown(thisKeyCode))
+        {
+            Debug.Log("PULL DEST: " + sourceHistory[sourceHistory.Count - 1].x + ", " + sourceHistory[sourceHistory.Count - 1].y);
+            Debug.Log("RESETTING: " + resetting);
+            Debug.Log("PULLING: " + pulling);
+        }
+
+        if(resetting)
+        {
+            if (pullHistory.Count > 0)
             {
-                rb.velocity = Vector2.zero;
+                if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
+                {
+                    if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
+                    {
+                        Vector3 temp = spike.transform.position;
+                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
+                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+                    }
+                }
+                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
+                {
+                    if (spike.transform.position.y >= sourceHistory[sourceHistory.Count - 1].y)
+                    {
+                        Vector3 temp = spike.transform.position;
+                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
+                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+                    }
+                }
+                if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
+                {
+                    if (spike.transform.position.x >= sourceHistory[sourceHistory.Count - 1].x)
+                    {
+                        Vector3 temp = spike.transform.position;
+                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
+                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+                    }
+                }
+                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
+                {
+                    if (spike.transform.position.x <= sourceHistory[sourceHistory.Count - 1].x)
+                    {
+                        Vector3 temp = spike.transform.position;
+                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
+                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+                    }
+                }
             }
-            else if (pull == PullDirection.Up)
+            else
             {
-                if (transform.position.y >= pullDest.position.y)
+                Debug.Log("HERE");
+            }
+        }
+        if (pulling)
+        {
+            if (pull == PullDirection.Up)
+            {
+                if (spike.transform.position.y >= pullDest.y)
                 {
                     Snap();
                 }
             }
             else if (pull == PullDirection.Down)
             {
-                if (transform.position.y <= pullDest.position.y)
+                if (spike.transform.position.y <= pullDest.y)
                 {
                     Snap();
                 }
             }
             else if (pull == PullDirection.Left)
             {
-                if (transform.position.x <= pullDest.position.x)
+                if (spike.transform.localPosition.x <= pullDest.x)
                 {
                     Snap();
                 }
             }
             else if (pull == PullDirection.Right)
             {
-                if (transform.position.x >= pullDest.position.x)
+                if (spike.transform.localPosition.x >= pullDest.x)
                 {
                     Snap();
                 }
             }
-            else if(pull == PullDirection.DiagonalLeftUp)
-            {
-                if((transform.position.x <= pullDest.position.x && transform.position.y >= pullDest.position.y)) {
-                    Snap();
-                }
-            }
         }
     }
 
-    private void Snap()
+    private void FixedUpdate()
     {
-        Charged = false;
-        rb.velocity = Vector2.zero;
-        if (pull == PullDirection.Up || pull == PullDirection.Down)
+        SetVelocity();
+    }
+
+    private void SetVelocity()
+    {
+        if ((resetting && sourceHistory.Count == 0) || snapped)
         {
-            transform.position = new Vector3(transform.position.x, pullDest.position.y, transform.position.z);
+            rb.velocity = Vector2.zero;
+            return;
         }
-        else if (pull == PullDirection.Left || pull == PullDirection.Right)
+
+        if (pulling)
         {
-            transform.position = new Vector3(pullDest.position.x, transform.position.y, transform.position.z);
+            Vector3 dest = pullDestHistory[pullDestHistory.Count - 1];
+            Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
+            rb.velocity = v;
         }
-        if (pullDest != startPos)
+        else if (resetting)
         {
-            snapped = true;
-            magnet.snapBlocked = true;
-            mm.HideCurrentMagnetHint();
+            if (pullHistory.Count > 0)
+            {
+                Vector3 dest = sourceHistory[sourceHistory.Count - 1];
+                Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.transform.position.y, 0F));
+                if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
+                {
+                    v = new Vector3(1.25F, 0F);
+                }
+                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
+                {
+                    v = new Vector3(-1.25F, 0F);
+                }
+                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
+                {
+                    v = new Vector3(0F, -1.25F);
+                }
+                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
+                {
+                    v = new Vector3(0F, 1.25F);
+                }
+                rb.velocity = v;
+            }
+            else
+            {
+                Vector3 dest = startPos.position;
+                Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
+                rb.velocity = v;
+            }
         }
         else
         {
-            pull = PullDirection.None;
-        }
-    }
-    private void SetVelocity()
-    {
-        if (snapped || pull == PullDirection.None)
-        {
             rb.velocity = Vector2.zero;
-        }
-        else if (pull == PullDirection.Up)
-        {
-            rb.velocity = new Vector2(pullDest.position.x - transform.position.x, 2F);
-        }
-        else if (pull == PullDirection.Down)
-        {
-            rb.velocity = new Vector2(pullDest.position.x - transform.position.x, -2F);
-        }
-        else if(pull == PullDirection.Left)
-        {
-            rb.velocity = new Vector2(-2F, pullDest.position.y - transform.position.y);
-        }
-        else if(pull == PullDirection.Right)
-        {
-            rb.velocity = new Vector2(2F, pullDest.position.y - transform.position.y);
-        }
-        else if(pull == PullDirection.DiagonalLeftUp)
-        {
-            rb.velocity = new Vector2(2F, -2F);
         }
     }
 
+
+    private void Snap()
+    {
+        Debug.Log("SNAP");
+        Charged = false;
+        resetting = false;
+        pulling = false;
+        rb.velocity = Vector2.zero;
+        if (pull == PullDirection.Up || pull == PullDirection.Down)
+        {
+            spike.transform.position = new Vector3(pullDest.x, pullDest.y, transform.position.z);
+        }
+        else if (pull == PullDirection.Left || pull == PullDirection.Right)
+        {
+            spike.transform.position = new Vector3(pullDest.x, pullDest.y, transform.position.z);
+        }
+        snapped = true;
+        magnet.snapBlocked = true;
+        mm.HideCurrentMagnetHint();
+        if(Mathf.Approximately(spike.transform.position.x, startPos.position.x) && Mathf.Approximately(spike.transform.position.y, startPos.position.y))
+        {
+            Debug.Log("SNAP COLLIDE start pos");
+        }
+    }
+
+    public void SetLocked(int index, Transform dest)
+    {
+        lockIndex = index;
+        spike.transform.position = dest.position;
+        snapped = false;
+        pullDest = dest.position;
+        pull = PullDirection.Locked;
+        currLockType = LockType.None;
+        if (rb.velocity.x > 0) currLockType = LockType.Right;
+        else if (rb.velocity.x < 0) currLockType = LockType.Left;
+        else if (rb.velocity.y > 0) currLockType = LockType.Up;
+        else if (rb.velocity.y < 0) currLockType = LockType.Down;
+        rb.velocity = Vector2.zero;
+    }
 }

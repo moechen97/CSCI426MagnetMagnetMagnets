@@ -27,6 +27,8 @@ TagManager:
   - ElectricStation
   - Block
   - MagnetPositions
+  - RoadBattery
+  - MagnetManager
   layers:
   - Default
   - TransparentFX

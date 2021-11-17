@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject DieParticle;
     [SerializeField] private GameObject WinParticle;
+    [SerializeField] public int GameLevel;
+    [SerializeField] public float RateOfAcceleration;
     private SpriteRenderer _spriteRenderer;
     private Vector3 startPos;
     private SWS.splineMove move;
@@ -30,7 +32,7 @@ public class Player : MonoBehaviour
         interactables = new Interactable[interactableObjects.Length];
         for(int i = 0; i < interactableObjects.Length; i++)
         {
-            interactables[i] = interactableObjects[i].GetComponent<Interactable>();
+            interactables[i] = interactableObjects[i].GetComponentInParent<Interactable>();
         }
 
         GameObject[] keyLockObjects = GameObject.FindGameObjectsWithTag("KeyLock");
@@ -78,7 +80,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Interactable") && collision.gameObject.GetComponent<Interactable>().pull != Interactable.PullDirection.Locked)
+        if(collision.gameObject.CompareTag("Interactable") && collision.gameObject.GetComponentInParent<Interactable>().pull != Interactable.PullDirection.Locked)
         {
             Die();
         }
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
         {
             if (!collision.gameObject.GetComponent<Battery>().charged)
             {
-                Die();
+                //Die();
                 //music.PlayElectricDie();
             }
         }

@@ -118,10 +118,6 @@ public class KeyLock : MonoBehaviour
         SetColor(Color.green, false);
         yield return new WaitForSeconds(unlockTimer / 3F);
         SetColor(srOriginalColor, true);
-        yield return new WaitForSeconds(unlockTimer / 3F);
-        SetColor(srGreen, true);
-        yield return new WaitForSeconds(unlockTimer / 3F);
-        SetColor(srOriginalColor, true);
         unlocking = false;
     }
 }
