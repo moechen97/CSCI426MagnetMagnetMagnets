@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyLock : MonoBehaviour
 {
-    public bool isLocked;
+    [HideInInspector] public bool isLocked;
     private SpriteRenderer sr;
     private Color srOriginalColor;
     private Color srGreen;
@@ -15,65 +15,90 @@ public class KeyLock : MonoBehaviour
     private bool unlocking;
     private float unlockTimer;
     private SpriteRenderer[] blocks;
+    private BoxCollider2D[] colliders;
     private Music music;
     private Interactable spike;
+    private MagnetMove mm;
+    [HideInInspector] public bool spikeContact;
     private void Awake()
     {
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
-        blocks = new SpriteRenderer[transform.childCount];
-        for(int i = 0; i < blocks.Length; i++)
-        {
-            blocks[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
-        }
         unlocking = false;
-        unlockTimer = 1.0F;
+        unlockTimer = 0.5F;
         sr = GetComponent<SpriteRenderer>();
         srOriginalColor = sr.color;
         srGreen = new Color(36F / 256F, 123F / 256F, 18 / 256F);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerSr = player.gameObject.GetComponent<SpriteRenderer>();
         playerSrOriginalColor = playerSr.color;
+        mm = GameObject.FindGameObjectWithTag("Magnet").GetComponent<MagnetMove>();
         spike = null;
-    }
-
-    public void ResetLock()
-    {
-        unlocking = false;
-        isLocked = false;
+        spikeContact = false;
+        blocks = new SpriteRenderer[transform.childCount];
+        colliders = new BoxCollider2D[transform.childCount];
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            blocks[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
+            colliders[i] = transform.GetChild(i).GetComponent<BoxCollider2D>();
+        }
     }
 
     private void Update()
     {
-        if (unlocking) return;
-        if (!isLocked)
+        if (isLocked)
         {
-            sr.color = srOriginalColor;
-        }
-        else sr.color = srGreen;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (unlocking) return;
-        if (!isLocked)
-        {
-            SetColor(srOriginalColor, true);
-            if (collision.gameObject.CompareTag("Interactable"))
+            for (int i = 0; i < blocks.Length; i++)
             {
-                if (!isLocked)
-                {
-                    Contain(collision.gameObject.GetComponent<Interactable>());
-                }
-            }
-            if(collision.gameObject.CompareTag("Player"))
-            {
-                player.Die();
+                blocks[i].enabled = true;
+                colliders[i].enabled = true;
             }
         }
         else
         {
-            if (collision.gameObject.CompareTag("Player"))
+            for (int i = 0; i < blocks.Length; i++)
             {
-                SetColor(Color.green, false);
+                blocks[i].enabled = false;
+                colliders[i].enabled = false;
+            }
+        }
+    }
+    public void ResetLock()
+    {
+        unlocking = false;
+        isLocked = false;
+        spikeContact = false;
+        SetColor(srOriginalColor, true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interactable"))
+        {
+            Interactable i = collision.gameObject.GetComponent<Interactable>();
+            if (!spikeContact && !isLocked)
+            {
+                Contain(i);
+            }
+            spikeContact = true;
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            if(!isLocked)
+            {
+                collision.gameObject.GetComponent<Player>().Die();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (spikeContact)
+        {
+            if (collision.gameObject.CompareTag("Interactable"))
+            {
+                Debug.Log("YO HOE"); Debug.Log(isLocked);
+                spikeContact = false;
+                SetColor(srOriginalColor, true);
             }
         }
     }
@@ -81,11 +106,11 @@ public class KeyLock : MonoBehaviour
 
     public void Contain(Interactable i)
     {
-        if (i.unlocking) return;
         isLocked = true;
-        music.PlaySpikeKey();
+        //music.PlaySpikeKey();
         unlocking = false;
         isLocked = true;
+        spikeContact = true;
         SetColor(Color.green, false);
         i.SetLocked(this, index, transform);
         spike = i;
@@ -95,6 +120,7 @@ public class KeyLock : MonoBehaviour
     {
         unlocking = true;
         isLocked = false;
+        spikeContact = true;
         Debug.Log("UNLOCK");
         spike = null;
         StartCoroutine(UnlockRoutine());
@@ -102,28 +128,30 @@ public class KeyLock : MonoBehaviour
 
     private void SetColor(Color c, bool gateActive = true)
     {
-        sr.color = c;
-        if(gateActive)
-        {
-            foreach (SpriteRenderer s in blocks)
-            {
-                s.gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (SpriteRenderer s in blocks)
-            {
-                s.gameObject.SetActive(false);
-            }
-        }
+        //sr.color = c;
+        //if(gateActive)
+        //{
+        //    for (int i = 0; i < blocks.Length; i++)
+        //    {
+        //        blocks[i].enabled = true;
+        //        colliders[i].enabled = true;
+        //    }
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < blocks.Length; i++)
+        //    {
+        //        blocks[i].enabled = false;
+        //        colliders[i].enabled = false;
+        //    }
+        //}
     }
 
     private IEnumerator UnlockRoutine()
     {
-        SetColor(Color.green, false);
-        yield return new WaitForSeconds(unlockTimer / 3F);
+        //SetColor(Color.green, false);
         SetColor(srOriginalColor, true);
+        yield return new WaitForSeconds(unlockTimer);
         unlocking = false;
     }
 }
