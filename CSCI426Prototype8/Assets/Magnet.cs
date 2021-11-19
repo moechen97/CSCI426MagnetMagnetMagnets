@@ -143,12 +143,25 @@ public class Magnet : MonoBehaviour
                             i.pull = Interactable.PullDirection.Locked;
                             continue;
                         }
+                        else
+                        {
+                            Debug.Log("YOOO");
+                        }
                     }
                     if (i.currLockType == Interactable.LockType.Right)
                     {
                         if (mm.currQuad == MagnetMove.Quadrant.Right)
                         {
-                            KeyLocks[i.currKeyLock.index].Contain(i);
+                            //KeyLocks[i.currKeyLock.index].Contain(i);
+                            if (KeyLocks[i.currKeyLock.index].spikeContact)
+                            {
+                                Debug.Log("THIS IS THE SPOT");
+                            }
+                            else
+                            {
+                                i.pull = Interactable.PullDirection.Right;
+                                Debug.Log("PULL");
+                            }
                             //i.SetLocked(i.currKeyLock, i.currKeyLock.index, i.currKeyLock.transform);
                         }
                     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    public enum ForceFieldState { None, Weak, Strong }
     public enum Direction { Up, Down, Left, Right } 
     public enum PullDirection { None, Left, Up, Right, Down, Locked }
     public enum LockType { None, Left, Right, Up, Down }
@@ -32,8 +33,18 @@ public class Interactable : MonoBehaviour
     private List<Vector3> sourceHistory;
     [HideInInspector] public bool unlocking;
     [HideInInspector] public KeyLock currKeyLock;
+    private ForceFieldState forceFieldState;
+    private ForceFieldState prevForceFieldState;
+    private ParticleSystem forceFieldNone;
+    private ParticleSystem forceFieldWeak;
+    private ParticleSystem forceFieldStrong;
+    private ParticleSystem.VelocityOverLifetimeModule forceFieldStrongVelocity;
+    private Vector3 ffHide;
+    private Vector3 ffVisible;
     void Awake()
     {
+        ffHide = new Vector3(500F, 500F, 500F);
+        ffVisible = new Vector3(0, -0.06F, 0F);
         currKeyLock = null;
         electricSpark = transform.GetChild(2).transform.gameObject;
         if (GameObject.FindGameObjectWithTag("ElectricStation")) electricStation = GameObject.FindGameObjectWithTag("ElectricStation").GetComponent<ElectricStation>();
@@ -51,7 +62,14 @@ public class Interactable : MonoBehaviour
         resetting = false;
         pullHistory = new List<PullDirection>();
         rb = GetComponent<Rigidbody2D>();
-        startPos = transform.parent.GetChild(0).transform;
+        GameObject start = transform.parent.GetChild(0).gameObject;
+        startPos = start.transform;
+        forceFieldNone = start.transform.GetChild(0).GetComponent<ParticleSystem>();
+        forceFieldNone.transform.localPosition = ffVisible;
+        forceFieldWeak = start.transform.GetChild(1).GetComponent<ParticleSystem>();
+        forceFieldWeak.transform.localPosition = ffHide;
+        forceFieldStrong = start.transform.GetChild(2).GetComponent<ParticleSystem>();
+        forceFieldStrong.transform.localPosition = ffHide;
         spike = transform.gameObject;
         pullDestHistory = new List<Vector3>();
         pullDest = transform.position;
@@ -60,6 +78,10 @@ public class Interactable : MonoBehaviour
         string[] spikeInfo = transform.parent.gameObject.name.Split('_');
         id = int.Parse(spikeInfo[1]);
         unlocking = false;
+
+        forceFieldState = ForceFieldState.None;
+        forceFieldStrongVelocity = forceFieldStrong.velocityOverLifetime;
+        forceFieldStrongVelocity.zMultiplier = forceFieldStrongVelocity.zMultiplier / 2F;
     }
   
     public void SetPull(int magnet, Transform dest, MagnetMove.Quadrant pd)
@@ -101,8 +123,9 @@ public class Interactable : MonoBehaviour
         resetting = true;
         if(pull == PullDirection.Locked)
         {
-            pull = PullDirection.None;
+            pull = pullHistory[pullHistory.Count - 1];
             Debug.Log("PULL HISTORY SIZE: " + pullHistory.Count);
+            Debug.Log("PULL NOW: " + pullHistory[pullHistory.Count - 1]);
             foreach(PullDirection p in pullHistory)
             {
                 Debug.Log(p);
@@ -116,7 +139,7 @@ public class Interactable : MonoBehaviour
     private IEnumerator Unlock()
     {
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(0.25F);
+        yield return new WaitForSeconds(0.5F);
         unlocking = false;
     }
     public void ResetStage()
@@ -151,6 +174,7 @@ public class Interactable : MonoBehaviour
 
     public void Update()
     {
+        prevForceFieldState = forceFieldState;
         //if (pull == PullDirection.Locked || unlocking) return;
         if (!Charged)
         {
@@ -194,23 +218,16 @@ public class Interactable : MonoBehaviour
         }
 
         KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + id.ToString());
-        if (Input.GetKeyDown(thisKeyCode))
-        {
-            //Debug.Log("PULL DEST: " + sourceHistory[sourceHistory.Count - 1].x + ", " + sourceHistory[sourceHistory.Count - 1].y);
-            Debug.Log("RESETTING: " + resetting);
-            Debug.Log("PULLING: " + pulling);
-        }
 
         if(resetting)
         {
             if (pullHistory.Count > 0)
             {
+                forceFieldState = ForceFieldState.Strong;
                 if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
                 {
                     if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
                     {
-                        Vector3 temp = spike.transform.position;
-                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
                         pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
                         sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
                     }
@@ -219,8 +236,6 @@ public class Interactable : MonoBehaviour
                 {
                     if (spike.transform.position.y >= sourceHistory[sourceHistory.Count - 1].y)
                     {
-                        Vector3 temp = spike.transform.position;
-                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
                         pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
                         sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
                     }
@@ -229,8 +244,6 @@ public class Interactable : MonoBehaviour
                 {
                     if (spike.transform.position.x >= sourceHistory[sourceHistory.Count - 1].x)
                     {
-                        Vector3 temp = spike.transform.position;
-                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
                         pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
                         sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
                     }
@@ -239,8 +252,6 @@ public class Interactable : MonoBehaviour
                 {
                     if (spike.transform.position.x <= sourceHistory[sourceHistory.Count - 1].x)
                     {
-                        Vector3 temp = spike.transform.position;
-                        //spike.transform.position = sourceHistory[sourceHistory.Count - 1];
                         pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
                         sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
                     }
@@ -248,11 +259,15 @@ public class Interactable : MonoBehaviour
             }
             else
             {
-                Debug.Log("HERE");
+                Debug.Log("RAN HERE");
+                forceFieldState = ForceFieldState.None;
+                resetting = false;
             }
         }
+
         if (pulling)
         {
+            forceFieldState = ForceFieldState.Weak;
             if (pull == PullDirection.Up)
             {
                 if (spike.transform.position.y >= pullDest.y)
@@ -280,6 +295,61 @@ public class Interactable : MonoBehaviour
                 {
                     Snap();
                 }
+            }
+        }
+
+        if(!resetting && !pulling)
+        {
+            forceFieldState = ForceFieldState.None;
+        }
+
+        //Force field visual updates
+        if (forceFieldState == ForceFieldState.None)
+        {
+            if(forceFieldWeak.transform.localPosition == ffVisible)
+            {
+                forceFieldWeak.transform.localPosition = ffHide;
+                //ParticleSystem.VelocityOverLifetimeModule velocityModule = forceFieldWeak.velocityOverLifetime;
+                //velocityModule.zMultiplier = velocityModule.zMultiplier / 2F;
+            }
+            if(forceFieldStrong.transform.localPosition == ffVisible)
+            {
+                forceFieldStrong.transform.localPosition = ffHide;
+            }
+            forceFieldNone.transform.localPosition = ffVisible;
+        }
+        else if(forceFieldState == ForceFieldState.Weak && prevForceFieldState != ForceFieldState.Weak)
+        {
+            StartCoroutine(ForceFieldTransition(forceFieldWeak));
+        }
+        else if(forceFieldState == ForceFieldState.Strong && prevForceFieldState != ForceFieldState.Strong)
+        {
+            StartCoroutine(ForceFieldTransition(forceFieldStrong));
+        }
+    }
+
+    private IEnumerator ForceFieldTransition(ParticleSystem ff)
+    {
+        if (ff == forceFieldStrong)
+        {
+            yield return new WaitForSeconds(0.1125F);
+        }
+        ff.transform.localPosition = ffVisible;
+        yield return new WaitForSeconds(0.225F);
+        if(ff == forceFieldWeak)
+        {
+            if(forceFieldState == ForceFieldState.Weak)
+            {
+                forceFieldStrong.transform.localPosition = ffHide;
+                forceFieldNone.transform.localPosition = ffHide;
+            }
+        }
+        else if(ff == forceFieldStrong)
+        {
+            if(forceFieldState == ForceFieldState.Strong)
+            {
+                forceFieldWeak.transform.localPosition = ffHide;
+                forceFieldNone.transform.localPosition = ffHide;
             }
         }
     }
@@ -344,7 +414,6 @@ public class Interactable : MonoBehaviour
 
     private void Snap()
     {
-        Debug.Log("SNAP");
         Charged = false;
         resetting = false;
         pulling = false;
@@ -360,10 +429,6 @@ public class Interactable : MonoBehaviour
         snapped = true;
         magnet.snapBlocked = true;
         mm.HideCurrentMagnetHint();
-        if(Mathf.Approximately(spike.transform.position.x, startPos.position.x) && Mathf.Approximately(spike.transform.position.y, startPos.position.y))
-        {
-            Debug.Log("SNAP COLLIDE start pos");
-        }
     }
 
     public void SetLocked(KeyLock keyLock, int index, Transform dest)
@@ -378,7 +443,6 @@ public class Interactable : MonoBehaviour
         else if (rb.velocity.x < 1F) currLockType = LockType.Left;
         else if (rb.velocity.y > 1F) currLockType = LockType.Up;
         else if (rb.velocity.y < 1F) currLockType = LockType.Down;
-        Debug.Log("CURR LOCK TYPE: " + currLockType);
         rb.velocity = Vector2.zero;
     }
 }
