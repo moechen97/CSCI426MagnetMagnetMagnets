@@ -121,19 +121,19 @@ public class Interactable : MonoBehaviour
         mm.UnhideCurrentMagnetHint();
         pulling = false;
         resetting = true;
-        if(pull == PullDirection.Locked)
-        {
-            pull = pullHistory[pullHistory.Count - 1];
-            Debug.Log("PULL HISTORY SIZE: " + pullHistory.Count);
-            Debug.Log("PULL NOW: " + pullHistory[pullHistory.Count - 1]);
-            foreach(PullDirection p in pullHistory)
-            {
-                Debug.Log(p);
-            }
-            unlocking = true;
-            currKeyLock.Unlock();
-            StartCoroutine(Unlock());
-        }
+        // if(pull == PullDirection.Locked)
+        // {
+        //     pull = pullHistory[pullHistory.Count - 1];
+        //     Debug.Log("PULL HISTORY SIZE: " + pullHistory.Count);
+        //     Debug.Log("PULL NOW: " + pullHistory[pullHistory.Count - 1]);
+        //     foreach(PullDirection p in pullHistory)
+        //     {
+        //         Debug.Log(p);
+        //     }
+        //     unlocking = true;
+        //     currKeyLock.Unlock();
+        //     StartCoroutine(Unlock());
+        // }
     }
 
     private IEnumerator Unlock()
@@ -221,48 +221,56 @@ public class Interactable : MonoBehaviour
 
         if(resetting)
         {
-            if (pullHistory.Count > 0)
-            {
-                forceFieldState = ForceFieldState.Strong;
-                if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
-                {
-                    if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
-                    {
-                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-                    }
-                }
-                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
-                {
-                    if (spike.transform.position.y >= sourceHistory[sourceHistory.Count - 1].y)
-                    {
-                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-                    }
-                }
-                if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
-                {
-                    if (spike.transform.position.x >= sourceHistory[sourceHistory.Count - 1].x)
-                    {
-                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-                    }
-                }
-                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
-                {
-                    if (spike.transform.position.x <= sourceHistory[sourceHistory.Count - 1].x)
-                    {
-                        pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-                        sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-                    }
-                }
-            }
-            else
-            {
-                Debug.Log("RAN HERE");
+            if (transform.position.x == startPos.position.x && transform.position.y == startPos.position.y) {
                 forceFieldState = ForceFieldState.None;
                 resetting = false;
             }
+            else {
+                forceFieldState = ForceFieldState.Strong;
+            }
+
+            // if (pullHistory.Count > 0)
+            // {
+            //     forceFieldState = ForceFieldState.Strong;
+            //     if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
+            //     {
+            //         if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
+            //         {
+            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+            //         }
+            //     }
+            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
+            //     {
+            //         if (spike.transform.position.y >= sourceHistory[sourceHistory.Count - 1].y)
+            //         {
+            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+            //         }
+            //     }
+            //     if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
+            //     {
+            //         if (spike.transform.position.x >= sourceHistory[sourceHistory.Count - 1].x)
+            //         {
+            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+            //         }
+            //     }
+            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
+            //     {
+            //         if (spike.transform.position.x <= sourceHistory[sourceHistory.Count - 1].x)
+            //         {
+            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
+            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
+            //         }
+            //     }
+            // }
+            // else
+            // {
+            //     Debug.Log("RAN HERE");
+            //     forceFieldState = ForceFieldState.None;
+            //     resetting = false;
+            // }
         }
 
         if (pulling)
@@ -272,28 +280,28 @@ public class Interactable : MonoBehaviour
             {
                 if (spike.transform.position.y >= pullDest.y)
                 {
-                    Snap();
+                    // Snap();
                 }
             }
             else if (pull == PullDirection.Down)
             {
                 if (spike.transform.position.y <= pullDest.y)
                 {
-                    Snap();
+                    // Snap();
                 }
             }
             else if (pull == PullDirection.Left)
             {
                 if (spike.transform.localPosition.x <= pullDest.x)
                 {
-                    Snap();
+                    // Snap();
                 }
             }
             else if (pull == PullDirection.Right)
             {
-                if (spike.transform.localPosition.x >= pullDest.x)
+                if (spike.transform.localPosition.x >= pullDest.x + 5)
                 {
-                    Snap();
+                    // Snap();
                 }
             }
         }
@@ -376,34 +384,34 @@ public class Interactable : MonoBehaviour
         }
         else if (resetting)
         {
-            if (pullHistory.Count > 0)
-            {
-                Vector3 dest = sourceHistory[sourceHistory.Count - 1];
-                Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.transform.position.y, 0F));
-                if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
-                {
-                    v = new Vector3(1.5F, 0F);
-                }
-                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
-                {
-                    v = new Vector3(-1.5F, 0F);
-                }
-                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
-                {
-                    v = new Vector3(0F, -1.5F);
-                }
-                else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
-                {
-                    v = new Vector3(0F, 1.5F);
-                }
-                rb.velocity = v;
-            }
-            else
-            {
+            // if (pullHistory.Count > 0)
+            // {
+            //     Vector3 dest = sourceHistory[sourceHistory.Count - 1];
+            //     Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.transform.position.y, 0F));
+            //     if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
+            //     {
+            //         v = new Vector3(1.5F, 0F);
+            //     }
+            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
+            //     {
+            //         v = new Vector3(-1.5F, 0F);
+            //     }
+            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
+            //     {
+            //         v = new Vector3(0F, -1.5F);
+            //     }
+            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
+            //     {
+            //         v = new Vector3(0F, 1.5F);
+            //     }
+            //     rb.velocity = v;
+            // }
+            // else
+            // {
                 Vector3 dest = startPos.position;
                 Vector3 v = 1.5F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
                 rb.velocity = v;
-            }
+            // }
         }
         else
         {
