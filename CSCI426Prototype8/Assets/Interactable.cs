@@ -83,6 +83,13 @@ public class Interactable : MonoBehaviour
         forceFieldState = ForceFieldState.None;
         forceFieldStrongVelocity = forceFieldStrong.velocityOverLifetime;
         forceFieldStrongVelocity.zMultiplier = forceFieldStrongVelocity.zMultiplier / 2F;
+        if(!isAttractedToStart)
+        {
+            forceFieldNone.gameObject.SetActive(false);
+            forceFieldWeak.gameObject.SetActive(false);
+            forceFieldStrong.gameObject.SetActive(false);
+            transform.parent.GetChild(0).gameObject.SetActive(false);
+        }
     }
   
     public void SetPull(int magnet, Transform dest, MagnetMove.Quadrant pd)
@@ -284,7 +291,7 @@ public class Interactable : MonoBehaviour
             {
                 if (spike.transform.position.y >= pullDest.y)
                 {
-                    // Snap();
+                    //Snap();
                 }
             }
             else if (pull == PullDirection.Down)
@@ -341,12 +348,6 @@ public class Interactable : MonoBehaviour
             {
                 StartCoroutine(ForceFieldTransition(forceFieldStrong));
             }
-        }
-        else
-        {
-            forceFieldNone.gameObject.SetActive(false);
-            forceFieldWeak.gameObject.SetActive(false);
-            forceFieldStrong.gameObject.SetActive(false);
         }
     }
 
