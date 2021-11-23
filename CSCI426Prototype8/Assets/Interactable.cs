@@ -120,7 +120,7 @@ public class Interactable : MonoBehaviour
         snapped = false;
         mm.UnhideCurrentMagnetHint();
         pulling = false;
-        resetting = true;
+        //resetting = true;
         // if(pull == PullDirection.Locked)
         // {
         //     pull = pullHistory[pullHistory.Count - 1];
