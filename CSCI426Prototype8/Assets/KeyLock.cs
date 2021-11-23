@@ -96,7 +96,7 @@ public class KeyLock : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Interactable"))
             {
-                Debug.Log("YO HOE"); Debug.Log(isLocked);
+                Debug.Log(isLocked);
                 spikeContact = false;
                 SetColor(srOriginalColor, true);
             }

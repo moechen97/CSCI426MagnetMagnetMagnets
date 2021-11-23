@@ -132,19 +132,11 @@ public class Interactable : MonoBehaviour
         {
             resetting = true;
         }
-        // if(pull == PullDirection.Locked)
-        // {
-        //     pull = pullHistory[pullHistory.Count - 1];
-        //     Debug.Log("PULL HISTORY SIZE: " + pullHistory.Count);
-        //     Debug.Log("PULL NOW: " + pullHistory[pullHistory.Count - 1]);
-        //     foreach(PullDirection p in pullHistory)
-        //     {
-        //         Debug.Log(p);
-        //     }
-        //     unlocking = true;
-        //     currKeyLock.Unlock();
-        //     StartCoroutine(Unlock());
-        // }
+        if(pull == PullDirection.Locked)
+        {
+
+            Debug.Log("LOCKED");
+        }
     }
 
     private IEnumerator Unlock()
