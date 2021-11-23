@@ -41,6 +41,7 @@ public class Interactable : MonoBehaviour
     private ParticleSystem.VelocityOverLifetimeModule forceFieldStrongVelocity;
     private Vector3 ffHide;
     private Vector3 ffVisible;
+    [SerializeField] public bool isAttractedToStart;
     void Awake()
     {
         ffHide = new Vector3(500F, 500F, 500F);
@@ -120,7 +121,10 @@ public class Interactable : MonoBehaviour
         snapped = false;
         mm.UnhideCurrentMagnetHint();
         pulling = false;
-        //resetting = true;
+        if (isAttractedToStart)
+        {
+            resetting = true;
+        }
         // if(pull == PullDirection.Locked)
         // {
         //     pull = pullHistory[pullHistory.Count - 1];
@@ -311,28 +315,38 @@ public class Interactable : MonoBehaviour
             forceFieldState = ForceFieldState.None;
         }
 
-        //Force field visual updates
-        if (forceFieldState == ForceFieldState.None)
+
+        if (isAttractedToStart)
         {
-            if(forceFieldWeak.transform.localPosition == ffVisible)
+            //Force field visual updates
+            if (forceFieldState == ForceFieldState.None)
             {
-                forceFieldWeak.transform.localPosition = ffHide;
-                //ParticleSystem.VelocityOverLifetimeModule velocityModule = forceFieldWeak.velocityOverLifetime;
-                //velocityModule.zMultiplier = velocityModule.zMultiplier / 2F;
+                if (forceFieldWeak.transform.localPosition == ffVisible)
+                {
+                    forceFieldWeak.transform.localPosition = ffHide;
+                    //ParticleSystem.VelocityOverLifetimeModule velocityModule = forceFieldWeak.velocityOverLifetime;
+                    //velocityModule.zMultiplier = velocityModule.zMultiplier / 2F;
+                }
+                if (forceFieldStrong.transform.localPosition == ffVisible)
+                {
+                    forceFieldStrong.transform.localPosition = ffHide;
+                }
+                forceFieldNone.transform.localPosition = ffVisible;
             }
-            if(forceFieldStrong.transform.localPosition == ffVisible)
+            else if (forceFieldState == ForceFieldState.Weak && prevForceFieldState != ForceFieldState.Weak)
             {
-                forceFieldStrong.transform.localPosition = ffHide;
+                StartCoroutine(ForceFieldTransition(forceFieldWeak));
             }
-            forceFieldNone.transform.localPosition = ffVisible;
+            else if (forceFieldState == ForceFieldState.Strong && prevForceFieldState != ForceFieldState.Strong)
+            {
+                StartCoroutine(ForceFieldTransition(forceFieldStrong));
+            }
         }
-        else if(forceFieldState == ForceFieldState.Weak && prevForceFieldState != ForceFieldState.Weak)
+        else
         {
-            StartCoroutine(ForceFieldTransition(forceFieldWeak));
-        }
-        else if(forceFieldState == ForceFieldState.Strong && prevForceFieldState != ForceFieldState.Strong)
-        {
-            StartCoroutine(ForceFieldTransition(forceFieldStrong));
+            forceFieldNone.gameObject.SetActive(false);
+            forceFieldWeak.gameObject.SetActive(false);
+            forceFieldStrong.gameObject.SetActive(false);
         }
     }
 
