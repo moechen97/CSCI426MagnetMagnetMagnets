@@ -49,16 +49,16 @@ public class KeyLock : MonoBehaviour
         {
             for (int i = 0; i < blocks.Length; i++)
             {
-                blocks[i].enabled = true;
-                colliders[i].enabled = true;
+                blocks[i].enabled = false;
+                colliders[i].enabled = false;
             }
         }
         else
         {
             for (int i = 0; i < blocks.Length; i++)
             {
-                blocks[i].enabled = false;
-                colliders[i].enabled = false;
+                blocks[i].enabled = true;
+                colliders[i].enabled = true;
             }
         }
     }

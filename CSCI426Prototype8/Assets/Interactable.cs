@@ -194,7 +194,7 @@ public class Interactable : MonoBehaviour
         }
         else
         {
-            sr.color = srLockColor;
+            //sr.color = srLockColor;
         }
 
         if (snapped) return;
