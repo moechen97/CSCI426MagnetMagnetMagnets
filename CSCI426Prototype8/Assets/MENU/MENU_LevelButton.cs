@@ -10,9 +10,13 @@ public class MENU_LevelButton : MonoBehaviour
     private string levelScene;
     private int number;
     private bool unavailable;
+    private Button button;
+    private Color green;
     // Start is called before the first frame update
     void Start()
     {
+        green = new Color(58F / 255F, 215F / 255F, 65F / 255F);
+        button = GetComponent<Button>();
         unavailable = false;
         vs = GameObject.FindGameObjectWithTag("VariablesSaver").GetComponent<VariablesSaver>();
         string[] nameInfo = gameObject.name.Split('_');
@@ -22,10 +26,27 @@ public class MENU_LevelButton : MonoBehaviour
             number = int.Parse(nameInfo[1]);
         }
 
-        if(number > vs.levelRange)
+        if(number == 1)
         {
-            unavailable = true;
-            transform.GetChild(0).GetComponent<Image>().color = Color.red;
+            if(vs.levelsCompleted[1])
+            {
+                GetComponent<Image>().color = green;
+            }
+        }
+        else  if(number >= 2 && number <= vs.levelRange)
+        {
+            if (vs.levelsCompleted[number])
+            {
+                GetComponent<Image>().color = green;
+            }
+            else
+            {
+                if(!vs.levelsCompleted[number - 1])
+                {
+                    unavailable = true;
+                    GetComponent<Image>().color = Color.red;
+                }
+            }
         }
     }
 
@@ -35,8 +56,7 @@ public class MENU_LevelButton : MonoBehaviour
         {
             if (number >= 0 && number <= vs.levelRange)
             {
-                SceneManager.LoadScene(vs.Levels[number]);
-                vs.level = number;
+                vs.LoadLevel(number);
             }
         }
     }

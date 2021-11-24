@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class VariablesSaver : MonoBehaviour
 {
+    [HideInInspector] public bool gameStarted;
     [HideInInspector] public int levelRange;
     [HideInInspector] public int level;
     [HideInInspector] public bool[] levelsCompleted;
     [HideInInspector] public int currentLevel;
-
     public string[] Levels;
     public enum LevelState { Gray, Green, Red }
+    [HideInInspector] public bool[] research;
     void Awake()
     {
         if (GameObject.FindGameObjectsWithTag("VariablesSaver").Length > 1)
@@ -19,12 +20,18 @@ public class VariablesSaver : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+        gameStarted = false;
         string sceneName = SceneManager.GetActiveScene().name;
         level = 0;
-        levelRange = Levels.Length - 1;
+        levelRange = Levels.Length;
         Debug.Log("VARIABLE SAVER: Begin level " + level);
         DontDestroyOnLoad(this.gameObject);
         levelsCompleted = new bool[levelRange];
+        research = new bool[2];
+        for(int r = 0; r < 2; r++)
+        {
+            research[r] = false;
+        }
     }
 
     public LevelState GetLevelState(int num)
@@ -57,6 +64,7 @@ public class VariablesSaver : MonoBehaviour
 
     public void LoadLevel(int index)
     {
+        gameStarted = true;
         level = index;
         SceneManager.LoadScene(Levels[level]);
     }
@@ -68,7 +76,19 @@ public class VariablesSaver : MonoBehaviour
 
     public void NextLevel()
     {
-        if (level < levelRange)
+        levelsCompleted[level] = true;
+        //Check research
+        if(level == 5)
+        {
+            research[0] = true;
+        }
+        else if(level == 10)
+        {
+            research[1] = true;
+        }
+
+        //Move on to next level
+        if (level < levelRange - 1)
         {
             level++;
         }
