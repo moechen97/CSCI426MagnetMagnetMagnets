@@ -321,14 +321,14 @@ public class Interactable : MonoBehaviour
             }
             else if (pull == PullDirection.Left)
             {
-                if (spike.transform.localPosition.x <= pullDest.x + 0.35F)
+                if (spike.transform.position.x <= pullDest.x)
                 {
                     Snap();
                 }
             }
             else if (pull == PullDirection.Right)
             {
-                if (spike.transform.localPosition.x >= pullDest.x + 0.2F)
+                if (spike.transform.position.x >= pullDest.x)
                 {
                     Snap();
                 }
