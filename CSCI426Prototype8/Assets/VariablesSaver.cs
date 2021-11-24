@@ -27,8 +27,8 @@ public class VariablesSaver : MonoBehaviour
         Debug.Log("VARIABLE SAVER: Begin level " + level);
         DontDestroyOnLoad(this.gameObject);
         levelsCompleted = new bool[levelRange];
-        research = new bool[2];
-        for(int r = 0; r < 2; r++)
+        research = new bool[3];
+        for(int r = 0; r < 3; r++)
         {
             research[r] = false;
         }
@@ -82,9 +82,13 @@ public class VariablesSaver : MonoBehaviour
         {
             research[0] = true;
         }
-        else if(level == 10)
+        else if(level == 7)
         {
             research[1] = true;
+        }
+        else if(level == 10)
+        {
+            research[2] = true;
         }
 
         //Move on to next level
