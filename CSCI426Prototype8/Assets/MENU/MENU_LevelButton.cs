@@ -9,9 +9,11 @@ public class MENU_LevelButton : MonoBehaviour
     private VariablesSaver vs;
     private string levelScene;
     private int number;
+    private bool available;
     // Start is called before the first frame update
     void Start()
     {
+        available = false;
         vs = GameObject.FindGameObjectWithTag("VariablesSaver").GetComponent<VariablesSaver>();
         string[] nameInfo = gameObject.name.Split('_');
         if (nameInfo.Length == 2)
@@ -37,11 +39,21 @@ public class MENU_LevelButton : MonoBehaviour
                 if (i == number)
                 {
                     transform.GetChild(0).GetComponent<Image>().color = Color.green;
+                    available = true;
                     seen = true;
+                }
+                if(seen && i ==  number + 1)
+                {
+                    if (!vs.levelsCompleted[i])
+                    {
+                        available = true;
+                        Debug.Log("FIRST LEVEL NOT BEATEN: " + number);
+                    }
+                    break;
                 }
             }
         }
-
+ 
         if(!seen && number > 0)
         {
             if (number < vs.levelRange)
@@ -60,13 +72,16 @@ public class MENU_LevelButton : MonoBehaviour
 
     public void OnClick()
     {
-        if(number > 0 && number <= vs.levelRange)
+        if (available)
         {
-            SceneManager.LoadScene(levelScene);
-        }
-        else if(number == 0)
-        {
-            SceneManager.LoadScene(levelScene);
+            if (number > 0 && number <= vs.levelRange)
+            {
+                SceneManager.LoadScene(levelScene);
+            }
+            else if (number == 0)
+            {
+                SceneManager.LoadScene(levelScene);
+            }
         }
     }
 }
