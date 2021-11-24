@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Yimeng Test Folder/Scene/Level1.unity
     guid: 98be6c7439eda20419f0e3bfe11712b8
   - enabled: 1
+    path: Assets/Yimeng Test Folder/Scene/Level1.5.unity
+    guid: 9a469e19203fa4147a00a05ea722819e
+  - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/Level2.unity
     guid: 85ad36655ba78fd419edb497ada5b0e9
   - enabled: 1
@@ -30,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Yimeng Test Folder/Scene/Level7.unity
     guid: ac55abba404277d4e988c54ba277f6b7
   - enabled: 1
-    path: Assets/Yimeng Test Folder/Scene/Level1.5.unity
-    guid: 9a469e19203fa4147a00a05ea722819e
+    path: Assets/Yimeng Test Folder/Scene/LevelTestBomb.unity
+    guid: b38d60bcd03c8ad48948832ee79483ef
   m_configObjects: {}

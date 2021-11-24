@@ -21,25 +21,32 @@ namespace SWS
     public class splineMove : MonoBehaviour
     {
         //CUSTOM IMPLEMENTATION
-        private float timeElapsed;
+        private float accelerationElapsed;
         private float rateOfAcceleration;
+        private float timeDelay;
+        private float timer;
+        private float totalSpeed;
         private Player player; //Level, Rate of acceleration variables
         private float speedLimit = 4F;
         private float startSpeed = 2.0F;
         private int level;
         private void Awake()
         {
-            timeElapsed = 0F;
+            timer = 0F;
+            accelerationElapsed = 0F;
+            totalSpeed = startSpeed;
             player = GetComponent<Player>();
             rateOfAcceleration = player.RateOfAcceleration;
+            timeDelay = player.DelayBeforeAcceleration;
             Debug.Log("SPLINE MOVE: LEVEL " + player.GameLevel);
         }
         private void Update()
         {
-            if (level != 5 && level != 4) //No speed increases
+            timer += Time.deltaTime;
+            if(timer >= timeDelay)
             {
-                timeElapsed += rateOfAcceleration * Time.deltaTime;
-                ChangeSpeed(timeElapsed / 2.0F + startSpeed);
+                accelerationElapsed += rateOfAcceleration * Time.deltaTime;
+                ChangeSpeed(accelerationElapsed / 2.0F + startSpeed);
             }
         }
 
@@ -314,7 +321,8 @@ namespace SWS
         {
             //CUSTOM IMPLEMENTATION
             speed = startSpeed;
-            timeElapsed = 0F;
+            accelerationElapsed = 0F;
+            timer = 0F;
             //END OF CUSTOM IMPLEMENTATION
             if (!moveToPathBool) startAt = 0;
             wpPos = new Vector3[waypoints.Length - startAt];

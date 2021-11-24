@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject WinParticle;
     [SerializeField] public int GameLevel;
     [SerializeField] public float RateOfAcceleration;
+    [SerializeField] public float DelayBeforeAcceleration;
+    [SerializeField] public float startSpeed = 2F;
     private SpriteRenderer _spriteRenderer;
     private Vector3 startPos;
     private SWS.splineMove move;
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
     private Bomb[] bombs;
     public bool dead;
     private Music music;
+
     void Awake()
     {
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
@@ -115,6 +118,10 @@ public class Player : MonoBehaviour
                 Die();
                 music.PlayElectricDie();
             }
+        }
+        else if(collision.gameObject.CompareTag("BombLock"))
+        {
+            Die();
         }
     }
 
