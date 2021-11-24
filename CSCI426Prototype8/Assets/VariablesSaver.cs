@@ -9,6 +9,7 @@ public class VariablesSaver : MonoBehaviour
     [HideInInspector] public int level;
     [HideInInspector] public bool[] levelsCompleted;
     [HideInInspector] public int currentLevel;
+    public enum LevelState { Gray, Green, Red }
     void Awake()
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -19,6 +20,33 @@ public class VariablesSaver : MonoBehaviour
         levelsCompleted = new bool[levelRange];
     }
 
+    public LevelState GetLevelState(int num)
+    {
+        int i;
+        for(i = 0; i < num; i++)
+        {
+            if(!levelsCompleted[i])
+            {
+                break;
+            }
+            if(i > num)
+            {
+                break;
+            }
+        }
+        if(i == num)
+        {
+            return LevelState.Gray;
+        }
+        else if(i > num)
+        {
+            return LevelState.Green;
+        }
+        else
+        {
+            return LevelState.Red;
+        }
+    }
     public void LoadMenu()
     {
         SceneManager.LoadScene("New Menu");

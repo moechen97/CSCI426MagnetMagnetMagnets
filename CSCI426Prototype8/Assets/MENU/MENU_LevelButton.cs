@@ -30,42 +30,19 @@ public class MENU_LevelButton : MonoBehaviour
         bool seen = false;
         if (number != -1)
         {
-            for (int i = 0; i < vs.levelsCompleted.Length; i++)
+            if(vs.GetLevelState(number) == VariablesSaver.LevelState.Green)
             {
-                if (!vs.levelsCompleted[i])
-                {
-                    break;
-                }
-                if (i == number)
-                {
-                    transform.GetChild(0).GetComponent<Image>().color = Color.green;
-                    available = true;
-                    seen = true;
-                }
-                if(seen && i ==  number + 1)
-                {
-                    if (!vs.levelsCompleted[i])
-                    {
-                        available = true;
-                        Debug.Log("FIRST LEVEL NOT BEATEN: " + number);
-                    }
-                    break;
-                }
+                transform.GetChild(0).GetComponent<Image>().color = Color.green;
+                available = true;
             }
-        }
- 
-        if(!seen && number > 0)
-        {
-            if (number < vs.levelRange)
+            else if (vs.GetLevelState(number) == VariablesSaver.LevelState.Red)
             {
-                if (!vs.levelsCompleted[number])
-                {
-                    transform.GetChild(0).GetComponent<Image>().color = Color.red;
-                }
+                transform.GetChild(0).GetComponent<Image>().color = Color.red;
             }
             else
             {
-                transform.GetChild(0).GetComponent<Image>().color = Color.red;
+                available = true;
+                Debug.Log("FIRST UNBEATEN LEVEL: " + number);
             }
         }
     }
