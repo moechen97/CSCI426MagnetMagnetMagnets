@@ -237,6 +237,15 @@ public class Magnet : MonoBehaviour
             }
         }
     }
+
+    public void TurnOffBeams()
+    {
+        foreach(ParticleSystem beam in ps)
+        {
+            beam.Stop();
+            beam.gameObject.SetActive(false);
+        }
+    }
     public void FixedUpdate()
     {
 

@@ -129,7 +129,7 @@ public class MagnetMove : MonoBehaviour
     public void HideCurrentMagnetHint()
     {
         Debug.Log("HIDE");
-        transform.GetChild(2).gameObject.SetActive(false);
+        magnet.TurnOffBeams();
     }
 
     public void UnhideCurrentMagnetHint()
