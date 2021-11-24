@@ -12,7 +12,7 @@ public class Magnet : MonoBehaviour
     private Quadrant currQuad;
     private LayerMask maskInteractable;
     private LayerMask maskBomb;
-    private ParticleSystem ps;
+    private ParticleSystem[] ps;
     [HideInInspector] public bool snapBlocked;
     private float snapBlockedTimer;
     private Music music;
@@ -30,7 +30,11 @@ public class Magnet : MonoBehaviour
         currQuad = Quadrant.Upper;
         maskInteractable = LayerUtility.Only("Magnet", "Interactable");
         maskBomb = LayerUtility.Only("Magnet", "Bomb");
-        ps = transform.GetChild(1).GetComponent<ParticleSystem>();
+        ps = new ParticleSystem[transform.GetChild(1).childCount];
+        for(int i = 0; i < ps.Length; i++)
+        {
+            ps[i] = transform.GetChild(1).GetChild(i).GetComponent<ParticleSystem>();
+        }
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
     }
 
@@ -72,11 +76,42 @@ public class Magnet : MonoBehaviour
 
     public void Update()
     {
-        if(ps.gameObject.activeSelf)
+        ParticleSystem currBeam;
+        if(mm.currQuad == MagnetMove.Quadrant.Up)
+        {
+            currBeam = ps[0];
+        }
+        else if(mm.currQuad == MagnetMove.Quadrant.Down)
+        {
+            currBeam = ps[1];
+        }
+        else if (mm.currQuad == MagnetMove.Quadrant.Left)
+        {
+            currBeam = ps[2];
+        }
+        else if (mm.currQuad == MagnetMove.Quadrant.Right)
+        {
+            currBeam = ps[3];
+        }
+        else if(mm.currQuad == MagnetMove.Quadrant.None) 
+        {
+            foreach(ParticleSystem beam in ps)
+            {
+                beam.Stop();
+                beam.gameObject.SetActive(false);
+            }
+            return;
+        }
+        else
+        {
+            return;
+        }
+
+        if (currBeam.gameObject.activeSelf)
         {
             if(snapBlocked && !playingClink)
             {
-                if(ps.isPlaying) { playingClink = true;  StartCoroutine(TurnOffTractorBeam()); }
+                if(currBeam.isPlaying) { playingClink = true;  StartCoroutine(TurnOffTractorBeam()); }
             }
         }
         else
@@ -85,8 +120,8 @@ public class Magnet : MonoBehaviour
             {
                 //Turn on tractor beam
                 music.PlayUnSnapClink();
-                ps.gameObject.SetActive(true);
-                ps.Play();
+                currBeam.gameObject.SetActive(true);
+                currBeam.Play();
             }
         }
 
@@ -188,10 +223,19 @@ public class Magnet : MonoBehaviour
     {
         if (pulls.Count == 0) { playingClink = false; yield break; }
         music.PlaySnapClink();
-        ps.Stop();
+        foreach(ParticleSystem beam in ps)
+        {
+            beam.Stop();
+        }
         yield return new WaitForSeconds(0.35F);
         playingClink = false;
-        if(snapBlocked) ps.gameObject.SetActive(false);
+        if (snapBlocked)
+        {
+            foreach (ParticleSystem beam in ps)
+            {
+                beam.gameObject.SetActive(false);
+            }
+        }
     }
     public void FixedUpdate()
     {

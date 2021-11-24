@@ -2964,5 +2964,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Magnet
       objectReference: {fileID: 0}
+    - target: {fileID: 7610167411328140201, guid: 2e70b268c8c4b5d4e8a7acf4c098d44e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610167411328140201, guid: 2e70b268c8c4b5d4e8a7acf4c098d44e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610167411328140201, guid: 2e70b268c8c4b5d4e8a7acf4c098d44e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610167411328140201, guid: 2e70b268c8c4b5d4e8a7acf4c098d44e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610167411328140201, guid: 2e70b268c8c4b5d4e8a7acf4c098d44e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e70b268c8c4b5d4e8a7acf4c098d44e, type: 3}
