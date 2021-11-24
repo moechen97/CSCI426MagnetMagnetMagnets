@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.R))
         {
-            vs.LoadMenu();
+            vs.LoadLevel(0);
         }
         else if (Input.GetKeyDown(KeyCode.Minus)) vs.PreviousLevel();
         else if (Input.GetKeyDown(KeyCode.Equals)) vs.NextLevel();

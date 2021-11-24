@@ -5,16 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class VariablesSaver : MonoBehaviour
 {
-    public int levelRange;
+    [HideInInspector] public int levelRange;
     [HideInInspector] public int level;
     [HideInInspector] public bool[] levelsCompleted;
     [HideInInspector] public int currentLevel;
+
+    public string[] Levels;
     public enum LevelState { Gray, Green, Red }
     void Awake()
     {
+        if (GameObject.FindGameObjectsWithTag("VariablesSaver").Length > 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         string sceneName = SceneManager.GetActiveScene().name;
-        if (!sceneName.Equals("New Menu")) level = sceneName[sceneName.Length - 1] - '0';
-        else level = 0; 
+        level = 0;
+        levelRange = Levels.Length - 1;
         Debug.Log("VARIABLE SAVER: Begin level " + level);
         DontDestroyOnLoad(this.gameObject);
         levelsCompleted = new bool[levelRange];
@@ -47,9 +54,11 @@ public class VariablesSaver : MonoBehaviour
             return LevelState.Red;
         }
     }
-    public void LoadMenu()
+
+    public void LoadLevel(int index)
     {
-        SceneManager.LoadScene("New Menu");
+        level = index;
+        SceneManager.LoadScene(Levels[level]);
     }
 
     public void ReloadLevel()
@@ -59,20 +68,19 @@ public class VariablesSaver : MonoBehaviour
 
     public void NextLevel()
     {
-        levelsCompleted[level] = true;
-        if(level < levelRange) level++;
-        if(SceneManager.GetActiveScene().name.Equals("Level1"))
+        if (level < levelRange)
         {
-            SceneManager.LoadScene("Level2");
-            level = 2;
-            return;
+            level++;
         }
-        SceneManager.LoadScene("Level" + level);
+        SceneManager.LoadScene(Levels[level]);
     }
 
     public void PreviousLevel()
     {
-        if (level > 1) level--;
-        SceneManager.LoadScene("Level" + level);
+        if(level > 0)
+        {
+            level--;
+        }
+        SceneManager.LoadScene(Levels[level]);
     }
 }

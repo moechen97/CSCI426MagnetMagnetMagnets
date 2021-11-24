@@ -45,3 +45,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelRange: 5
   level: 0
+  levelsCompleted: 
+  currentLevel: 0
+  Levels:
+  - New Menu
+  - Level1
+  - Level1.5
+  - Level2
+  - Level3
+  - Level4
+  - Level5
+  - Level6
+  - Level7

@@ -19,15 +19,10 @@ public class MENU_LevelButton : MonoBehaviour
         if (nameInfo.Length == 2)
         {
             levelScene = nameInfo[0] + nameInfo[1];
-            number = int.Parse(nameInfo[1]) - 1;
-        }
-        else
-        {
-            levelScene = nameInfo[0];
-            number = -1;
+            number = int.Parse(nameInfo[1]);
         }
 
-        if(number > vs.levelRange - 1)
+        if(number > vs.levelRange)
         {
             unavailable = true;
             transform.GetChild(0).GetComponent<Image>().color = Color.red;
@@ -38,13 +33,10 @@ public class MENU_LevelButton : MonoBehaviour
     {
         if (!unavailable)
         {
-            if (number > 0 && number <= vs.levelRange)
+            if (number >= 0 && number <= vs.levelRange)
             {
-                SceneManager.LoadScene(levelScene);
-            }
-            else if (number == 0)
-            {
-                SceneManager.LoadScene(levelScene);
+                SceneManager.LoadScene(vs.Levels[number]);
+                vs.level = number;
             }
         }
     }
