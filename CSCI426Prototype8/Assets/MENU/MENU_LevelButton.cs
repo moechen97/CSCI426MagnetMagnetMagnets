@@ -42,9 +42,16 @@ public class MENU_LevelButton : MonoBehaviour
             }
         }
 
-        if(!seen && number > 0 && number < vs.levelRange)
+        if(!seen && number > 0)
         {
-            if(!vs.levelsCompleted[number])
+            if (number < vs.levelRange)
+            {
+                if (!vs.levelsCompleted[number])
+                {
+                    transform.GetChild(0).GetComponent<Image>().color = Color.red;
+                }
+            }
+            else
             {
                 transform.GetChild(0).GetComponent<Image>().color = Color.red;
             }
