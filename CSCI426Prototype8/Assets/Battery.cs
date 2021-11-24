@@ -34,7 +34,7 @@ public class Battery : MonoBehaviour
         _batteryAnimator.speed=0;
 
         chargeTimer = 0F;
-        chargeTimeExpire = 6.525F;
+        chargeTimeExpire = 6.25F;
     }
 
     public void Charge()
