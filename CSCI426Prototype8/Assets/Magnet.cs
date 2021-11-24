@@ -18,7 +18,7 @@ public class Magnet : MonoBehaviour
     private Music music;
     private bool playingClink;
     public KeyLock[] KeyLocks;
-
+    public enum InteractableType { Interactable, Bomb } 
     void Awake()
     {
         playingClink = false;
@@ -38,11 +38,18 @@ public class Magnet : MonoBehaviour
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
     }
 
-    public void AddPull(GameObject i)
+    public void AddPull(GameObject i, InteractableType type = InteractableType.Interactable)
     {
         if (mm.currQuad == MagnetMove.Quadrant.None) return;
         ResetPulls();
-        i.GetComponent<Interactable>().SetPull(mm.magnetIndex, pullSource, mm.currQuad);
+        if (type == InteractableType.Interactable)
+        {
+            i.GetComponent<Interactable>().SetPull(mm.magnetIndex, pullSource, mm.currQuad);
+        }
+        else if(type == InteractableType.Bomb)
+        {
+            i.GetComponent<Bomb>().SetPull(mm.magnetIndex, pullSource, mm.currQuad);
+        }
         pulls.Add(i);
     }
 
@@ -56,8 +63,11 @@ public class Magnet : MonoBehaviour
         {
             if (p.CompareTag("Interactable"))
             {
-                Debug.Log("NAME: " + p.gameObject.name);
                 p.GetComponent<Interactable>().ResetPull();
+            }
+            else if(p.CompareTag("Bomb"))
+            {
+                p.GetComponent<Bomb>().ResetPull();
             }
         }
         snapBlocked = false;
@@ -68,7 +78,14 @@ public class Magnet : MonoBehaviour
     {
         foreach(GameObject p in pulls)
         {
-            p.GetComponent<Interactable>().ResetPull();
+            if (p.CompareTag("Interactable"))
+            {
+                p.GetComponent<Interactable>().ResetPull();
+            }
+            else if(p.CompareTag("Bomb"))
+            {
+                p.GetComponent<Bomb>().ResetPull();
+            }
         }
         snapBlocked = false;
         pulls.Clear();
@@ -77,10 +94,10 @@ public class Magnet : MonoBehaviour
     public void Update()
     {
         ParticleSystem currBeam;
-        if(mm.currQuad == MagnetMove.Quadrant.Up)
+        if (mm.currQuad == MagnetMove.Quadrant.Up)
         {
             currBeam = ps[0];
-            for(int i = 0; i < ps.Length; i++)
+            for (int i = 0; i < ps.Length; i++)
             {
                 if (ps[i] != currBeam)
                 {
@@ -89,7 +106,7 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
-        else if(mm.currQuad == MagnetMove.Quadrant.Down)
+        else if (mm.currQuad == MagnetMove.Quadrant.Down)
         {
             currBeam = ps[1];
             for (int i = 0; i < ps.Length; i++)
@@ -125,9 +142,9 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
-        else if(mm.currQuad == MagnetMove.Quadrant.None) 
+        else if (mm.currQuad == MagnetMove.Quadrant.None)
         {
-            foreach(ParticleSystem beam in ps)
+            foreach (ParticleSystem beam in ps)
             {
                 beam.Stop();
                 beam.gameObject.SetActive(false);
@@ -141,14 +158,14 @@ public class Magnet : MonoBehaviour
 
         if (currBeam.gameObject.activeSelf)
         {
-            if(snapBlocked && !playingClink)
+            if (snapBlocked && !playingClink)
             {
-                if(currBeam.isPlaying) { playingClink = true;  StartCoroutine(TurnOffTractorBeam()); }
+                if (currBeam.isPlaying) { playingClink = true; StartCoroutine(TurnOffTractorBeam()); }
             }
         }
         else
         {
-            if(!snapBlocked)
+            if (!snapBlocked)
             {
                 //Turn on tractor beam
                 music.PlayUnSnapClink();
@@ -156,9 +173,11 @@ public class Magnet : MonoBehaviour
                 currBeam.Play();
             }
         }
+    }
 
-
-        //USED TO BE IN FIXEDUPDATE
+    private void FixedUpdate()
+    {
+        //USED TO BE IN UPDATE
         if (snapBlocked || mm.currQuad == MagnetMove.Quadrant.None) return;
         Vector2 forward = Vector2.zero;
         if (mm.currQuad == MagnetMove.Quadrant.Up)
@@ -194,63 +213,23 @@ public class Magnet : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Interactable"))
                 {
                     Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
-                    if (i.pull == Interactable.PullDirection.Locked)
-                    {
-                        if (!i.unlocking)
-                        {
-                            Debug.Log("HA");
-                            snapBlocked = true;
-                            i.pull = Interactable.PullDirection.Locked;
-                            continue;
-                        }
-                        else
-                        {
-                            Debug.Log("YOOO");
-                        }
-                    }
-                    if (i.currLockType == Interactable.LockType.Right)
-                    {
-                        if (mm.currQuad == MagnetMove.Quadrant.Right)
-                        {
-                            //KeyLocks[i.currKeyLock.index].Contain(i);
-                            if (KeyLocks[i.currKeyLock.index].spikeContact)
-                            {
-                                Debug.Log("THIS IS THE SPOT");
-                            }
-                            else
-                            {
-                                i.pull = Interactable.PullDirection.Right;
-                                Debug.Log("PULL");
-                            }
-                            //i.SetLocked(i.currKeyLock, i.currKeyLock.index, i.currKeyLock.transform);
-                        }
-                    }
-                    else if (i.currLockType == Interactable.LockType.Left)
-                    {
-
-                    }
-                    else if (i.currLockType == Interactable.LockType.Down)
-                    {
-
-                    }
-                    else if (i.currLockType == Interactable.LockType.Up)
-                    {
-
-                    }
-                    else if (i.pull == Interactable.PullDirection.Locked)
-                    {
-
-                    }
                     if (!pulls.Contains(hit.collider.gameObject))
                     {
-                        Debug.Log("ADDING PULL"); AddPull(hit.collider.gameObject);
+                        AddPull(hit.collider.gameObject, InteractableType.Interactable);
                     }
                     break;
+                }
+                else if(hit.collider.gameObject.CompareTag("Bomb"))
+                {
+                    Bomb b = hit.collider.gameObject.GetComponent<Bomb>();
+                    if(!pulls.Contains(hit.collider.gameObject))
+                    {
+                        AddPull(hit.collider.gameObject, InteractableType.Bomb);
+                    }
                 }
             }
         }
     }
-
     private IEnumerator TurnOffTractorBeam()
     {
         if (pulls.Count == 0) { playingClink = false; yield break; }
@@ -277,10 +256,6 @@ public class Magnet : MonoBehaviour
             beam.Stop();
             beam.gameObject.SetActive(false);
         }
-    }
-    public void FixedUpdate()
-    {
-
     }
 
     //Key Locks

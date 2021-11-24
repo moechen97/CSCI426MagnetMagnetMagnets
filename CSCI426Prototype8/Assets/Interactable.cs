@@ -231,49 +231,6 @@ public class Interactable : MonoBehaviour
             else {
                 forceFieldState = ForceFieldState.Strong;
             }
-
-            // if (pullHistory.Count > 0)
-            // {
-            //     forceFieldState = ForceFieldState.Strong;
-            //     if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
-            //     {
-            //         if(spike.transform.position.y <= sourceHistory[sourceHistory.Count - 1].y)
-            //         {
-            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-            //         }
-            //     }
-            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
-            //     {
-            //         if (spike.transform.position.y >= sourceHistory[sourceHistory.Count - 1].y)
-            //         {
-            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-            //         }
-            //     }
-            //     if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
-            //     {
-            //         if (spike.transform.position.x >= sourceHistory[sourceHistory.Count - 1].x)
-            //         {
-            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-            //         }
-            //     }
-            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
-            //     {
-            //         if (spike.transform.position.x <= sourceHistory[sourceHistory.Count - 1].x)
-            //         {
-            //             pullHistory.Remove(pullHistory[pullHistory.Count - 1]);
-            //             sourceHistory.Remove(sourceHistory[sourceHistory.Count - 1]);
-            //         }
-            //     }
-            // }
-            // else
-            // {
-            //     Debug.Log("RAN HERE");
-            //     forceFieldState = ForceFieldState.None;
-            //     resetting = false;
-            // }
         }
 
         if (pulling)

@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private Interactable[] interactables;
     private KeyLock[] keyLocks;
     private Battery[] batteries;
+    private Bomb[] bombs;
     public bool dead;
     private Music music;
     void Awake()
@@ -47,6 +48,13 @@ public class Player : MonoBehaviour
         for(int i = 0; i < batteryObjects.Length; i++)
         {
             batteries[i] = batteryObjects[i].GetComponent<Battery>();
+        }
+
+        GameObject[] bombObjects = GameObject.FindGameObjectsWithTag("Bomb");
+        bombs = new Bomb[bombObjects.Length];
+        for(int i = 0; i < bombObjects.Length; i++)
+        {
+            bombs[i] = bombObjects[i].GetComponent<Bomb>();
         }
 
         mm = GameObject.FindGameObjectWithTag("Magnet").GetComponent<MagnetMove>();
@@ -125,6 +133,10 @@ public class Player : MonoBehaviour
                 //music.PlayElectricDie();
             }
         }
+        else if(collision.gameObject.CompareTag("BombLock"))
+        {
+            Die();
+        }
     }
 
     public void Die()
@@ -150,6 +162,10 @@ public class Player : MonoBehaviour
         foreach(Battery b in batteries)
         {
             b.UnCharge();
+        }
+        foreach(Bomb b in bombs)
+        {
+            b.Reset();
         }
         yield return new WaitForSeconds(1f);
         move.ResetToStart();

@@ -30,6 +30,8 @@ TagManager:
   - RoadBattery
   - MagnetManager
   - KeyLockManager
+  - BombLock
+  - Trail
   layers:
   - Default
   - TransparentFX
