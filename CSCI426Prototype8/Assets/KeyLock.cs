@@ -107,7 +107,7 @@ public class KeyLock : MonoBehaviour
     public void Contain(Interactable i)
     {
         isLocked = true;
-        //music.PlaySpikeKey();
+        music.PlaySpikeKey();
         unlocking = false;
         isLocked = true;
         spikeContact = true;

@@ -224,9 +224,50 @@ public class Interactable : MonoBehaviour
 
         if(resetting)
         {
-            if (Mathf.Approximately(transform.position.x, startPos.position.x) && Mathf.Approximately(transform.position.y, startPos.position.y)) {
-                forceFieldState = ForceFieldState.None;
-                resetting = false;
+            Debug.Log("PULL: " + pull);
+            if (pull == PullDirection.Down)
+            {
+                if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y >= startPos.position.y)
+                {
+                    forceFieldState = ForceFieldState.None;
+                    resetting = false;
+                    transform.position = startPos.position;
+                    rb.velocity = Vector2.zero;
+                    pull = PullDirection.None;
+                }
+            }
+            else if(pull == PullDirection.Up)
+            {
+                if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y <= startPos.position.y)
+                {
+                    forceFieldState = ForceFieldState.None;
+                    resetting = false;
+                    transform.position = startPos.position;
+                    rb.velocity = Vector2.zero;
+                    pull = PullDirection.None;
+                }
+            }
+            else if (pull == PullDirection.Left)
+            {
+                if (Mathf.Approximately(transform.position.x - 0.1F, startPos.position.x) && transform.position.x >= startPos.position.x)
+                {
+                    forceFieldState = ForceFieldState.None;
+                    resetting = false;
+                    transform.position = startPos.position;
+                    rb.velocity = Vector2.zero;
+                    pull = PullDirection.None;
+                }
+            }
+            else if (pull == PullDirection.Right)
+            {
+                if (Mathf.Approximately(transform.position.x + 0.1F, startPos.position.x) && transform.position.x <= startPos.position.x)
+                {
+                    forceFieldState = ForceFieldState.None;
+                    resetting = false;
+                    transform.position = startPos.position;
+                    rb.velocity = Vector2.zero;
+                    pull = PullDirection.None;
+                }
             }
             else {
                 forceFieldState = ForceFieldState.Strong;
@@ -303,7 +344,7 @@ public class Interactable : MonoBehaviour
     {
         if (pull == PullDirection.Locked) return;
         SetVelocity();
-        if(pulling)
+        if(pulling && !resetting)
         {
             if (pull == PullDirection.Up)
             {
