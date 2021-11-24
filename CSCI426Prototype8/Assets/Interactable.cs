@@ -224,7 +224,7 @@ public class Interactable : MonoBehaviour
 
         if(resetting)
         {
-            if (transform.position.x == startPos.position.x && transform.position.y == startPos.position.y) {
+            if (Mathf.Approximately(transform.position.x, startPos.position.x) && Mathf.Approximately(transform.position.y, startPos.position.y)) {
                 forceFieldState = ForceFieldState.None;
                 resetting = false;
             }
@@ -278,7 +278,11 @@ public class Interactable : MonoBehaviour
 
         if (pulling)
         {
-            forceFieldState = ForceFieldState.Weak;
+            if (isAttractedToStart)
+            {
+                forceFieldState = ForceFieldState.Weak;
+            }
+
             if (pull == PullDirection.Up)
             {
                 if (spike.transform.position.y >= pullDest.y)
@@ -309,14 +313,12 @@ public class Interactable : MonoBehaviour
             }
         }
 
-        if(!resetting && !pulling)
-        {
-            forceFieldState = ForceFieldState.None;
-        }
-
-
         if (isAttractedToStart)
         {
+            if(!resetting && !pulling)
+            {
+                forceFieldState = ForceFieldState.None;
+            }
             //Force field visual updates
             if (forceFieldState == ForceFieldState.None)
             {
@@ -459,5 +461,13 @@ public class Interactable : MonoBehaviour
         else if (rb.velocity.y > 1F) currLockType = LockType.Up;
         else if (rb.velocity.y < 1F) currLockType = LockType.Down;
         rb.velocity = Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag.Split('_').Equals("Magnet"))
+        {
+            Debug.Log("YO");
+        }
     }
 }

@@ -42,7 +42,10 @@ public class Magnet : MonoBehaviour
         pulls.Add(i);
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
     public void RemovePulls(GameObject i)
     {
         foreach(GameObject p in pulls)
@@ -86,38 +89,28 @@ public class Magnet : MonoBehaviour
                 ps.Play();
             }
         }
-    }
 
-    private IEnumerator TurnOffTractorBeam()
-    {
-        if (pulls.Count == 0) { playingClink = false; yield break; }
-        music.PlaySnapClink();
-        ps.Stop();
-        yield return new WaitForSeconds(0.35F);
-        playingClink = false;
-        if(snapBlocked) ps.gameObject.SetActive(false);
-    }
-    public void FixedUpdate()
-    {
+
+        //USED TO BE IN FIXEDUPDATE
         if (snapBlocked || mm.currQuad == MagnetMove.Quadrant.None) return;
         Vector2 forward = Vector2.zero;
-        if(mm.currQuad == MagnetMove.Quadrant.Up)
+        if (mm.currQuad == MagnetMove.Quadrant.Up)
         {
-           forward = -Vector2.up;
+            forward = -Vector2.up;
         }
-        else if(mm.currQuad == MagnetMove.Quadrant.Down)
+        else if (mm.currQuad == MagnetMove.Quadrant.Down)
         {
             forward = Vector2.up;
         }
-        else if(mm.currQuad == MagnetMove.Quadrant.Left)
+        else if (mm.currQuad == MagnetMove.Quadrant.Left)
         {
             forward = Vector2.right;
         }
-        else if(mm.currQuad == MagnetMove.Quadrant.Right)
+        else if (mm.currQuad == MagnetMove.Quadrant.Right)
         {
             forward = Vector2.left;
         }
-        else if(mm.currQuad == MagnetMove.Quadrant.DiagonalLeft)
+        else if (mm.currQuad == MagnetMove.Quadrant.DiagonalLeft)
         {
             forward = new Vector2(-1F, 1F);
         }
@@ -125,7 +118,6 @@ public class Magnet : MonoBehaviour
         {
             forward = new Vector2(1F, 1F);
         }
-
         //raycast for interactables
         RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 20.5F, maskInteractable);
         foreach (RaycastHit2D hit in raycasts)
@@ -135,7 +127,8 @@ public class Magnet : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Interactable"))
                 {
                     Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
-                    if (i.pull == Interactable.PullDirection.Locked) {
+                    if (i.pull == Interactable.PullDirection.Locked)
+                    {
                         if (!i.unlocking)
                         {
                             Debug.Log("HA");
@@ -183,12 +176,26 @@ public class Magnet : MonoBehaviour
                     }
                     if (!pulls.Contains(hit.collider.gameObject))
                     {
-                        Debug.Log("ADDING PULL");  AddPull(hit.collider.gameObject);
+                        Debug.Log("ADDING PULL"); AddPull(hit.collider.gameObject);
                     }
                     break;
                 }
             }
         }
+    }
+
+    private IEnumerator TurnOffTractorBeam()
+    {
+        if (pulls.Count == 0) { playingClink = false; yield break; }
+        music.PlaySnapClink();
+        ps.Stop();
+        yield return new WaitForSeconds(0.35F);
+        playingClink = false;
+        if(snapBlocked) ps.gameObject.SetActive(false);
+    }
+    public void FixedUpdate()
+    {
+
     }
 
     //Key Locks
