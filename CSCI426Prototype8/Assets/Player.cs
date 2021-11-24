@@ -69,6 +69,10 @@ public class Player : MonoBehaviour
         {
             vs.ReloadLevel();
         }
+        else if(Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.R))
+        {
+            vs.LoadMenu();
+        }
         else if (Input.GetKeyDown(KeyCode.Minus)) vs.PreviousLevel();
         else if (Input.GetKeyDown(KeyCode.Equals)) vs.NextLevel();
         //MUSIC TEST
