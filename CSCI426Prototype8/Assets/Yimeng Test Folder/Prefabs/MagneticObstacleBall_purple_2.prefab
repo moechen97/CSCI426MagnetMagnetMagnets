@@ -9955,7 +9955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577532415066095640}
   m_Layer: 6
-  m_Name: IronObstacleBall_purple_2
+  m_Name: MagneticObstacleBall_purple_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
