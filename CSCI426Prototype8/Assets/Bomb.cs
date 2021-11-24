@@ -10,6 +10,7 @@ public class Bomb : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 dest;
     private Player player;
+    private Music music;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class Bomb : MonoBehaviour
         startPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
     }
 
     // Update is called once per frame

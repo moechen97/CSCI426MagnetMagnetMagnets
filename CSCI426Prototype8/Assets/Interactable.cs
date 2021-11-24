@@ -239,35 +239,6 @@ public class Interactable : MonoBehaviour
             {
                 forceFieldState = ForceFieldState.Weak;
             }
-
-            if (pull == PullDirection.Up)
-            {
-                if (spike.transform.position.y >= pullDest.y)
-                {
-                    //Snap();
-                }
-            }
-            else if (pull == PullDirection.Down)
-            {
-                if (spike.transform.position.y <= pullDest.y)
-                {
-                    // Snap();
-                }
-            }
-            else if (pull == PullDirection.Left)
-            {
-                if (spike.transform.localPosition.x <= pullDest.x)
-                {
-                    // Snap();
-                }
-            }
-            else if (pull == PullDirection.Right)
-            {
-                if (spike.transform.localPosition.x >= pullDest.x + 5)
-                {
-                    // Snap();
-                }
-            }
         }
 
         if (isAttractedToStart)
@@ -332,6 +303,37 @@ public class Interactable : MonoBehaviour
     {
         if (pull == PullDirection.Locked) return;
         SetVelocity();
+        if(pulling)
+        {
+            if (pull == PullDirection.Up)
+            {
+                if (spike.transform.position.y >= pullDest.y)
+                {
+                    Snap();
+                }
+            }
+            else if (pull == PullDirection.Down)
+            {
+                if (spike.transform.position.y <= pullDest.y)
+                {
+                    Snap();
+                }
+            }
+            else if (pull == PullDirection.Left)
+            {
+                if (spike.transform.localPosition.x <= pullDest.x + 0.35F)
+                {
+                    Snap();
+                }
+            }
+            else if (pull == PullDirection.Right)
+            {
+                if (spike.transform.localPosition.x >= pullDest.x + 0.2F)
+                {
+                    Snap();
+                }
+            }
+        }
     }
 
     private void SetVelocity()
@@ -350,34 +352,9 @@ public class Interactable : MonoBehaviour
         }
         else if (resetting)
         {
-            // if (pullHistory.Count > 0)
-            // {
-            //     Vector3 dest = sourceHistory[sourceHistory.Count - 1];
-            //     Vector3 v = 2F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.transform.position.y, 0F));
-            //     if (pullHistory[pullHistory.Count - 1] == PullDirection.Left)
-            //     {
-            //         v = new Vector3(1.5F, 0F);
-            //     }
-            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Right)
-            //     {
-            //         v = new Vector3(-1.5F, 0F);
-            //     }
-            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Up)
-            //     {
-            //         v = new Vector3(0F, -1.5F);
-            //     }
-            //     else if (pullHistory[pullHistory.Count - 1] == PullDirection.Down)
-            //     {
-            //         v = new Vector3(0F, 1.5F);
-            //     }
-            //     rb.velocity = v;
-            // }
-            // else
-            // {
-                Vector3 dest = startPos.position;
-                Vector3 v = 1.5F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
-                rb.velocity = v;
-            // }
+            Vector3 dest = startPos.position;
+            Vector3 v = 1.5F * Vector3.Normalize(new Vector3(dest.x - transform.position.x, dest.y - transform.position.y, 0F));
+            rb.velocity = v;
         }
         else
         {
@@ -396,12 +373,17 @@ public class Interactable : MonoBehaviour
         {
             spike.transform.position = new Vector3(pullDest.x, pullDest.y, transform.position.z);
         }
-        else if (pull == PullDirection.Left || pull == PullDirection.Right)
+        else if (pull == PullDirection.Left)
+        {
+            spike.transform.position = new Vector3(pullDest.x, pullDest.y, transform.position.z);
+        }
+        else if (pull == PullDirection.Right)
         {
             spike.transform.position = new Vector3(pullDest.x, pullDest.y, transform.position.z);
         }
         snapped = true;
-        magnet.snapBlocked = true;
+        Debug.Log("SNAPPED");
+        //magnet.snapBlocked = true;
         mm.HideCurrentMagnetHint();
     }
 
@@ -418,13 +400,5 @@ public class Interactable : MonoBehaviour
         else if (rb.velocity.y > 1F) currLockType = LockType.Up;
         else if (rb.velocity.y < 1F) currLockType = LockType.Down;
         rb.velocity = Vector2.zero;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag.Split('_').Equals("Magnet"))
-        {
-            Debug.Log("YO");
-        }
     }
 }

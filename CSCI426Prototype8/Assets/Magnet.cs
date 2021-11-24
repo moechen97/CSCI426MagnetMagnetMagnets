@@ -168,7 +168,7 @@ public class Magnet : MonoBehaviour
             if (!snapBlocked)
             {
                 //Turn on tractor beam
-                music.PlayUnSnapClink();
+                //music.PlayUnSnapClink();
                 currBeam.gameObject.SetActive(true);
                 currBeam.Play();
             }
@@ -233,7 +233,7 @@ public class Magnet : MonoBehaviour
     private IEnumerator TurnOffTractorBeam()
     {
         if (pulls.Count == 0) { playingClink = false; yield break; }
-        music.PlaySnapClink();
+        //music.PlaySnapClink();
         foreach(ParticleSystem beam in ps)
         {
             beam.Stop();
