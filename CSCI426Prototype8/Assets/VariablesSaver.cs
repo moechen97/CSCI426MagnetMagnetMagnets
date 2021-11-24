@@ -72,6 +72,10 @@ public class VariablesSaver : MonoBehaviour
         {
             level++;
         }
+        else
+        {
+            level = 0;
+        }
         SceneManager.LoadScene(Levels[level]);
     }
 
@@ -80,6 +84,10 @@ public class VariablesSaver : MonoBehaviour
         if(level > 0)
         {
             level--;
+        }
+        else
+        {
+            level = levelRange;
         }
         SceneManager.LoadScene(Levels[level]);
     }

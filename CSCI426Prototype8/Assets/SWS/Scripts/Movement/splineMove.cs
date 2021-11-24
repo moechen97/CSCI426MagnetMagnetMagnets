@@ -38,6 +38,7 @@ namespace SWS
             player = GetComponent<Player>();
             rateOfAcceleration = player.RateOfAcceleration;
             timeDelay = player.DelayBeforeAcceleration;
+            startSpeed = player.startSpeed;
             Debug.Log("SPLINE MOVE: LEVEL " + player.GameLevel);
         }
         private void Update()

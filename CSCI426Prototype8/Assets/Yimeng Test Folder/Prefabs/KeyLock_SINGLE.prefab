@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2457924921569006600}
   m_Layer: 0
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 1527873902569607815}
   - component: {fileID: 3185961227980524366}
   - component: {fileID: 3185961227980524367}
+  - component: {fileID: 1280918601000950155}
   m_Layer: 0
   m_Name: KeyLock_SINGLE
   m_TagString: KeyLock
@@ -230,6 +231,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocked: 0
   index: 4
+  spikeContact: 0
+--- !u!61 &1280918601000950155
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7075606126383114668}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008586168, y: 0.008586168}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 5.12, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.828071, y: 4.828071}
+  m_EdgeRadius: 0
 --- !u!1 &7281480982278219431
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +271,7 @@ GameObject:
   - component: {fileID: 3271290595358879374}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
