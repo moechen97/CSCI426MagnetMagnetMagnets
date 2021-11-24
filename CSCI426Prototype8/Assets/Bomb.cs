@@ -78,7 +78,8 @@ public class Bomb : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("BombLock"))
         {
-            foreach(Transform child in collision.transform.parent)
+            music.PlayBombDefuse();
+            foreach (Transform child in collision.transform.parent)
             {
                 child.gameObject.SetActive(false);
             }
@@ -88,6 +89,7 @@ public class Bomb : MonoBehaviour
         else if(collision.gameObject.CompareTag("Trail"))
         {
             player.Die();
+            music.PlayBombExplode();
         }
     }
 }

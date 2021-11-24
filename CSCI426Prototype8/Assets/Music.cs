@@ -16,23 +16,22 @@ public class Music : MonoBehaviour
     public AudioSource batteryCharge;
     public AudioSource electricDie;
     public AudioSource batteryUncharge;
+    public AudioSource bombExplode;
+    public AudioSource bombDefuse;
 
     private void Awake()
     {
         background = backgroundMusic;
-        //if(GameObject.FindGameObjectWithTag("MusicManager") == null)
-        //{
-        //    DontDestroyOnLoad(this.gameObject);
-        //    foreach(Transform child in transform)
-        //    {
-        //        DontDestroyOnLoad(this.gameObject);
-        //    }
-        //}
-        //else
-        //{
-        //    Destroy(this.gameObject);
-        //}
+        if(GameObject.FindGameObjectsWithTag("MusicManager").Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
+
     public void PlaySnapClink()
     {
         snapClink.Play();
@@ -76,6 +75,16 @@ public class Music : MonoBehaviour
     public void PlayBatteryUncharge()
     {
         batteryUncharge.Play();
+    }
+
+    public void PlayBombExplode()
+    {
+        bombExplode.Play();
+    }
+
+    public void PlayBombDefuse()
+    {
+        bombDefuse.Play();
     }
 
     //TEST
