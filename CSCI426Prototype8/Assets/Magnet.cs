@@ -80,18 +80,50 @@ public class Magnet : MonoBehaviour
         if(mm.currQuad == MagnetMove.Quadrant.Up)
         {
             currBeam = ps[0];
+            for(int i = 0; i < ps.Length; i++)
+            {
+                if (ps[i] != currBeam)
+                {
+                    ps[i].Stop();
+                    ps[i].gameObject.SetActive(false);
+                }
+            }
         }
         else if(mm.currQuad == MagnetMove.Quadrant.Down)
         {
             currBeam = ps[1];
+            for (int i = 0; i < ps.Length; i++)
+            {
+                if (ps[i] != currBeam)
+                {
+                    ps[i].Stop();
+                    ps[i].gameObject.SetActive(false);
+                }
+            }
         }
         else if (mm.currQuad == MagnetMove.Quadrant.Left)
         {
             currBeam = ps[2];
+            for (int i = 0; i < ps.Length; i++)
+            {
+                if (ps[i] != currBeam)
+                {
+                    ps[i].Stop();
+                    ps[i].gameObject.SetActive(false);
+                }
+            }
         }
         else if (mm.currQuad == MagnetMove.Quadrant.Right)
         {
             currBeam = ps[3];
+            for (int i = 0; i < ps.Length; i++)
+            {
+                if (ps[i] != currBeam)
+                {
+                    ps[i].Stop();
+                    ps[i].gameObject.SetActive(false);
+                }
+            }
         }
         else if(mm.currQuad == MagnetMove.Quadrant.None) 
         {
