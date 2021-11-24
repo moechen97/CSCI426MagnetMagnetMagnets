@@ -5,21 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Yimeng Test Folder/Scene/New Menu.unity
+    guid: 39a4c46f670e2bd458f426b1c76c6793
   - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/Level1.unity
     guid: 98be6c7439eda20419f0e3bfe11712b8
   - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/Level2.unity
-    guid: 10c0ffe9cd48c487cb9c504219a24ad3
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    guid: 85ad36655ba78fd419edb497ada5b0e9
+  - enabled: 1
+    path: Assets/Yimeng Test Folder/Scene/Level3.unity
+    guid: fec3bb8814d78a74a868e43145b8d2e9
   - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/Level4.unity
-    guid: 85ad36655ba78fd419edb497ada5b0e9
+    guid: 9e8c65056c33d974380966c43139c718
   - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/Level5.unity
     guid: f9de7626d2b8c5d4db23e963a3066b00
@@ -27,6 +27,6 @@ EditorBuildSettings:
     path: Assets/Yimeng Test Folder/Scene/Level6.unity
     guid: 3aa4e98069c61ce48a039bb3ffc7fcec
   - enabled: 1
-    path: Assets/Yimeng Test Folder/Scene/New Menu.unity
-    guid: 39a4c46f670e2bd458f426b1c76c6793
+    path: Assets/Yimeng Test Folder/Scene/Level7.unity
+    guid: ac55abba404277d4e988c54ba277f6b7
   m_configObjects: {}

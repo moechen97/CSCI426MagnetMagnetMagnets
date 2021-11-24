@@ -9,11 +9,11 @@ public class MENU_LevelButton : MonoBehaviour
     private VariablesSaver vs;
     private string levelScene;
     private int number;
-    private bool available;
+    private bool unavailable;
     // Start is called before the first frame update
     void Start()
     {
-        available = false;
+        unavailable = false;
         vs = GameObject.FindGameObjectWithTag("VariablesSaver").GetComponent<VariablesSaver>();
         string[] nameInfo = gameObject.name.Split('_');
         if (nameInfo.Length == 2)
@@ -27,29 +27,16 @@ public class MENU_LevelButton : MonoBehaviour
             number = -1;
         }
 
-        bool seen = false;
-        if (number != -1)
+        if(number > vs.levelRange - 1)
         {
-            if(vs.GetLevelState(number) == VariablesSaver.LevelState.Green)
-            {
-                transform.GetChild(0).GetComponent<Image>().color = Color.green;
-                available = true;
-            }
-            else if (vs.GetLevelState(number) == VariablesSaver.LevelState.Red)
-            {
-                transform.GetChild(0).GetComponent<Image>().color = Color.red;
-            }
-            else
-            {
-                available = true;
-                Debug.Log("FIRST UNBEATEN LEVEL: " + number);
-            }
+            unavailable = true;
+            transform.GetChild(0).GetComponent<Image>().color = Color.red;
         }
     }
 
     public void OnClick()
     {
-        if (available)
+        if (!unavailable)
         {
             if (number > 0 && number <= vs.levelRange)
             {
