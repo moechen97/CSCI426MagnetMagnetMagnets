@@ -61,6 +61,12 @@ public class VariablesSaver : MonoBehaviour
     {
         levelsCompleted[level] = true;
         if(level < levelRange) level++;
+        if(SceneManager.GetActiveScene().name.Equals("Level1"))
+        {
+            SceneManager.LoadScene("Level2");
+            level = 2;
+            return;
+        }
         SceneManager.LoadScene("Level" + level);
     }
 
