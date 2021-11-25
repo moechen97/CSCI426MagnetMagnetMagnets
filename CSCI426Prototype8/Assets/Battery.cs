@@ -14,7 +14,6 @@ public class Battery : MonoBehaviour
     private float chargeTimer;
     private float chargeTimeExpire;
     private Music music;
-    public GameObject electricPrefab;
     void Awake()
     {
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
@@ -42,9 +41,6 @@ public class Battery : MonoBehaviour
         charged = true;
         chargeTimer = 0F;
         music.PlayBatteryCharge();
-        //GameObject e = Instantiate(electricPrefab);
-        //e.transform.position = transform.position + new Vector3(0.5F, 1.25F, 0F);
-        //e.transform.rotation = transform.rotation;
     }
 
     // Update is called once per frame

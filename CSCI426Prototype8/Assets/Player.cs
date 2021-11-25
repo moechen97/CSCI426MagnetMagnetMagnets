@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Vector3 startPos;
     private SWS.splineMove move;
-    public Battery battery;
     private float timeElapsed;
     private Color spriteOriginColor;
     private ScreenShake _screenShake;
