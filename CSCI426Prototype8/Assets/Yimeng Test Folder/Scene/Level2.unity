@@ -4212,7 +4212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4782529402538999512, guid: 126f0f9031189d140adf98221e9e5edb, type: 3}
       propertyPath: onStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4782529402538999512, guid: 126f0f9031189d140adf98221e9e5edb, type: 3}
       propertyPath: pathContainer

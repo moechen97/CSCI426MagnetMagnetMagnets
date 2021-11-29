@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Yimeng Test Folder/Scene/Level5.unity
     guid: f9de7626d2b8c5d4db23e963a3066b00
   - enabled: 1
+    path: Assets/Yimeng Test Folder/Scene/LevelElsaKeyLock.unity
+    guid: b191d1fa1ce27b1409bf1de3fbf60c10
+  - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/Level6.unity
     guid: 3aa4e98069c61ce48a039bb3ffc7fcec
   - enabled: 1
