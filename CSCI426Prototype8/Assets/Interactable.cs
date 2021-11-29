@@ -224,50 +224,58 @@ public class Interactable : MonoBehaviour
 
         if(resetting)
         {
-            if (pull == PullDirection.Down)
+            if(Mathf.Abs(transform.position.x - startPos.position.x) <= 0.0125F && Mathf.Abs(transform.position.y - startPos.position.y) <= 0.0125F)
             {
-                if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y >= startPos.position.y)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
+                forceFieldState = ForceFieldState.None;
+                resetting = false;
+                transform.position = startPos.position;
+                rb.velocity = Vector2.zero;
+                pull = PullDirection.None;
             }
-            else if(pull == PullDirection.Up)
-            {
-                if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y <= startPos.position.y)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
-            }
-            else if (pull == PullDirection.Left)
-            {
-                if (Mathf.Approximately(transform.position.x - 0.1F, startPos.position.x) && transform.position.x >= startPos.position.x)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
-            }
-            else if (pull == PullDirection.Right)
-            {
-                if (Mathf.Approximately(transform.position.x + 0.1F, startPos.position.x) && transform.position.x <= startPos.position.x)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
-            }
+            //if (pull == PullDirection.Down)
+            //{
+            //    if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y >= startPos.position.y)
+            //    {
+            //        forceFieldState = ForceFieldState.None;
+            //        resetting = false;
+            //        transform.position = startPos.position;
+            //        rb.velocity = Vector2.zero;
+            //        pull = PullDirection.None;
+            //    }
+            //}
+            //else if(pull == PullDirection.Up)
+            //{
+            //    if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y <= startPos.position.y)
+            //    {
+            //        forceFieldState = ForceFieldState.None;
+            //        resetting = false;
+            //        transform.position = startPos.position;
+            //        rb.velocity = Vector2.zero;
+            //        pull = PullDirection.None;
+            //    }
+            //}
+            //else if (pull == PullDirection.Left)
+            //{
+            //    if (Mathf.Abs(transform.position.y - startPos.position.y) <= 0.12F && Mathf.Abs(transform.position.x - startPos.position.x) <= 0.
+            //    {
+            //        forceFieldState = ForceFieldState.None;
+            //        resetting = false;
+            //        transform.position = startPos.position;
+            //        rb.velocity = Vector2.zero;
+            //        pull = PullDirection.None;
+            //    }
+            //}
+            //else if (pull == PullDirection.Right)
+            //{
+            //    if (Mathf.Approximately(transform.position.y + 0.1F, startPos.position.y) && transform.position.x <= startPos.position.x)
+            //    {
+            //        forceFieldState = ForceFieldState.None;
+            //        resetting = false;
+            //        transform.position = startPos.position;
+            //        rb.velocity = Vector2.zero;
+            //        pull = PullDirection.None;
+            //    }
+            //}
             else {
                 forceFieldState = ForceFieldState.Strong;
             }
