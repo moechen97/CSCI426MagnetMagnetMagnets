@@ -845,8 +845,8 @@ Transform:
   - {fileID: 216198941}
   - {fileID: 350990784}
   - {fileID: 681854377}
-  - {fileID: 586731093}
   - {fileID: 1774785317}
+  - {fileID: 586731093}
   m_Father: {fileID: 1596303985}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1399,7 +1399,7 @@ GameObject:
   - component: {fileID: 586731095}
   - component: {fileID: 586731094}
   m_Layer: 0
-  m_Name: MagnetButtonUp_5
+  m_Name: MagnetButtonUp_6
   m_TagString: Magnet_Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1418,7 +1418,7 @@ Transform:
   m_Children:
   - {fileID: 926650857}
   m_Father: {fileID: 337097897}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!61 &586731094
 BoxCollider2D:
@@ -3643,7 +3643,7 @@ GameObject:
   - component: {fileID: 1774785319}
   - component: {fileID: 1774785318}
   m_Layer: 0
-  m_Name: MagnetButtonLeft_6
+  m_Name: MagnetButtonLeft_5
   m_TagString: Magnet_Left
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3662,7 +3662,7 @@ Transform:
   m_Children:
   - {fileID: 132924621}
   m_Father: {fileID: 337097897}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
 --- !u!61 &1774785318
 BoxCollider2D:
