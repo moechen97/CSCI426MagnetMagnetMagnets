@@ -204,6 +204,7 @@ public class Magnet : MonoBehaviour
         {
             forward = new Vector2(1F, 1F);
         }
+
         //raycast for interactables
         RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 20.5F, maskInteractable);
         int numHits = ObserveRaycasts(raycasts);
