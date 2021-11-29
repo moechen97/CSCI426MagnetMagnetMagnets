@@ -224,7 +224,6 @@ public class Interactable : MonoBehaviour
 
         if(resetting)
         {
-            Debug.Log("PULL: " + pull);
             if (pull == PullDirection.Down)
             {
                 if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y >= startPos.position.y)
