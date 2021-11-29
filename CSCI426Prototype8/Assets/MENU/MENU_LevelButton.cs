@@ -33,7 +33,7 @@ public class MENU_LevelButton : MonoBehaviour
                 GetComponent<Image>().color = green;
             }
         }
-        else  if(number >= 2 && number <= vs.levelRange)
+        else  if(number >= 2 && number < vs.levelRange)
         {
             if (vs.levelsCompleted[number])
             {
@@ -47,6 +47,11 @@ public class MENU_LevelButton : MonoBehaviour
                     GetComponent<Image>().color = Color.red;
                 }
             }
+        }
+        else
+        {
+            unavailable = true;
+            GetComponent<Image>().color = Color.red;
         }
     }
 
