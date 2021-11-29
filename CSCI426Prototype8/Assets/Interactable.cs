@@ -220,53 +220,15 @@ public class Interactable : MonoBehaviour
             electricSpark.transform.eulerAngles = new Vector3(0F, 0F, 180F);
         }
 
-        KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + id.ToString());
-
         if(resetting)
         {
-            if (pull == PullDirection.Down)
+            if(Mathf.Abs(transform.position.x - startPos.position.x) <= 0.01125F && Mathf.Abs(transform.position.y - startPos.position.y) <= 0.01125F)
             {
-                if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y >= startPos.position.y)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
-            }
-            else if(pull == PullDirection.Up)
-            {
-                if (Mathf.Approximately(transform.position.x, startPos.position.x) && transform.position.y <= startPos.position.y)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
-            }
-            else if (pull == PullDirection.Left)
-            {
-                if (Mathf.Approximately(transform.position.x - 0.1F, startPos.position.x) && transform.position.x >= startPos.position.x)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
-            }
-            else if (pull == PullDirection.Right)
-            {
-                if (Mathf.Approximately(transform.position.x + 0.1F, startPos.position.x) && transform.position.x <= startPos.position.x)
-                {
-                    forceFieldState = ForceFieldState.None;
-                    resetting = false;
-                    transform.position = startPos.position;
-                    rb.velocity = Vector2.zero;
-                    pull = PullDirection.None;
-                }
+                forceFieldState = ForceFieldState.None;
+                resetting = false;
+                transform.position = startPos.position;
+                rb.velocity = Vector2.zero;
+                pull = PullDirection.None;
             }
             else {
                 forceFieldState = ForceFieldState.Strong;
