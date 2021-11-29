@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        mm.SetMagnetPos(0);
         Instantiate(DieParticle, transform.position, quaternion.identity);
         _spriteRenderer.color = new Color(0, 0, 0, 0);
         _screenShake.ShakeScreen();
@@ -157,7 +158,6 @@ public class Player : MonoBehaviour
 
     IEnumerator RestartLevel()
     {
-        mm.SetMagnetPos(0);
         foreach (Interactable i in interactables)
         {
             i.ResetStage();
