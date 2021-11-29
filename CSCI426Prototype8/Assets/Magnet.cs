@@ -206,12 +206,51 @@ public class Magnet : MonoBehaviour
         }
         //raycast for interactables
         RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 20.5F, maskInteractable);
-        for(int r = 0; r < raycasts.Length; r++)
+        int numHits = ObserveRaycasts(raycasts);
+        //increase range of magnet if nothing detected from center of magnet
+        if(numHits == 0)
+        {
+            if(mm.currQuad == MagnetMove.Quadrant.Left || mm.currQuad == MagnetMove.Quadrant.Right)
+            {
+                Vector3 bottomOfMagnet = transform.position;
+                bottomOfMagnet.y -= 0.525F;
+                raycasts = Physics2D.RaycastAll(bottomOfMagnet, forward, 20.5F, maskInteractable);
+                numHits = ObserveRaycasts(raycasts);
+                if(numHits == 0)
+                {
+                    Vector3 topOfMagnet = transform.position;
+                    topOfMagnet.y += 0.525F;
+                    raycasts = Physics2D.RaycastAll(topOfMagnet, forward, 20.5F, maskInteractable);
+                    numHits = ObserveRaycasts(raycasts);
+                }
+            }
+            else if(mm.currQuad == MagnetMove.Quadrant.Up || mm.currQuad == MagnetMove.Quadrant.Down)
+            {
+                Vector3 leftOfMagnet = transform.position;
+                leftOfMagnet.x -= 0.525F;
+                raycasts = Physics2D.RaycastAll(leftOfMagnet, forward, 20.5F, maskInteractable);
+                numHits = ObserveRaycasts(raycasts);
+                if (numHits == 0)
+                {
+                    Vector3 rightOfMagnet = transform.position;
+                    rightOfMagnet.y += 0.525F;
+                    raycasts = Physics2D.RaycastAll(rightOfMagnet, forward, 20.5F, maskInteractable);
+                    numHits = ObserveRaycasts(raycasts);
+                }
+            }
+        }
+    }
+
+    private int ObserveRaycasts(RaycastHit2D[] raycasts)
+    {
+        int numHits = 0;
+        for (int r = 0; r < raycasts.Length; r++)
         {
             if (raycasts[r].collider != null)
             {
                 if (raycasts[r].collider.gameObject.CompareTag("Interactable"))
                 {
+                    numHits++;
                     Interactable i = raycasts[r].collider.gameObject.GetComponent<Interactable>();
                     if (!pulls.Contains(raycasts[r].collider.gameObject))
                     {
@@ -219,10 +258,11 @@ public class Magnet : MonoBehaviour
                     }
                     break;
                 }
-                else if(raycasts[r].collider.gameObject.CompareTag("Bomb"))
+                else if (raycasts[r].collider.gameObject.CompareTag("Bomb"))
                 {
+                    numHits++;
                     Bomb b = raycasts[r].collider.gameObject.GetComponent<Bomb>();
-                    if(!pulls.Contains(raycasts[r].collider.gameObject))
+                    if (!pulls.Contains(raycasts[r].collider.gameObject))
                     {
                         AddPull(raycasts[r].collider.gameObject, InteractableType.Bomb);
                     }
@@ -230,6 +270,7 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
+        return numHits;
     }
     private IEnumerator TurnOffTractorBeam()
     {

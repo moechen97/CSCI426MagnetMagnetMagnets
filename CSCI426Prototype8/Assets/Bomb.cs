@@ -78,7 +78,9 @@ public class Bomb : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("BombLock"))
         {
+            Debug.Log("PLAY BOMB DEFUSE");
             music.PlayBombDefuse();
+            Debug.Log("BOMB DEFUSE PLAYED");
             foreach (Transform child in collision.transform.parent)
             {
                 child.gameObject.SetActive(false);

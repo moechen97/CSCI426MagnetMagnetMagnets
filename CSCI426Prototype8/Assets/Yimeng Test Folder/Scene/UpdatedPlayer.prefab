@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7138988259474785944}
   - component: {fileID: 7138988257429435813}
+  - component: {fileID: 7138988257429435814}
   - component: {fileID: 7138988259474785947}
   - component: {fileID: 7138988257429435812}
   - component: {fileID: 7138988257429435815}
-  - component: {fileID: 7138988257429435814}
   - component: {fileID: 2399348605144435579}
   m_Layer: 0
   m_Name: UpdatedPlayer
@@ -54,8 +54,68 @@ MonoBehaviour:
   RateOfAcceleration: 0.25
   DelayBeforeAcceleration: 0
   startSpeed: 2
-  battery: {fileID: 0}
+  maxSpeed: 10
   dead: 0
+--- !u!114 &7138988257429435814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138988259474785946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathContainer: {fileID: 0}
+  onStart: 1
+  moveToPath: 0
+  reverse: 0
+  startPoint: 0
+  currentPoint: 0
+  closeLoop: 0
+  localType: 0
+  lookAhead: 0
+  sizeToAdd: 0
+  timeValue: 1
+  speed: 0.05
+  animEaseType:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  waypoints: []
+  pathType: 1
+  pathMode: 1
+  easeType: 1
+  lockPosition: 0
+  lockRotation: -1
+  waypointRotation: 0
+  rotationTarget: {fileID: 0}
+  movementStart:
+    m_PersistentCalls:
+      m_Calls: []
+  movementChange:
+    m_PersistentCalls:
+      m_Calls: []
+  movementEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7138988257429435813}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: createWinParticle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &7138988259474785947
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -154,66 +214,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7138988257429435814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7138988259474785946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathContainer: {fileID: 0}
-  onStart: 1
-  moveToPath: 0
-  reverse: 0
-  startPoint: 0
-  currentPoint: 0
-  closeLoop: 0
-  localType: 0
-  lookAhead: 0
-  sizeToAdd: 0
-  timeValue: 1
-  speed: 0.05
-  animEaseType:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  loopType: 0
-  waypoints: []
-  pathType: 1
-  pathMode: 1
-  easeType: 1
-  lockPosition: 0
-  lockRotation: -1
-  waypointRotation: 0
-  rotationTarget: {fileID: 0}
-  movementStart:
-    m_PersistentCalls:
-      m_Calls: []
-  movementChange:
-    m_PersistentCalls:
-      m_Calls: []
-  movementEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7138988257429435813}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: createWinParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2399348605144435579
 MonoBehaviour:
   m_ObjectHideFlags: 0

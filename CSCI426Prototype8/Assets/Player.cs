@@ -143,6 +143,7 @@ public class Player : MonoBehaviour
         else if(collision.gameObject.CompareTag("BombLock"))
         {
             Die();
+            music.PlayBombExplode();
         }
     }
 
