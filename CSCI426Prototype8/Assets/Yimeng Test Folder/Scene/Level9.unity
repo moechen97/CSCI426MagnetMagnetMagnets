@@ -370,8 +370,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1898923102}
   - {fileID: 1422209986}
+  - {fileID: 1898923102}
   - {fileID: 1244365572}
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -3139,7 +3139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 595145838708924940, guid: 5cdfb715ae26f17478d8b3ff69faec37, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 595145838708924940, guid: 5cdfb715ae26f17478d8b3ff69faec37, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3441,19 +3441,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1019454862298259429, guid: d40b5d7dee6f34544bc0d40e604eb167, type: 3}
       propertyPath: m_Name
-      value: MagneticObstacleBall_2
+      value: MagneticObstacleBall_1
       objectReference: {fileID: 0}
     - target: {fileID: 1019454862298259433, guid: d40b5d7dee6f34544bc0d40e604eb167, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1019454862298259433, guid: d40b5d7dee6f34544bc0d40e604eb167, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1019454862298259433, guid: d40b5d7dee6f34544bc0d40e604eb167, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.32
+      value: -2.737
       objectReference: {fileID: 0}
     - target: {fileID: 1019454862298259433, guid: d40b5d7dee6f34544bc0d40e604eb167, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4093,19 +4093,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1577532415066095636, guid: 7e5a8a3f3c1a2654786311a020d060c2, type: 3}
       propertyPath: m_Name
-      value: MagnetIcObstacleBall_1
+      value: MagnetIcObstacleBall_2
       objectReference: {fileID: 0}
     - target: {fileID: 1577532415066095640, guid: 7e5a8a3f3c1a2654786311a020d060c2, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1577532415066095640, guid: 7e5a8a3f3c1a2654786311a020d060c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1577532415066095640, guid: 7e5a8a3f3c1a2654786311a020d060c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.737
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 1577532415066095640, guid: 7e5a8a3f3c1a2654786311a020d060c2, type: 3}
       propertyPath: m_LocalPosition.z
