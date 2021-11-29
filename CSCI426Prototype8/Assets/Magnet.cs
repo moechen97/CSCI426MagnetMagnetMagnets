@@ -173,16 +173,12 @@ public class Magnet : MonoBehaviour
                 currBeam.Play();
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        //USED TO BE IN UPDATE
         if (snapBlocked || mm.currQuad == MagnetMove.Quadrant.None) return;
         Vector2 forward = Vector2.zero;
         if (mm.currQuad == MagnetMove.Quadrant.Up)
         {
-            forward = -Vector2.up;
+            forward = Vector2.down;
         }
         else if (mm.currQuad == MagnetMove.Quadrant.Down)
         {
@@ -209,15 +205,15 @@ public class Magnet : MonoBehaviour
         RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 20.5F, maskInteractable);
         int numHits = ObserveRaycasts(raycasts);
         //increase range of magnet if nothing detected from center of magnet
-        if(numHits == 0)
+        if (numHits == 0)
         {
-            if(mm.currQuad == MagnetMove.Quadrant.Left || mm.currQuad == MagnetMove.Quadrant.Right)
+            if (mm.currQuad == MagnetMove.Quadrant.Left || mm.currQuad == MagnetMove.Quadrant.Right)
             {
                 Vector3 bottomOfMagnet = transform.position;
                 bottomOfMagnet.y -= 0.525F;
                 raycasts = Physics2D.RaycastAll(bottomOfMagnet, forward, 20.5F, maskInteractable);
                 numHits = ObserveRaycasts(raycasts);
-                if(numHits == 0)
+                if (numHits == 0)
                 {
                     Vector3 topOfMagnet = transform.position;
                     topOfMagnet.y += 0.525F;
@@ -225,21 +221,27 @@ public class Magnet : MonoBehaviour
                     numHits = ObserveRaycasts(raycasts);
                 }
             }
-            else if(mm.currQuad == MagnetMove.Quadrant.Up || mm.currQuad == MagnetMove.Quadrant.Down)
+            else if (mm.currQuad == MagnetMove.Quadrant.Up || mm.currQuad == MagnetMove.Quadrant.Down)
             {
                 Vector3 leftOfMagnet = transform.position;
-                leftOfMagnet.x -= 0.525F;
+                leftOfMagnet.x -= 0.625F;
                 raycasts = Physics2D.RaycastAll(leftOfMagnet, forward, 20.5F, maskInteractable);
                 numHits = ObserveRaycasts(raycasts);
                 if (numHits == 0)
                 {
                     Vector3 rightOfMagnet = transform.position;
-                    rightOfMagnet.y += 0.525F;
+                    rightOfMagnet.x += 0.625F;
                     raycasts = Physics2D.RaycastAll(rightOfMagnet, forward, 20.5F, maskInteractable);
                     numHits = ObserveRaycasts(raycasts);
                 }
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        //USED TO BE IN UPDATE
+        
     }
 
     private int ObserveRaycasts(RaycastHit2D[] raycasts)
