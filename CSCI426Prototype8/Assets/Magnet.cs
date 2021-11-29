@@ -206,26 +206,27 @@ public class Magnet : MonoBehaviour
         }
         //raycast for interactables
         RaycastHit2D[] raycasts = Physics2D.RaycastAll(transform.position, forward, 20.5F, maskInteractable);
-        foreach (RaycastHit2D hit in raycasts)
+        for(int r = 0; r < raycasts.Length; r++)
         {
-            if (hit.collider != null)
+            if (raycasts[r].collider != null)
             {
-                if (hit.collider.gameObject.CompareTag("Interactable"))
+                if (raycasts[r].collider.gameObject.CompareTag("Interactable"))
                 {
-                    Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
-                    if (!pulls.Contains(hit.collider.gameObject))
+                    Interactable i = raycasts[r].collider.gameObject.GetComponent<Interactable>();
+                    if (!pulls.Contains(raycasts[r].collider.gameObject))
                     {
-                        AddPull(hit.collider.gameObject, InteractableType.Interactable);
+                        AddPull(raycasts[r].collider.gameObject, InteractableType.Interactable);
                     }
                     break;
                 }
-                else if(hit.collider.gameObject.CompareTag("Bomb"))
+                else if(raycasts[r].collider.gameObject.CompareTag("Bomb"))
                 {
-                    Bomb b = hit.collider.gameObject.GetComponent<Bomb>();
-                    if(!pulls.Contains(hit.collider.gameObject))
+                    Bomb b = raycasts[r].collider.gameObject.GetComponent<Bomb>();
+                    if(!pulls.Contains(raycasts[r].collider.gameObject))
                     {
-                        AddPull(hit.collider.gameObject, InteractableType.Bomb);
+                        AddPull(raycasts[r].collider.gameObject, InteractableType.Bomb);
                     }
+                    break;
                 }
             }
         }

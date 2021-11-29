@@ -92,4 +92,9 @@ public class Bomb : MonoBehaviour
             music.PlayBombExplode();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("HII");
+    }
 }

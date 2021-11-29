@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] public float RateOfAcceleration;
     [SerializeField] public float DelayBeforeAcceleration;
     [SerializeField] public float startSpeed = 2F;
+    [SerializeField] public float maxSpeed = 10F;
     private SpriteRenderer _spriteRenderer;
     private Vector3 startPos;
     private SWS.splineMove move;

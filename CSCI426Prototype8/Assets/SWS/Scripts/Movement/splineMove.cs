@@ -29,6 +29,7 @@ namespace SWS
         private Player player; //Level, Rate of acceleration variables
         private float speedLimit = 4F;
         private float startSpeed = 2.0F;
+        private float maxSpeed = 10F;
         private int level;
         private void Awake()
         {
@@ -39,6 +40,7 @@ namespace SWS
             rateOfAcceleration = player.RateOfAcceleration;
             timeDelay = player.DelayBeforeAcceleration;
             startSpeed = player.startSpeed;
+            maxSpeed = player.maxSpeed;
             Debug.Log("SPLINE MOVE: LEVEL " + player.GameLevel);
         }
         private void Update()
@@ -72,6 +74,10 @@ namespace SWS
         /// <summary>
         public void ChangeSpeed(float value)
         {
+            if(value >= maxSpeed)
+            {
+                value = maxSpeed;
+            }
             //calulate new timeScale value based on original speed
             float newValue;
             if (timeValue == TimeValue.speed)
