@@ -175,6 +175,11 @@ public class Magnet : MonoBehaviour
         }
 
         if (snapBlocked || mm.currQuad == MagnetMove.Quadrant.None) return;
+    }
+
+    private void FixedUpdate()
+    {
+        //USED TO BE IN UPDATE
         Vector2 forward = Vector2.zero;
         if (mm.currQuad == MagnetMove.Quadrant.Up)
         {
@@ -210,13 +215,13 @@ public class Magnet : MonoBehaviour
             if (mm.currQuad == MagnetMove.Quadrant.Left || mm.currQuad == MagnetMove.Quadrant.Right)
             {
                 Vector3 bottomOfMagnet = transform.position;
-                bottomOfMagnet.y -= 0.525F;
+                bottomOfMagnet.y -= 0.625F;
                 raycasts = Physics2D.RaycastAll(bottomOfMagnet, forward, 20.5F, maskInteractable);
                 numHits = ObserveRaycasts(raycasts);
                 if (numHits == 0)
                 {
                     Vector3 topOfMagnet = transform.position;
-                    topOfMagnet.y += 0.525F;
+                    topOfMagnet.y += 0.625F;
                     raycasts = Physics2D.RaycastAll(topOfMagnet, forward, 20.5F, maskInteractable);
                     numHits = ObserveRaycasts(raycasts);
                 }
@@ -236,12 +241,6 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        //USED TO BE IN UPDATE
-        
     }
 
     private int ObserveRaycasts(RaycastHit2D[] raycasts)
