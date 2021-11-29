@@ -51,7 +51,8 @@ public class MENU_LevelButton : MonoBehaviour
         else
         {
             unavailable = true;
-            GetComponent<Image>().color = Color.red;
+            GetComponent<Image>().color = Color.black;
+            transform.GetChild(0).GetComponent<Image>().color = new Color(52F / 255F, 65F / 255F, 50F / 255F);
         }
     }
 
