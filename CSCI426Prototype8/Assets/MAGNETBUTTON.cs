@@ -15,6 +15,8 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     private float flashTime;
     private float selectTimer;
     private float selectTimeLimit;
+    private GameObject cursor;
+
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         //Attach Physics2DRaycaster to the Camera
         Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
         addEventSystem();
+        cursor = GameObject.FindWithTag("Cursor");
     }
 
     void Awake()
@@ -75,6 +78,7 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         sr.color = hoverColor;
         transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(OnMouseHover());
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -83,6 +87,7 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         selected = true;
         transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(OnMouseHover());
+        MouseCursor.isPointer = true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -106,6 +111,8 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         selected = false;
         transform.GetChild(0).gameObject.SetActive(false);
         selectTimer = 0F;
+        MouseCursor.isPointer = false;
+
     }
 
 

@@ -33,6 +33,7 @@ TagManager:
   - BombLock
   - Trail
   - VolumeSliderCanvas
+  - Cursor
   layers:
   - Default
   - TransparentFX
