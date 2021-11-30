@@ -11,6 +11,7 @@ public class Bomb : MonoBehaviour
     private Vector3 dest;
     private Player player;
     private Music music;
+    public GameObject bombLock;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,17 @@ public class Bomb : MonoBehaviour
 
     public void Reset()
     {
+        bombLock.gameObject.SetActive(true);
+        foreach (Transform child in bombLock.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        foreach (Transform child in bombLock.transform.GetChild(0))
+        {
+            child.gameObject.SetActive(true);
+        }   
+        gameObject.SetActive(true);
+        gameObject.transform.parent.gameObject.SetActive(true);
         ResetPull();
         transform.position = startPos;
         dest = transform.position;
@@ -81,6 +93,7 @@ public class Bomb : MonoBehaviour
             Debug.Log("PLAY BOMB DEFUSE");
             music.PlayBombDefuse();
             Debug.Log("BOMB DEFUSE PLAYED");
+            bombLock = collision.transform.parent.gameObject;
             foreach (Transform child in collision.transform.parent)
             {
                 child.gameObject.SetActive(false);
