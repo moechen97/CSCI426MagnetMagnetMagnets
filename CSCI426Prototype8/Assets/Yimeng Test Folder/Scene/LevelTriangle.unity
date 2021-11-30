@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414726, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -341,7 +341,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -385,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonDown_9
+      value: MagnetButtonDown_6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
@@ -1428,7 +1428,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1472,7 +1472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonDown_10
+      value: MagnetButtonDown_7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
@@ -2278,7 +2278,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2322,7 +2322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonRight_8
+      value: MagnetButtonRight_5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
@@ -2330,68 +2330,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
   m_PrefabInstance: {fileID: 1104736135}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1133857183
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1184089737}
-    m_Modifications:
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-      propertyPath: m_Name
-      value: MagnetButtonDown_7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
---- !u!4 &1133857184 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9054767795887747340, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
-  m_PrefabInstance: {fileID: 1133857183}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1178241354
 GameObject:
@@ -2551,10 +2489,7 @@ Transform:
   - {fileID: 411463656}
   - {fileID: 1909942512}
   - {fileID: 706921904}
-  - {fileID: 1882647960}
   - {fileID: 1805662364}
-  - {fileID: 1836964630}
-  - {fileID: 1133857184}
   - {fileID: 1104736136}
   - {fileID: 118145262}
   - {fileID: 579097495}
@@ -2802,7 +2737,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2846,7 +2781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonLeft_12
+      value: MagnetButtonLeft_9
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_TagString
@@ -3620,7 +3555,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3664,7 +3599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonRight_5
+      value: MagnetButtonRight_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
@@ -3672,68 +3607,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
   m_PrefabInstance: {fileID: 1805662363}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1836964629
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1184089737}
-    m_Modifications:
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_Name
-      value: MagnetButtonRight_6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
---- !u!4 &1836964630 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-  m_PrefabInstance: {fileID: 1836964629}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1858399789
 GameObject:
@@ -3779,68 +3652,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1882647959
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1184089737}
-    m_Modifications:
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-      propertyPath: m_Name
-      value: MagnetButtonRight_4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
---- !u!4 &1882647960 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
-  m_PrefabInstance: {fileID: 1882647959}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1887598769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3942,7 +3753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164284, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3986,7 +3797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonLeft_11
+      value: MagnetButtonLeft_8
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_TagString
