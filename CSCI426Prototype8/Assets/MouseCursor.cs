@@ -10,6 +10,7 @@ public class MouseCursor : MonoBehaviour
     public static bool isPointer = false;
     [SerializeField] private Texture2D hand;
     [SerializeField] private Texture2D pointerfinger;
+    [SerializeField] private Texture2D grab;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +26,16 @@ public class MouseCursor : MonoBehaviour
         transform.position = cursorPos;
         if (Input.GetMouseButton(0)) {
             //sr.sprite = pointerfinger;
-            Cursor.SetCursor(hand, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(grab, Vector2.zero, CursorMode.Auto);
+        }
+        else if (isPointer)
+        {
+            Cursor.SetCursor(pointerfinger, Vector2.zero, CursorMode.Auto);
+
         }
         else {
             //sr.sprite = hand;
-            Cursor.SetCursor(pointerfinger, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(hand, Vector2.zero, CursorMode.Auto);
         }
     }
 

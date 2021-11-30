@@ -6174,7 +6174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_NoiseProfile: {fileID: 0}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 5
@@ -6714,6 +6714,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7209921614077535413, guid: f21e2902be5f4f0458ab75cd675e6592, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7209921614077535414, guid: f21e2902be5f4f0458ab75cd675e6592, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -6762,6 +6766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DieParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 7209921614077535419, guid: f21e2902be5f4f0458ab75cd675e6592, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21e2902be5f4f0458ab75cd675e6592, type: 3}
 --- !u!1001 &1632997109
@@ -6775,17 +6783,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 5183164134338851969, guid: 69634d3f59660da4f93fc4b7e44368e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5183164134338851998, guid: 69634d3f59660da4f93fc4b7e44368e0, type: 3}
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5183164134338851998, guid: 69634d3f59660da4f93fc4b7e44368e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5
+      value: 6.97
       objectReference: {fileID: 0}
     - target: {fileID: 5183164134338851998, guid: 69634d3f59660da4f93fc4b7e44368e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 5183164134338851998, guid: 69634d3f59660da4f93fc4b7e44368e0, type: 3}
       propertyPath: m_LocalPosition.z

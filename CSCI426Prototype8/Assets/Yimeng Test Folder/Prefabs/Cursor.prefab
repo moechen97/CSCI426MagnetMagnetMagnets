@@ -95,5 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f0d714256194b0c87d11c863fa14ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2800000, guid: ef718eb7a0de8c44a8f6dab2776dc08f, type: 3}
-  pointerfinger: {fileID: 2800000, guid: a0baae3192fe79347935bd6ffd24dfc1, type: 3}
+  hand: {fileID: 2800000, guid: a0baae3192fe79347935bd6ffd24dfc1, type: 3}
+  pointerfinger: {fileID: 2800000, guid: ef718eb7a0de8c44a8f6dab2776dc08f, type: 3}
+  grab: {fileID: 2800000, guid: 1dc8507d19df1ca4ca7d05272fe3cf67, type: 3}
