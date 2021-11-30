@@ -13,6 +13,7 @@ public class VariablesSaver : MonoBehaviour
     public string[] Levels;
     public enum LevelState { Gray, Green, Red }
     [HideInInspector] public bool[] research;
+    private MagnetMove magnetMove;
     void Awake()
     {
         if (GameObject.FindGameObjectsWithTag("VariablesSaver").Length > 1)
