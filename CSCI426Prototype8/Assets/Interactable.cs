@@ -222,7 +222,7 @@ public class Interactable : MonoBehaviour
 
         if(resetting)
         {
-            if(Mathf.Abs(transform.position.x - startPos.position.x) <= 0.0125F && Mathf.Abs(transform.position.y - startPos.position.y) <= 0.0125F)
+            if(Mathf.Abs(transform.position.x - startPos.position.x) <= 0.01265F && Mathf.Abs(transform.position.y - startPos.position.y) <= 0.01265F)
             {
                 forceFieldState = ForceFieldState.None;
                 resetting = false;
