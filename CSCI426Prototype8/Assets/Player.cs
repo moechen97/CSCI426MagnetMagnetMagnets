@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     private Bomb[] bombs;
     public bool dead;
     private Music music;
+    [HideInInspector] public bool lastFrameDying = false;
+    [HideInInspector] public bool dying = false;
+    [HideInInspector] public bool deadImmunity;
 
     void Awake()
     {
@@ -72,6 +75,12 @@ public class Player : MonoBehaviour
         _screenShake = FindObjectOfType<ScreenShake>();
     }
 
+    private IEnumerator DeadImmunity() 
+    {
+        yield return new WaitForSeconds(0.75F);
+        deadImmunity = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -91,6 +100,13 @@ public class Player : MonoBehaviour
         {
             music.SwapBackgroundMusic();
         }
+
+        if (lastFrameDying && !dying)
+        {
+            deadImmunity = true;
+            StartCoroutine(DeadImmunity());
+        }
+        lastFrameDying = dying;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -149,6 +165,11 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        if(dying || deadImmunity)
+        {
+            return;
+        }
+        dying = true;
         mm.SetMagnetPos(0);
         Instantiate(DieParticle, transform.position, quaternion.identity);
         _spriteRenderer.color = new Color(0, 0, 0, 0);
@@ -180,6 +201,7 @@ public class Player : MonoBehaviour
         move.StartMove();
         timeElapsed = 0.0F;
         _spriteRenderer.color = spriteOriginColor;
+        dying = false;
     }
 
     public void createWinParticle()

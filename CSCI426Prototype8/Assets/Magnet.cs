@@ -18,9 +18,11 @@ public class Magnet : MonoBehaviour
     private Music music;
     private bool playingClink;
     public KeyLock[] KeyLocks;
+    private Player player;
     public enum InteractableType { Interactable, Bomb } 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playingClink = false;
         snapBlocked = false;
         snapBlockedTimer = 0.0F;
@@ -93,6 +95,11 @@ public class Magnet : MonoBehaviour
 
     public void Update()
     {
+        if(player.dying)
+        {
+            mm.SetMagnetPos(0);
+            return;
+        }
         ParticleSystem currBeam;
         if (mm.currQuad == MagnetMove.Quadrant.Up)
         {
@@ -254,6 +261,10 @@ public class Magnet : MonoBehaviour
                 {
                     numHits++;
                     Interactable i = raycasts[r].collider.gameObject.GetComponent<Interactable>();
+                    if(i.pull == Interactable.PullDirection.Locked)
+                    {
+                        continue;
+                    }
                     if (!pulls.Contains(raycasts[r].collider.gameObject))
                     {
                         AddPull(raycasts[r].collider.gameObject, InteractableType.Interactable);
