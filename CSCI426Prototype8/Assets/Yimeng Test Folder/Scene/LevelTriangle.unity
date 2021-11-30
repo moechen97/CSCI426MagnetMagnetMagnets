@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414726, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -385,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonDown_6
+      value: MagnetButtonDown_5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
@@ -1410,7 +1410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054767795887747341, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonDown_7
+      value: MagnetButtonDown_6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36178648df45fc146ac104df250e5a7e, type: 3}
@@ -1631,7 +1631,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonUp_3
+      value: MagnetButtonUp_2
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_RootOrder
@@ -2260,7 +2260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonRight_5
+      value: MagnetButtonRight_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
@@ -2718,7 +2718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonLeft_1
+      value: MagnetButtonLeft_8
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_TagString
@@ -3536,7 +3536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonRight_4
+      value: MagnetButtonRight_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
@@ -3628,7 +3628,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991342011402144560, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonUp_2
+      value: MagnetButtonUp_1
       objectReference: {fileID: 0}
     - target: {fileID: 2991342011402144561, guid: 2714a743b1fddfc4d81e2fffda2a023e, type: 3}
       propertyPath: m_RootOrder
@@ -3734,7 +3734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_Name
-      value: MagnetButtonLeft_8
+      value: MagnetButtonLeft_7
       objectReference: {fileID: 0}
     - target: {fileID: 6661360301507164285, guid: 5c97cf9b4b1428a46a75d2f53e9aac92, type: 3}
       propertyPath: m_TagString
