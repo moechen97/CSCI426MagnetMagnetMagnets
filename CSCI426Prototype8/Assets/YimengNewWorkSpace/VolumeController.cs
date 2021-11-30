@@ -13,7 +13,7 @@ public class VolumeController : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         slider.value = AudioListener.volume;
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     // Update is called once per frame

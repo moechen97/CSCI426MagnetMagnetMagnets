@@ -8,14 +8,14 @@ public class MouseCursor : MonoBehaviour
     private SpriteRenderer sr;
     // public static Sprite currentSprite;
     public static bool isPointer = false;
-    [SerializeField] private Sprite hand;
-    [SerializeField] private Sprite pointerfinger;
+    [SerializeField] private Texture2D hand;
+    [SerializeField] private Texture2D pointerfinger;
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
-        sr = GetComponent<SpriteRenderer>();
+        Cursor.visible = true;
+        //sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -23,12 +23,13 @@ public class MouseCursor : MonoBehaviour
     {
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = cursorPos;
-        if (isPointer) {
-            sr.sprite = pointerfinger;
-
+        if (Input.GetMouseButton(0)) {
+            //sr.sprite = pointerfinger;
+            Cursor.SetCursor(hand, Vector2.zero, CursorMode.Auto);
         }
         else {
-            sr.sprite = hand;
+            //sr.sprite = hand;
+            Cursor.SetCursor(pointerfinger, Vector2.zero, CursorMode.Auto);
         }
     }
 
