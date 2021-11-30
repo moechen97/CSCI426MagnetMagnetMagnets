@@ -163,11 +163,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Die()
+    public bool Die()
     {
         if(dying || deadImmunity)
         {
-            return;
+            return true;
         }
         dying = true;
         mm.SetMagnetPos(0);
@@ -176,6 +176,7 @@ public class Player : MonoBehaviour
         _screenShake.ShakeScreen();
         move.Stop();
         StartCoroutine(RestartLevel());
+        return false;
     }
 
     IEnumerator RestartLevel()

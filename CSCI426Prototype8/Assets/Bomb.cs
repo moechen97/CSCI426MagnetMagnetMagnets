@@ -90,7 +90,11 @@ public class Bomb : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Trail"))
         {
-            player.Die();
+            bool dead = player.Die();
+            if(dead)
+            {
+                transform.position = startPos;
+            }
             music.PlayBombExplode();
         }
     }
