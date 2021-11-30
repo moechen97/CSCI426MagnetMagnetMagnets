@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Yimeng Test Folder/Scene/Level5.unity
     guid: f9de7626d2b8c5d4db23e963a3066b00
   - enabled: 1
+    path: Assets/YimengNewWorkSpace/LevelCorrectPosition.unity
+    guid: 6b029cf7b7458be4f946a3ed9197ba2a
+  - enabled: 1
     path: Assets/Yimeng Test Folder/Scene/LevelElsaKeyLock.unity
     guid: b191d1fa1ce27b1409bf1de3fbf60c10
   - enabled: 1
