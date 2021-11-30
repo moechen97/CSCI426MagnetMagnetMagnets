@@ -3502,7 +3502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Electrons can be transferred to a battery to charge and premit access through
+  m_text: Electrons can be transferred to a battery to charge and permit access through
     them.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd3c2907c16637c40aabb940a1956bef, type: 2}

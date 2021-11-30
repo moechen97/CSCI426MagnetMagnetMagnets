@@ -700,8 +700,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bomb spikes are volatile: they move faster and will detonate your line
-    if they touch the trail, ending your trial.'
+  m_text: 'Bomb spikes are volatile: they will detonate you if they touch your line.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd3c2907c16637c40aabb940a1956bef, type: 2}
   m_sharedMaterial: {fileID: -2510131576269404205, guid: dd3c2907c16637c40aabb940a1956bef, type: 2}
@@ -830,7 +829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.07, y: -0.49}
+  m_AnchoredPosition: {x: 2.07, y: -0.48999977}
   m_SizeDelta: {x: 16.9647, y: 3.9652}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &331647183
@@ -2852,7 +2851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.07, y: -0.49}
+  m_AnchoredPosition: {x: 2.07, y: -0.48999977}
   m_SizeDelta: {x: 16.9647, y: 3.9652}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1346767862
