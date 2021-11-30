@@ -1037,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4782529402538999515, guid: 126f0f9031189d140adf98221e9e5edb, type: 3}
       propertyPath: startSpeed
-      value: 1
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 4782529402538999515, guid: 126f0f9031189d140adf98221e9e5edb, type: 3}
       propertyPath: DieParticle
