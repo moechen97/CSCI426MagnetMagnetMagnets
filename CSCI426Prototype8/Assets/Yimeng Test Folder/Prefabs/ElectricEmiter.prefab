@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 3375550310133246091}
   - component: {fileID: 3375550310133246090}
   - component: {fileID: 9196988084100417516}
-  - component: {fileID: 3375550310133246084}
+  - component: {fileID: 627508869161396679}
   m_Layer: 0
   m_Name: ElectricEmiter
   m_TagString: ElectricStation
@@ -197,14 +197,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3375550310133246085}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.25, y: -1.5, z: 0}
-  m_LocalScale: {x: 0.58929014, y: 0.58929014, z: 0.58929}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.346, y: -1.516, z: 0}
+  m_LocalScale: {x: 0.1899282, y: 0.1899282, z: 0.18992817}
   m_Children:
   - {fileID: 3375550309723654309}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3375550310133246090
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -245,8 +245,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2135585597343286014, guid: eed45a33cd08446c8b88325cf82fc52f, type: 3}
-  m_Color: {r: 0.9960785, g: 0.7607844, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a3b80d9cd5dd41241a2bea981986afb2, type: 3}
+  m_Color: {r: 0.91984063, g: 0.99607843, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   electricPrefab: {fileID: 7613883612854474828, guid: 49e1290c0831a0248acb17123c5f2942, type: 3}
---- !u!60 &3375550310133246084
+--- !u!60 &627508869161396679
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,7 +286,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 5.13, y: 5.12}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -294,30 +294,36 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.4375, y: -0.265625}
-      - {x: 0.44140625, y: -0.2578125}
-      - {x: 0.44140625, y: 0.2578125}
-      - {x: 0.4375, y: 0.265625}
-      - {x: 0.390625, y: 0.29296875}
-      - {x: 0.36328125, y: 0.30859375}
-      - {x: 0.26171875, y: 0.3671875}
-      - {x: 0.21484375, y: 0.39453125}
-      - {x: 0.16015625, y: 0.42578125}
-      - {x: 0.05859375, y: 0.484375}
-      - {x: 0.02734375, y: 0.5}
-      - {x: -0.03125, y: 0.5}
-      - {x: -0.05859375, y: 0.484375}
-      - {x: -0.1875, y: 0.41015625}
-      - {x: -0.36328125, y: 0.30859375}
-      - {x: -0.4375, y: 0.265625}
-      - {x: -0.44140625, y: 0.2578125}
-      - {x: -0.44140625, y: -0.2578125}
-      - {x: -0.4375, y: -0.265625}
-      - {x: -0.31640625, y: -0.3359375}
-      - {x: -0.26171875, y: -0.3671875}
-      - {x: -0.21484375, y: -0.39453125}
-      - {x: -0.11328125, y: -0.453125}
-      - {x: -0.03125, y: -0.5}
-      - {x: 0.03125, y: -0.5}
-      - {x: 0.0859375, y: -0.46875}
-      - {x: 0.2421875, y: -0.37890625}
+    - - {x: 0.175, y: -1.2099999}
+      - {x: 0.375, y: -1}
+      - {x: 0.585, y: -0.78}
+      - {x: 0.98499995, y: -0.35999998}
+      - {x: 1.395, y: 0.07}
+      - {x: 1.6949999, y: 0.38}
+      - {x: 1.6949999, y: 0.39999998}
+      - {x: 1.675, y: 0.42}
+      - {x: 0.035, y: 0.42}
+      - {x: 0.065, y: 0.45999998}
+      - {x: 0.16499999, y: 0.68}
+      - {x: 0.765, y: 2.02}
+      - {x: 0.865, y: 2.24}
+      - {x: 0.955, y: 2.45}
+      - {x: 0.92499995, y: 2.47}
+      - {x: 0.865, y: 2.4099998}
+      - {x: -0.055, y: 1.4399999}
+      - {x: -0.60499996, y: 0.85999995}
+      - {x: -0.97499996, y: 0.47}
+      - {x: -1.3349999, y: 0.089999996}
+      - {x: -1.525, y: -0.11}
+      - {x: -1.7049999, y: -0.29999998}
+      - {x: -1.7049999, y: -0.31}
+      - {x: -1.685, y: -0.32999998}
+      - {x: 0.065, y: -0.42}
+      - {x: -0.78499997, y: -1.9399999}
+      - {x: -0.97499996, y: -2.28}
+      - {x: -1.055, y: -2.4299998}
+      - {x: -1.025, y: -2.45}
+      - {x: -0.995, y: -2.45}
+      - {x: -0.635, y: -2.08}
+      - {x: -0.445, y: -1.86}
+      - {x: -0.235, y: -1.64}
