@@ -213,6 +213,9 @@ public class Player : MonoBehaviour
         {
             return true;
         }
+        vs.RecordDeath();
+        vs.deathCountTitleText.gameObject.SetActive(true);
+        vs.deathCountText.gameObject.SetActive(true);
         dying = true;
         mm.SetMagnetPos(0);
         Instantiate(DieParticle, transform.position, quaternion.identity);
@@ -243,6 +246,8 @@ public class Player : MonoBehaviour
         }
         countdown.gameObject.SetActive(true);
         yield return new WaitForSeconds(1F);
+        vs.deathCountTitleText.gameObject.SetActive(false);
+        vs.deathCountText.gameObject.SetActive(false);
         countdown.text = "2~";
         yield return new WaitForSeconds(1F);
         countdown.text = "1!";

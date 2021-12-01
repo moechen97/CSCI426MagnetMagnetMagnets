@@ -10,16 +10,32 @@ public class VariablesSaver : MonoBehaviour
     [HideInInspector] public int level;
     [HideInInspector] public bool[] levelsCompleted;
     [HideInInspector] public int currentLevel;
+    [HideInInspector] public int deathCount;
     public string[] Levels;
     public enum LevelState { Gray, Green, Red }
     [HideInInspector] public bool[] research;
     private MagnetMove magnetMove;
+    [HideInInspector] public TMPro.TextMeshProUGUI deathCountTitleText;
+    [HideInInspector] public TMPro.TextMeshProUGUI deathCountText;
     void Awake()
     {
         if (GameObject.FindGameObjectsWithTag("VariablesSaver").Length > 1)
         {
             Destroy(this.gameObject);
             return;
+        }
+        deathCount = 0;
+        GameObject vsc = GameObject.FindGameObjectWithTag("VolumeSliderCanvas");
+        foreach(Transform child in vsc.transform)
+        {
+            if(child.gameObject.name.Equals("DeathCountTotal_Text"))
+            {
+                deathCountText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            }
+            else if (child.gameObject.name.Equals("DeathCountTitle_Text"))
+            {
+                deathCountTitleText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            }
         }
         gameStarted = false;
         string sceneName = SceneManager.GetActiveScene().name;
@@ -33,6 +49,12 @@ public class VariablesSaver : MonoBehaviour
         {
             research[r] = false;
         }
+    }
+
+    public void RecordDeath()
+    {
+        deathCount++;
+        deathCountText.text = deathCount.ToString();
     }
 
     public LevelState GetLevelState(int num)
