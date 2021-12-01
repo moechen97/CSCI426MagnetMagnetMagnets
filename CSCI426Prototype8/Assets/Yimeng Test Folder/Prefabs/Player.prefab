@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathContainer: {fileID: 0}
-  onStart: 1
+  onStart: 0
   moveToPath: 0
   reverse: 0
   startPoint: 0

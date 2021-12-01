@@ -56,6 +56,9 @@ MonoBehaviour:
   startSpeed: 2
   maxSpeed: 10
   dead: 0
+  lastFrameDying: 0
+  dying: 0
+  deadImmunity: 0
 --- !u!114 &7138988257429435814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathContainer: {fileID: 0}
-  onStart: 1
+  onStart: 0
   moveToPath: 0
   reverse: 0
   startPoint: 0

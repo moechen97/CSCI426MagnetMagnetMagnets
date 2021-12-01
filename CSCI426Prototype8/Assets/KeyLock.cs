@@ -81,13 +81,6 @@ public class KeyLock : MonoBehaviour
             }
             spikeContact = true;
         }
-        else if (collision.gameObject.CompareTag("Player"))
-        {
-            if(!isLocked)
-            {
-                collision.gameObject.GetComponent<Player>().Die();
-            }
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

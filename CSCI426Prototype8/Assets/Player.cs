@@ -31,7 +31,9 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool lastFrameDying = false;
     [HideInInspector] public bool dying = false;
     [HideInInspector] public bool deadImmunity;
-
+    private TMPro.TextMeshProUGUI countdown;
+    private bool countingDown = false;
+    private Coroutine cd;
     void Awake()
     {
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
@@ -73,6 +75,35 @@ public class Player : MonoBehaviour
         spriteOriginColor = _spriteRenderer.color;
 
         _screenShake = FindObjectOfType<ScreenShake>();
+        GameObject vsc = GameObject.FindGameObjectWithTag("VolumeSliderCanvas");
+        foreach(Transform child in vsc.transform) 
+        {
+            if(child.gameObject.name.Equals("Countdown_Text"))
+            {
+                countdown = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+                cd = StartCoroutine(Count());
+            }
+        }
+    }
+
+    private IEnumerator Count()
+    {
+        countingDown = true;
+        countdown.gameObject.SetActive(true);
+        countdown.text = "3~";
+        _spriteRenderer.enabled = false;
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(1F);
+        countdown.text = "2~";
+        yield return new WaitForSeconds(1F);
+        countdown.text = "1!";
+        yield return new WaitForSeconds(1F);
+        countingDown = false;
+        _spriteRenderer.enabled = true;
+        countdown.gameObject.SetActive(false);
+        countdown.text = "3~";
+        move.StartMove();
     }
 
     private IEnumerator DeadImmunity() 
@@ -107,6 +138,19 @@ public class Player : MonoBehaviour
             StartCoroutine(DeadImmunity());
         }
         lastFrameDying = dying;
+
+        if(countingDown)
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                countingDown = false;
+                StopCoroutine(cd);
+                _spriteRenderer.enabled = true;
+                countdown.gameObject.SetActive(false);
+                countdown.text = "3~";
+                move.StartMove();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -197,7 +241,14 @@ public class Player : MonoBehaviour
         {
             b.Reset();
         }
+        countdown.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1F);
+        countdown.text = "2~";
+        yield return new WaitForSeconds(1F);
+        countdown.text = "1!";
         yield return new WaitForSeconds(1f);
+        countdown.gameObject.SetActive(false);
+        countdown.text = "3~";
         move.ResetToStart();
         move.StartMove();
         timeElapsed = 0.0F;
