@@ -147,6 +147,8 @@ public class Player : MonoBehaviour
                 StopCoroutine(cd);
                 _spriteRenderer.enabled = true;
                 countdown.gameObject.SetActive(false);
+                vs.deathCountTitleText.gameObject.SetActive(false);
+                vs.deathCountText.gameObject.SetActive(false);
                 countdown.text = "3~";
                 move.StartMove();
             }
@@ -213,9 +215,11 @@ public class Player : MonoBehaviour
         {
             return true;
         }
+        transform.position = startPos;
         vs.RecordDeath();
         vs.deathCountTitleText.gameObject.SetActive(true);
         vs.deathCountText.gameObject.SetActive(true);
+        StartCoroutine(FailTimer());
         dying = true;
         mm.SetMagnetPos(0);
         Instantiate(DieParticle, transform.position, quaternion.identity);
@@ -224,6 +228,13 @@ public class Player : MonoBehaviour
         move.Stop();
         StartCoroutine(RestartLevel());
         return false;
+    }
+
+    private IEnumerator FailTimer()
+    {
+        yield return new WaitForSeconds(1.5F);
+        vs.deathCountTitleText.gameObject.SetActive(false);
+        vs.deathCountText.gameObject.SetActive(false);
     }
 
     IEnumerator RestartLevel()
@@ -244,16 +255,9 @@ public class Player : MonoBehaviour
         {
             b.Reset();
         }
-        countdown.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1F);
-        vs.deathCountTitleText.gameObject.SetActive(false);
-        vs.deathCountText.gameObject.SetActive(false);
-        countdown.text = "2~";
-        yield return new WaitForSeconds(1F);
-        countdown.text = "1!";
-        yield return new WaitForSeconds(1f);
-        countdown.gameObject.SetActive(false);
-        countdown.text = "3~";
+        countingDown = true;
+        cd = StartCoroutine(Count());
+        yield return new WaitUntil(() => !countingDown);
         move.ResetToStart();
         move.StartMove();
         timeElapsed = 0.0F;

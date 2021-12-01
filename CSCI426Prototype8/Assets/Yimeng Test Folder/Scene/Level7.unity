@@ -1481,6 +1481,10 @@ PrefabInstance:
       propertyPath: index
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4467371158396496790, guid: d44ca0e41259e72438cdb1988db38349, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7075606126383114668, guid: d44ca0e41259e72438cdb1988db38349, type: 3}
       propertyPath: m_Name
       value: KeyLock_SINGLE
@@ -1528,6 +1532,10 @@ PrefabInstance:
     - target: {fileID: 8335967943429429269, guid: d44ca0e41259e72438cdb1988db38349, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394023501570193196, guid: d44ca0e41259e72438cdb1988db38349, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d44ca0e41259e72438cdb1988db38349, type: 3}

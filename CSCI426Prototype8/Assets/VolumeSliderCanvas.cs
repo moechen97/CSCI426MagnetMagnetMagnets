@@ -7,6 +7,7 @@ public class VolumeSliderCanvas : MonoBehaviour
 {
     private TMPro.TextMeshProUGUI countdownText;
     private TMPro.TextMeshProUGUI deathCountText;
+    private TMPro.TextMeshProUGUI deathCountTotalText;
     private TMPro.TextMeshProUGUI deathCountTitleText;
     private GameObject restartButton;
     // Start is called before the first frame update
@@ -28,6 +29,10 @@ public class VolumeSliderCanvas : MonoBehaviour
                 else if(child.name.Equals("DeathCountTotal_Text"))
                 {
                     deathCountText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+                }
+                else if (child.name.Equals("DeathCountTotalTotal_Text"))
+                {
+                    deathCountTotalText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
                 }
                 else if(child.name.Equals("DeathCountTitle_Text"))
                 {
@@ -51,6 +56,7 @@ public class VolumeSliderCanvas : MonoBehaviour
             restartButton.SetActive(false);
             deathCountText.gameObject.SetActive(false);
             deathCountTitleText.gameObject.SetActive(false);
+
         }
         else
         {

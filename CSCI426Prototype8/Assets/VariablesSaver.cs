@@ -15,8 +15,11 @@ public class VariablesSaver : MonoBehaviour
     public enum LevelState { Gray, Green, Red }
     [HideInInspector] public bool[] research;
     private MagnetMove magnetMove;
+    [HideInInspector] public TMPro.TextMeshProUGUI deathCountTotalTitleText;
     [HideInInspector] public TMPro.TextMeshProUGUI deathCountTitleText;
+    [HideInInspector] public TMPro.TextMeshProUGUI deathCountTotalText;
     [HideInInspector] public TMPro.TextMeshProUGUI deathCountText;
+    [HideInInspector] public int currentLevelDeath;
     void Awake()
     {
         if (GameObject.FindGameObjectsWithTag("VariablesSaver").Length > 1)
@@ -26,12 +29,21 @@ public class VariablesSaver : MonoBehaviour
         }
         Screen.SetResolution(Mathf.RoundToInt((Screen.currentResolution.height / 1.6F) * 1.7777778F), Mathf.RoundToInt(Screen.currentResolution.height / 1.6F), FullScreenMode.Windowed, Screen.currentResolution.refreshRate);
         deathCount = 0;
+        currentLevelDeath = 0;
         GameObject vsc = GameObject.FindGameObjectWithTag("VolumeSliderCanvas");
         foreach(Transform child in vsc.transform)
         {
             if(child.gameObject.name.Equals("DeathCountTotal_Text"))
             {
                 deathCountText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            }
+            else if (child.gameObject.name.Equals("DeathCountTotalTotal_Text"))
+            {
+                deathCountTotalText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            }
+            else if (child.gameObject.name.Equals("DeathCountTotalTotalTitle_Text"))
+            {
+                deathCountTotalTitleText = child.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             }
             else if (child.gameObject.name.Equals("DeathCountTitle_Text"))
             {
@@ -52,10 +64,33 @@ public class VariablesSaver : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().name.Equals("New Menu"))
+        {
+            if(levelsCompleted[0])
+            {
+                deathCountTotalText.gameObject.SetActive(true);
+                deathCountTotalTitleText.gameObject.SetActive(true);
+            }
+            else
+            {
+                deathCountTotalText.gameObject.SetActive(false);
+                deathCountTotalTitleText.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            deathCountTotalText.gameObject.SetActive(false);
+            deathCountTotalTitleText.gameObject.SetActive(false);
+        }
+    }
     public void RecordDeath()
     {
         deathCount++;
-        deathCountText.text = deathCount.ToString();
+        currentLevelDeath++;
+        deathCountText.text = currentLevelDeath.ToString();
+        deathCountTotalText.text = deathCount.ToString();
     }
 
     public LevelState GetLevelState(int num)
@@ -88,6 +123,8 @@ public class VariablesSaver : MonoBehaviour
 
     public void LoadLevel(int index)
     {
+        levelsCompleted[0] = true;
+        currentLevelDeath = 0;
         gameStarted = true;
         level = index;
         SceneManager.LoadScene(Levels[level]);
@@ -95,11 +132,13 @@ public class VariablesSaver : MonoBehaviour
 
     public void ReloadLevel()
     {
+        currentLevelDeath = 0;
         SceneManager.LoadScene("Level" + level);
     }
 
     public void NextLevel()
     {
+        currentLevelDeath = 0;
         levelsCompleted[level] = true;
         //Check research
         if(level == 5)
@@ -129,7 +168,8 @@ public class VariablesSaver : MonoBehaviour
 
     public void PreviousLevel()
     {
-        if(level > 0)
+        currentLevelDeath = 0;
+        if (level > 0)
         {
             level--;
         }
