@@ -24,6 +24,7 @@ public class VariablesSaver : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+        Screen.SetResolution(Mathf.RoundToInt((Screen.currentResolution.height / 1.6F) * 1.7777778F), Mathf.RoundToInt(Screen.currentResolution.height / 1.6F), FullScreenMode.Windowed, Screen.currentResolution.refreshRate);
         deathCount = 0;
         GameObject vsc = GameObject.FindGameObjectWithTag("VolumeSliderCanvas");
         foreach(Transform child in vsc.transform)
