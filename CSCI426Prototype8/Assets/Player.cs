@@ -28,9 +28,7 @@ public class Player : MonoBehaviour
     private Bomb[] bombs;
     public bool dead;
     private Music music;
-    [HideInInspector] public bool lastFrameDying = false;
     [HideInInspector] public bool dying = false;
-    [HideInInspector] public bool deadImmunity;
     private TMPro.TextMeshProUGUI countdown;
     private bool countingDown = false;
     private Coroutine cd;
@@ -106,12 +104,6 @@ public class Player : MonoBehaviour
         move.StartMove();
     }
 
-    private IEnumerator DeadImmunity() 
-    {
-        yield return new WaitForSeconds(0.75F);
-        deadImmunity = false;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -131,13 +123,6 @@ public class Player : MonoBehaviour
         {
             music.SwapBackgroundMusic();
         }
-
-        if (lastFrameDying && !dying)
-        {
-            deadImmunity = true;
-            StartCoroutine(DeadImmunity());
-        }
-        lastFrameDying = dying;
 
         if(countingDown)
         {
@@ -211,7 +196,7 @@ public class Player : MonoBehaviour
 
     public bool Die()
     {
-        if(dying || deadImmunity)
+        if(dying)
         {
             return true;
         }

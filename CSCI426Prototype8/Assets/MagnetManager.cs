@@ -8,7 +8,6 @@ public class MagnetManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.Log("NUM OF MAGNETS: " + GameObject.FindGameObjectWithTag("MagnetPositions").transform.childCount);
         magnets = new Transform[GameObject.FindGameObjectWithTag("MagnetPositions").transform.childCount + 1];
     }
     public void RecordMagnetPosition(int magnetIndex, Transform magnetTransform)

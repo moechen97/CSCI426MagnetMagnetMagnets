@@ -16,10 +16,11 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     private float selectTimer;
     private float selectTimeLimit;
     private GameObject cursor;
-
+    private BoxCollider2D boxCollider;
 
     void Start()
     {
+        boxCollider = GetComponent<BoxCollider2D>();
         string[] magnetInfo = gameObject.name.Split('_');
         if (magnetInfo[0].Equals("MagnetButtonUp"))
         {
@@ -37,15 +38,27 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         {
             gameObject.tag = "Magnet_Left";
         }
-
+        ExpandClickRange();
         index = int.Parse(magnetInfo[1]);
-        Debug.Log("INDEX: " + index);
         magnetManager = GameObject.FindGameObjectWithTag("MagnetManager").GetComponent<MagnetManager>();
         magnetManager.RecordMagnetPosition(index, transform);
         //Attach Physics2DRaycaster to the Camera
         Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
         addEventSystem();
         cursor = GameObject.FindWithTag("Cursor");
+    }
+
+    private void ExpandClickRange()
+    {
+        if(gameObject.tag.Equals("Magnet_Up") || gameObject.tag.Equals("Magnet_Down"))
+        {
+            
+        }
+        else if(gameObject.tag.Equals("Magnet_Left") || gameObject.tag.Equals("Magnet_Right"))
+        {
+        }
+        boxCollider.offset = new Vector2(0F, 1F);
+        boxCollider.size = new Vector2(5.12F, 11.125F);
     }
 
     void Awake()
@@ -69,11 +82,11 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         }
         sr.color = hoverColor;
         transform.GetChild(0).gameObject.SetActive(true);
-        yield return new WaitForSeconds(flashTime);
+        yield return new WaitForSeconds(flashTime * 4F);
         sr.color = regularColor;
         transform.GetChild(0).gameObject.SetActive(false);
         if (!selected) yield break;
-        yield return new WaitForSeconds(flashTime);
+        yield return new WaitForSeconds(flashTime * 0.65F);
         if (!selected) yield break;
         sr.color = hoverColor;
         transform.GetChild(0).gameObject.SetActive(true);
@@ -140,17 +153,4 @@ public class MAGNETBUTTON : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
             }
         }
     }
-    //IPointerClickHandler,
-    //IPointerDownHandler, IPointerEnterHandler,
-    //IPointerUpHandler, IPointerExitHandler
-    //public void OnPointerUp(PointerEventData eventData)
-    //{
-    //    Debug.Log("Mouse Up!");
-    //}
-
-
-    //public void OnPointerDown(PointerEventData eventData)
-    //{
-    //    Debug.Log("Mouse Down!");
-    //}
 }

@@ -287,6 +287,7 @@ public class Magnet : MonoBehaviour
     }
     private IEnumerator TurnOffTractorBeam()
     {
+        Debug.Log("?");
         if (pulls.Count == 0) { playingClink = false; yield break; }
         //music.PlaySnapClink();
         foreach(ParticleSystem beam in ps)
@@ -316,7 +317,6 @@ public class Magnet : MonoBehaviour
     //Key Locks
     public void Unlock(int index)
     {
-        Debug.Log("UNLOCK " + index);
         KeyLocks[index].Unlock();
     }
 }

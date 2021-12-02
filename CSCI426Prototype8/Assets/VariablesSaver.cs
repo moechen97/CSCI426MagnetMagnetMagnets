@@ -27,7 +27,8 @@ public class VariablesSaver : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        Screen.SetResolution(Mathf.RoundToInt((Screen.currentResolution.height / 1.6F) * 1.7777778F), Mathf.RoundToInt(Screen.currentResolution.height / 1.6F), FullScreenMode.Windowed, Screen.currentResolution.refreshRate);
+        //Screen.SetResolution(Mathf.RoundToInt((Screen.currentResolution.height / 1.6F) * 1.7777778F), Mathf.RoundToInt(Screen.currentResolution.height / 1.6F), FullScreenMode.Windowed, Screen.currentResolution.refreshRate);
+        //Screen.SetResolution(1280, 720, FullScreenMode.Windowed, Screen.currentResolution.refreshRate);
         deathCount = 0;
         currentLevelDeath = 0;
         GameObject vsc = GameObject.FindGameObjectWithTag("VolumeSliderCanvas");
@@ -64,6 +65,17 @@ public class VariablesSaver : MonoBehaviour
         }
     }
 
+    public int GetLeveltoBeat()
+    {
+        for (int i = 1; i < levelsCompleted.Length; i++)
+        {
+            if (!levelsCompleted[i])
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
     private void Update()
     {
         if(SceneManager.GetActiveScene().name.Equals("New Menu"))

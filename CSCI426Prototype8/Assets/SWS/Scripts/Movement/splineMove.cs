@@ -41,7 +41,6 @@ namespace SWS
             timeDelay = player.DelayBeforeAcceleration;
             startSpeed = player.startSpeed;
             maxSpeed = player.maxSpeed;
-            Debug.Log("SPLINE MOVE: LEVEL " + player.GameLevel);
         }
         private void Update()
         {

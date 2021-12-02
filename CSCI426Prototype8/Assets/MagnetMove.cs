@@ -23,7 +23,6 @@ public class MagnetMove : MonoBehaviour
         magnets = new Transform[magnetPositions.transform.childCount];
         for(int i = 0; i < magnetPositions.transform.childCount; i++)
         {
-            Debug.Log(magnetPositions.transform.GetChild(i).gameObject.name);
             magnets[i] = magnetPositions.transform.GetChild(i).transform;
         }
         music = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<Music>();
