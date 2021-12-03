@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7138988259474785947}
   - component: {fileID: 7138988257429435812}
   - component: {fileID: 7138988257429435815}
-  - component: {fileID: 2399348605144435579}
   m_Layer: 0
   m_Name: UpdatedPlayer
   m_TagString: Player
@@ -56,9 +55,7 @@ MonoBehaviour:
   startSpeed: 2
   maxSpeed: 10
   dead: 0
-  lastFrameDying: 0
   dying: 0
-  deadImmunity: 0
 --- !u!114 &7138988257429435814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,16 +214,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2399348605144435579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7138988259474785946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38da291dcb0baf4ebbd326ae3d0bd6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitSound: {fileID: 0}

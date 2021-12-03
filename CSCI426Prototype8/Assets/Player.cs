@@ -118,11 +118,6 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Minus)) vs.PreviousLevel();
         else if (Input.GetKeyDown(KeyCode.Equals)) vs.NextLevel();
-        //MUSIC TEST
-        else if(Input.GetKeyDown(KeyCode.M))
-        {
-            music.SwapBackgroundMusic();
-        }
 
         if(countingDown)
         {
@@ -144,6 +139,7 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Interactable") && collision.gameObject.GetComponentInParent<Interactable>().pull != Interactable.PullDirection.Locked)
         {
+            music.PlayHit();
             Die();
         }
         else if(collision.gameObject.CompareTag("KeyLock") || collision.gameObject.CompareTag("Block"))

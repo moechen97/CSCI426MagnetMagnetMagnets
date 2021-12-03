@@ -70,9 +70,9 @@ public class Battery : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Interactable"))
+        if (collision.gameObject.CompareTag("Spark"))
         {
-            Interactable i = collision.gameObject.GetComponent<Interactable>();
+            Interactable i = collision.transform.parent.gameObject.GetComponent<Interactable>();
             if (i.Charged)
             {
                 Debug.Log("CHARGE BATTERY");

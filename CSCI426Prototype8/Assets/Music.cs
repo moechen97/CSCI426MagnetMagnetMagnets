@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Music : MonoBehaviour
 {
-    public AudioSource snapClink;
-    public AudioSource unSnapClink;
+    public AudioSource hit;
     public AudioSource chargeUp;
     public AudioSource magnetChangePosition;
     public AudioSource spikeKey;
     public AudioSource win;
-    private AudioSource background;
     public AudioSource backgroundMusic;
-    public AudioSource menuMusic;
     public AudioSource batteryCharge;
     public AudioSource electricDie;
     public AudioSource batteryUncharge;
@@ -21,7 +18,6 @@ public class Music : MonoBehaviour
 
     private void Awake()
     {
-        background = backgroundMusic;
         if(GameObject.FindGameObjectsWithTag("MusicManager").Length > 1)
         {
             Destroy(this.gameObject);
@@ -32,14 +28,9 @@ public class Music : MonoBehaviour
         }
     }
 
-    public void PlaySnapClink()
+    public void PlayHit()
     {
-        snapClink.Play();
-    }
-
-    public void PlayUnSnapClink()
-    {
-        unSnapClink.Play();
+        hit.Play();
     }
 
     public void PlayChargeUp()
@@ -85,23 +76,5 @@ public class Music : MonoBehaviour
     public void PlayBombDefuse()
     {
         bombDefuse.Play();
-    }
-
-    //TEST
-    public void SwapBackgroundMusic()
-    {
-        if(background == menuMusic)
-        {
-            menuMusic.Pause();
-            backgroundMusic.Play();
-            background = backgroundMusic;
-        }
-        else if(background == backgroundMusic)
-        {
-            menuMusic.loop = true;
-            backgroundMusic.Pause();
-            menuMusic.Play();
-            background = menuMusic;
-        }
     }
 }

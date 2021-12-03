@@ -35,6 +35,7 @@ TagManager:
   - VolumeSliderCanvas
   - Cursor
   - CountdownText
+  - Spark
   layers:
   - Default
   - TransparentFX
